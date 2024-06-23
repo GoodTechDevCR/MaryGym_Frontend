@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useFetchCatEje = () => {
+const useFetchData = (endpoint) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -8,7 +8,7 @@ const useFetchCatEje = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:4000/catEje');
+                const response = await fetch(`http://localhost:4000/${endpoint}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -22,9 +22,9 @@ const useFetchCatEje = () => {
         };
 
         fetchData();
-    }, []);
+    }, [endpoint]);
 
     return { data, loading, error };
 };
 
-export default useFetchCatEje;
+export default useFetchData;
