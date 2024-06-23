@@ -1,7 +1,7 @@
 import React from 'react';
-import PrincipalMenu from '../components/menu/PrincipalMenu';
+import PrincipalMenu from '../../components/menu/PrincipalMenu';
 
-const HomeScreen = () => {
+const HomeSc = () => {
     return (
         <div>
             <h1>Home Screen</h1>
@@ -10,4 +10,4 @@ const HomeScreen = () => {
     );
 };
 
-export default HomeScreen;
+export default HomeSc;

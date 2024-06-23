@@ -1,7 +1,7 @@
 import React from 'react';
-import BotonPrincipalNavegacion from '../components/ui/BotonPrincipalNavegacion';
+import BotonPrincipalNavegacion from '../../components/ui/BotonPrincipalNavegacion';
 
-const LogInPage = () => {
+const LogInSc = () => {
     return (
         <div>
             <h1>Login Page</h1>
@@ -10,4 +10,4 @@ const LogInPage = () => {
     );
 };
 
-export default LogInPage;
+export default LogInSc;
