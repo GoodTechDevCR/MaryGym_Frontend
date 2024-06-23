@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DatePickerPrueba from "../components/datePicker/DatePickerPrueba";
 import { logIfDateIsBeforeJuly5th2024 } from "../utils/DateUtils";
+import BotonPrincipalNavegacion from "../components/ui/BotonPrincipalNavegacion";
 
 const ShowDatePicker = () => {
     const [message, setMessage] = useState('');
@@ -18,6 +19,8 @@ const ShowDatePicker = () => {
             <DatePickerPrueba onDateChange={handleDateChange} />
 
             {message && <p>{message}</p>}
+
+            <BotonPrincipalNavegacion texto="Regresar" to="/" />
         </div>
     );
 };
