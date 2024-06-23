@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+// DataShowPrueba.js
+import React from 'react';
 import useFetchUsuario from '../hooks/useFetchUsuario';
 import BotonPrincipalNavegacion from "../components/ui/BotonPrincipalNavegacion";
+import TableUsuario from "../components/showData/TableUsuario";
 
 const DataShowPrueba = () => {
     const { data, loading, error } = useFetchUsuario();
@@ -10,12 +12,12 @@ const DataShowPrueba = () => {
 
     return (
         <div>
-            <h1>CatEje Data</h1>
-            <pre>{JSON.stringify(data, null, 2)}</pre>
-
+            <h1>Show Data</h1>
+            <TableUsuario usuarios={data} />
             <BotonPrincipalNavegacion texto="Regresar" to="/" />
         </div>
     );
 };
 
 export default DataShowPrueba;
+
