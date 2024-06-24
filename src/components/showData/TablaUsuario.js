@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import useFetchUsuario from "../../hooks/useFetchUsuario"; // Importa la función useFetchUsuario
+import UseConsultaUsuario from "../../hooks/usuarioHooks/useConsultaUsuario"; // Importa la función consultaUsuarioHook
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -29,7 +29,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function CustomizedTables() {
-    const data = useFetchUsuario(); // Usar la función useFetchUsuario para obtener los datos
+    const data = UseConsultaUsuario(); // Usar la función consultaUsuarioHook para obtener los datos
 
     if (!data) return <div>Loading...</div>;
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useFetchUsuario = () => {
+const UseConsultaPago = () => {
     const [data, setData] = useState(null);
     // eslint-disable-next-line
     const [loading, setLoading] = useState(true);
@@ -30,4 +30,4 @@ const useFetchUsuario = () => {
     return data;
 };
 
-export default useFetchUsuario;
+export default UseConsultaPago;
