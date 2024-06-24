@@ -24,7 +24,7 @@ const useFetchUsuario = () => {
         fetchData();
     }, []);
 
-    return { data, loading, error };
+    return data;
 };
 
 export default useFetchUsuario;
