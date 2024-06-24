@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import ConsultaPago from "../../hooks/ConsultaPago";
+import ConsultaPago from "../../hooks/pagoHooks/useConsultaPago";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -29,7 +29,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function TablaPago() {
-    const data = ConsultaPago(); // Usar la función useFetchUsuario para obtener los datos
+    const data = ConsultaPago(); // Usar la función consultaUsuarioHook para obtener los datos
 
     if (!data) return <div>Loading...</div>;
 

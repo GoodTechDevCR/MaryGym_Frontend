@@ -1,7 +1,4 @@
-export function logIfDateIsBeforeJuly5th2024(date) {
-    console.log(date);
-    const july5th2024 = new Date('2024-07-05');
-    if (date < july5th2024) {
-        console.log('Date is before July 5th, 2024:', date);
-    }
+export function isDateBefore1900(date) {
+    const january1st1900 = new Date('1900-01-01');
+    return date < january1st1900;
 }

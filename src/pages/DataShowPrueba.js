@@ -1,11 +1,11 @@
 // DataShowPrueba.js
 import React from 'react';
-import useFetchUsuario from '../hooks/useFetchUsuario';
+import UseConsultaUsuario from '../hooks/usuarioHooks/useConsultaUsuario';
 import BotonPrincipalNavegacion from "../components/ui/BotonPrincipalNavegacion";
 import TableUsuario2 from "../components/showData/TableUsuario2";
 
 const DataShowPrueba = () => {
-    const { data, loading, error } = useFetchUsuario();
+    const { data, loading, error } = UseConsultaUsuario();
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
