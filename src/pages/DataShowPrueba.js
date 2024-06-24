@@ -2,7 +2,7 @@
 import React from 'react';
 import useFetchUsuario from '../hooks/useFetchUsuario';
 import BotonPrincipalNavegacion from "../components/ui/BotonPrincipalNavegacion";
-import TableUsuario from "../components/showData/TableUsuario";
+import TableUsuario2 from "../components/showData/TableUsuario2";
 
 const DataShowPrueba = () => {
     const { data, loading, error } = useFetchUsuario();
@@ -13,7 +13,7 @@ const DataShowPrueba = () => {
     return (
         <div>
             <h1>Show Data</h1>
-            <TableUsuario usuarios={data} />
+            <TableUsuario2 usuarios={data} />
             <BotonPrincipalNavegacion texto="Regresar" to="/" />
         </div>
     );

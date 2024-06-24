@@ -9,10 +9,16 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Link } from 'react-router-dom';
-import LoginIcon from '@mui/icons-material/Login';
 import DataIcon from '@mui/icons-material/DataUsage';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import GroupIcon from '@mui/icons-material/Group';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import HomeIcon from '@mui/icons-material/Home';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 
 function PrincipalMenu() {
     const [open, setOpen] = React.useState(false);
@@ -23,44 +29,81 @@ function PrincipalMenu() {
 
     const DrawerList = (
         <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+            <Divider/>
             <List>
-                <ListItem key="login" disablePadding>
-                    <ListItemButton component={Link} to="/login">
+                <ListItem key="Admin Home" disablePadding>
+                    <ListItemButton component={Link} to="/admin">
                         <ListItemIcon>
-                            <LoginIcon />
+                            <HomeIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Ir a Login" />
+                        <ListItemText primary="Admin Home" />
                     </ListItemButton>
                 </ListItem>
-                <ListItem key="data" disablePadding>
-                    <ListItemButton component={Link} to="/data">
+            </List>
+            <Divider/>
+            <List>
+                <ListItem key="Rutina Ejercicios" disablePadding>
+                    <ListItemButton component={Link} to="/admin/crearRutina">
                         <ListItemIcon>
-                            <DataIcon />
+                            <FitnessCenterIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Ir a mostrar data" />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem key="data" disablePadding>
-                    <ListItemButton component={Link} to="/date">
-                        <ListItemIcon>
-                            <DataIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Ir a date picker" />
+                        <ListItemText primary="Rutina Ejercicios" />
                     </ListItemButton>
                 </ListItem>
             </List>
             <Divider />
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                <ListItem key="Registrar Usuario" disablePadding>
+                    <ListItemButton component={Link} to="/admin/usuario/registrar">
+                        <ListItemIcon>
+                            <PersonAddAltIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Registrar Usuario" />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem key="Modificar Usuario" disablePadding>
+                    <ListItemButton component={Link} to="/admin/usuario/modificar">
+                        <ListItemIcon>
+                            <ManageAccountsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Modificar Usuario" />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem key="Visualizar Usuario" disablePadding>
+                    <ListItemButton component={Link} to="/admin/usuario/visualizar">
+                        <ListItemIcon>
+                            <GroupIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Visualizar Usuario" />
+                    </ListItemButton>
+                </ListItem>
+            </List>
+            <Divider />
+            <List>
+                <ListItem key="Registrar Pago" disablePadding>
+                    <ListItemButton component={Link} to="/admin/pago/registrar">
+                        <ListItemIcon>
+                            <AddShoppingCartIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Registrar Pago" />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem key="Modificar Pago" disablePadding>
+                    <ListItemButton component={Link} to="/admin/pago/modificar">
+                        <ListItemIcon>
+                            <ProductionQuantityLimitsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Modificar Pago" />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem key="Visualizar Pago" disablePadding>
+                    <ListItemButton component={Link} to="/admin/pago/visualizar">
+                        <ListItemIcon>
+                            <ShoppingCartIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Visualizar Pago" />
+                    </ListItemButton>
+                </ListItem>
             </List>
         </Box>
     );
