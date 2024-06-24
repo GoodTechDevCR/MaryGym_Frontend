@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react';
 
 const useFetchUsuario = () => {
     const [data, setData] = useState(null);
+    // eslint-disable-next-line
     const [loading, setLoading] = useState(true);
+    // eslint-disable-next-line
     const [error, setError] = useState(null);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,7 +27,7 @@ const useFetchUsuario = () => {
         fetchData();
     }, []);
 
-    return { data, loading, error };
+    return data;
 };
 
 export default useFetchUsuario;
