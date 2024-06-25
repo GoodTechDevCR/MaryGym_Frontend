@@ -1,16 +1,15 @@
 import { useState } from 'react';
 
-const useCreateAnything = (url) => {
+const useUpdateAnything = (url) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(false);
 
-    const createAnything = async (body) => {
+    const updateAnything = async (body) => {
         setLoading(true);
         try {
             const response = await fetch(url, {
-                method: 'POST',
+                method: 'PUT', // Utiliza el método PUT para las actualizaciones
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -30,18 +29,14 @@ const useCreateAnything = (url) => {
             }
 
             setData(responseData);
-            setSuccess(true); // Marcar la operación como exitosa
-            return true;
         } catch (err) {
             setError(err);
-            setSuccess(false); // Marcar la operación como fallida
-            return false;
         } finally {
             setLoading(false);
         }
     };
 
-    return { data, error, loading, success, createAnything };
+    return { data, error, loading, updateAnything };
 };
 
-export default useCreateAnything;
+export default useUpdateAnything;
