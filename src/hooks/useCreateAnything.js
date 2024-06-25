@@ -5,7 +5,7 @@ const useCreateAnything = (url) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const createAnything = async (body) => {
+    const createAnything = async (body, onSuccess, onError) => {
         setLoading(true);
         try {
             const response = await fetch(url, {
@@ -16,14 +16,23 @@ const useCreateAnything = (url) => {
                 body: JSON.stringify(body),
             });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            let responseData;
+            const contentType = response.headers.get('Content-Type');
+            if (contentType && contentType.includes('application/json')) {
+                responseData = await response.json();
+            } else {
+                responseData = await response.text();
             }
 
-            const responseData = await response.json();
+            if (!response.ok) {
+                throw new Error(responseData);
+            }
+
             setData(responseData);
+            if (onSuccess) onSuccess(responseData);
         } catch (err) {
             setError(err);
+            if (onError) onError(err);
         } finally {
             setLoading(false);
         }
