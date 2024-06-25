@@ -57,32 +57,13 @@ function PagoInsertar() {
             FechaPago: fechaPagoFinal
         };
 
-        console.log(jsonData);
 
-        const onSuccess = (data) => {
-            alert('Pago creado exitosamente!');
-            setFormData({
-                IdUsuario: null,
-                Monto: '',
-                FechaPago: null,
-                IdTipoTran: null
-            });
-            handleReload();
-        };
-
-        const onError = (error) => {
-            alert('Error al crear el Pago: ${error.message}');
-            handleReload();
-        };
-
-        createAnything(jsonData, onSuccess, onError);
-
-        const updateSaldo = {
-            IdUsuario: formData.IdUsuario
+        if(createAnything(jsonData)){
+            alert("Pago creado exitosamente")
         }
-
-
-
+        else{
+            alert("Error al crear el pago")
+        }
     };
 
     return (

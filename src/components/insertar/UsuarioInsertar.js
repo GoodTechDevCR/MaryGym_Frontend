@@ -56,29 +56,14 @@ function UsuarioInsertar() {
         delete jsonData.CodigoPais;
         delete jsonData.Pais;
 
-        const onSuccess = (data) => {
-            alert('Usuario creado exitosamente!');
-            setFormData({
-                Nombre: '',
-                Apellido: '',
-                Password: '123',
-                Telefono: '',
-                Correo: '',
-                Saldo: 0,
-                Estado: 'activo',
-                Pais: '',
-                CodigoPais: '',
-                FechaNacimiento: null
-            });
-            handleReload();
-        };
 
-        const onError = (error) => {
-            alert(`Error al crear el usuario: ${error.message}`);
-            handleReload();
-        };
 
-        createAnything(jsonData, onSuccess, onError);
+        if(createAnything(jsonData)){
+            alert("Usuario Creado Exitosamente");
+        }
+        else{
+            alert("Error al crear el usuario");
+        }
 
     };
 
