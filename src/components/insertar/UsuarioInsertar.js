@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import PaisesTelefono from '../ui/PaisesTelefono';
 import useCreateAnything from '../../hooks/useCreateAnything';
 import DatePickerPrueba from "../datePicker/DatePickerPrueba";
-import {isDateBefore1900} from "../../utils/DateUtils"
+
 
 function UsuarioInsertar() {
-    const { data, error, loading, createAnything } = useCreateAnything('http://localhost:4000/usuario');
+    const { createAnything } = useCreateAnything('http://localhost:4000/usuario');
 
     const [formData, setFormData] = useState({
         Nombre: '',
@@ -37,12 +37,15 @@ function UsuarioInsertar() {
         setFormData({ ...formData, FechaNacimiento: date });
     };
 
+    const handleReload = () => {
+        window.location.reload();
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const telefonoCompleto = `${formData.CodigoPais}${formData.Telefono}`;
         const estadoNumerico = formData.Estado === 'activo' ? 1 : 0;
         const fechaNacimientoFinal = formData.FechaNacimiento.toISOString().split('T')[0];
-
 
         const jsonData = {
             ...formData,
@@ -52,7 +55,31 @@ function UsuarioInsertar() {
         };
         delete jsonData.CodigoPais;
         delete jsonData.Pais;
-        createAnything(jsonData);
+
+        const onSuccess = (data) => {
+            alert('Usuario creado exitosamente!');
+            setFormData({
+                Nombre: '',
+                Apellido: '',
+                Password: '123',
+                Telefono: '',
+                Correo: '',
+                Saldo: 0,
+                Estado: 'activo',
+                Pais: '',
+                CodigoPais: '',
+                FechaNacimiento: null
+            });
+            handleReload();
+        };
+
+        const onError = (error) => {
+            alert(`Error al crear el usuario: ${error.message}`);
+            handleReload();
+        };
+
+        createAnything(jsonData, onSuccess, onError);
+
     };
 
     return (
@@ -61,25 +88,25 @@ function UsuarioInsertar() {
             <form onSubmit={handleSubmit}>
                 <label>
                     Nombre:
-                    <input type="text" name="Nombre" value={formData.Nombre} onChange={handleInputChange}/>
+                    <input type="text" name="Nombre" value={formData.Nombre} onChange={handleInputChange} />
                 </label>
-                <br/>
+                <br />
                 <label>
                     Apellido:
-                    <input type="text" name="Apellido" value={formData.Apellido} onChange={handleInputChange}/>
+                    <input type="text" name="Apellido" value={formData.Apellido} onChange={handleInputChange} />
                 </label>
-                <br/>
+                <br />
                 <label>
                     Correo:
-                    <input type="email" name="Correo" value={formData.Correo} onChange={handleInputChange}/>
+                    <input type="email" name="Correo" value={formData.Correo} onChange={handleInputChange} />
                 </label>
-                <br/>
-                <PaisesTelefono onCountryChange={handleCountryChange}/>
+                <br />
+                <PaisesTelefono onCountryChange={handleCountryChange} />
                 <label>
                     Número de Teléfono:
-                    <input type="text" name="Telefono" value={formData.Telefono} onChange={handleInputChange}/>
+                    <input type="text" name="Telefono" value={formData.Telefono} onChange={handleInputChange} />
                 </label>
-                <br/>
+                <br />
                 <label>
                     Estado:
                     <select name="Estado" value={formData.Estado} onChange={handleInputChange}>
@@ -87,12 +114,12 @@ function UsuarioInsertar() {
                         <option value="noActivo">No Activo</option>
                     </select>
                 </label>
-                <br/>
+                <br />
                 <label>
                     Fecha de nacimiento:
-                    <DatePickerPrueba onDateChange={handleDateChange}/>
+                    <DatePickerPrueba onDateChange={handleDateChange} />
                 </label>
-                <button type="submit" disabled={loading}>Enviar</button>
+                <button type="submit">Enviar</button>
             </form>
         </div>
     );

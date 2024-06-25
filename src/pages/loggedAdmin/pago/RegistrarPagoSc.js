@@ -1,11 +1,12 @@
 import React from 'react';
 import PrincipalMenu from "../../../components/menu/PrincipalMenu";
+import PagoInsertar from "../../../components/insertar/PagoInsertar";
 
 const RegistrarPagoSc = () => {
     return (
         <div>
             <PrincipalMenu/>
-            <h1>Registrar PagoSc</h1>
+            <PagoInsertar/>
         </div>
     );
 };
