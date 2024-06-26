@@ -1,29 +1,19 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 
-function TextInputs({ selectedOption, formData, setFormData }) {
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-
+function TextInputs({ selectedOption, newData, setNewData }) {
     if (!selectedOption) {
         return null;
     }
 
     return (
-        <div>
-            <TextField
-                label={selectedOption.label}
-                name={selectedOption.label}
-                type={selectedOption.type}
-                value={formData[selectedOption.label]}
-                onChange={handleChange}
-            />
-        </div>
+        <TextField
+            label={selectedOption.label}
+            type={selectedOption.type}
+            value={newData}
+            onChange={(e) => setNewData(e.target.value)}
+            sx={{ width: 300 }}
+        />
     );
 }
 
