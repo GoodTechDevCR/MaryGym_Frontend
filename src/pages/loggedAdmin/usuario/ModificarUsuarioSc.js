@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import PrincipalMenu from "../../../components/menu/PrincipalMenu";
-import ComboBox from "../../../components/ui/ComboBox";
-import TextInputs from "../../../components/ui/TextInput";
-import BotonPrincipalFuncional from "../../../components/ui/BotonPrincipalFuncional";
-import useUpdateAnything from "../../../hooks/useUpdateAnything";
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Foot from "../../../components/Footer/Foot";
+import PrincipalMenu from '../../../components/menu/PrincipalMenu';
+import ComboBox from '../../../components/ui/ComboBox';
+import TextInputs from '../../../components/ui/TextInput';
+import BotonPrincipalFuncional from '../../../components/ui/BotonPrincipalFuncional';
+import useUpdateAnything from '../../../hooks/useUpdateAnything';
+import TarjetaInformacion from '../../../components/showData/TarjetaInformacion';
 import Head from "../../../components/Header/Head";
+import Foot from "../../../components/Footer/Foot";
 
 const datos = [
-    { label: 'nombre', type: 'text' },
+    { label: 'Nombre', type: 'text' },
     { label: 'Apellido', type: 'text' },
     { label: 'Teléfono', type: 'number' },
     { label: 'Saldo', type: 'number' },
@@ -18,27 +19,25 @@ const datos = [
 ];
 
 function ModificarUsuarioSc() {
-    const { updateAnything } = useUpdateAnything('http://localhost:4000/usuario/update');
+    const { updateAnything } = useUpdateAnything('http://25.7.30.30:4000/usuario/update');
+    const { id: userId } = useParams();
     const navigate = useNavigate();
     const [selectedOption, setSelectedOption] = useState(null);
     const [newData, setNewData] = useState('');
-    const { id } = useParams(); // Asegúrate de que userId se obtenga correctamente aquí
 
-
-    console.log("UserId:", id);
-
-    const handleModificar = (event) => {
+    const handleModificar = async (event) => {
         event.preventDefault();
         const jsonData = {
-            idRegistro: id,
+            idRegistro: userId,
             nombreColumna: selectedOption.label,
             nuevoValor: newData
         };
         console.log(jsonData);
 
-        if (updateAnything(jsonData)) {
+        const success = await updateAnything(jsonData);
+        if (success) {
             alert('Usuario modificado exitosamente');
-            //navigate('/');
+            navigate('/');
         } else {
             alert('Error al modificar al usuario');
             window.location.reload();
@@ -49,10 +48,11 @@ function ModificarUsuarioSc() {
         <div>
             <Head/>
             <h1>Modificar Usuario</h1>
-            <ComboBox datos={datos} onSelect={setSelectedOption} />
-            <TextInputs selectedOption={selectedOption} newData={newData} setNewData={setNewData} />
-            <BotonPrincipalFuncional texto="Modificar" onClick={handleModificar} />
-            <Foot />
+            <TarjetaInformacion/>
+            <ComboBox datos={datos} onSelect={setSelectedOption}/>
+            <TextInputs selectedOption={selectedOption} newData={newData} setNewData={setNewData}/>
+            <BotonPrincipalFuncional texto="Modificar" onClick={handleModificar}/>
+            <Foot/>
         </div>
     );
 }
