@@ -62,6 +62,7 @@ function UsuarioInsertar() {
             const success = await createAnything(jsonData);
             if (success) {
                 alert("Usuario Creado Exitosamente");
+                handleReload();
             } else {
                 alert("Error al crear el Usuario");
             }
