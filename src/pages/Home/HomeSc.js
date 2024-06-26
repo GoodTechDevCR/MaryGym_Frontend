@@ -6,7 +6,7 @@ import Foot from "../../components/Footer/Foot";
 const HomeSc = () => {
     return (
         <div>
-            <h1>Home Screen HOLAAAAAAAAAAAAAAAAAAAAAA PAMEEEEEEEEEEEEEEEEEEEEEEELA ejemplo</h1>
+            <h1>Home Screen HOLAAAAAAAAAAAAAAAAAAAAAA PAMEEEEEEEEEEEEEEEEEEEEEEELA ejemplo union</h1>
             <PrincipalMenu/>
             <ResponsiveFooter/>
         </div>
