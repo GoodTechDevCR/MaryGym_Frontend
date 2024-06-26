@@ -5,9 +5,11 @@ import TextInputs from "../../../components/ui/TextInput";
 import BotonPrincipalFuncional from "../../../components/ui/BotonPrincipalFuncional";
 import useUpdateAnything from "../../../hooks/useUpdateAnything";
 import { useParams, useNavigate } from 'react-router-dom';
+import Foot from "../../../components/Footer/Foot";
+import Head from "../../../components/Header/Head";
 
 const datos = [
-    { label: 'Nombre', type: 'text' },
+    { label: 'nombre', type: 'text' },
     { label: 'Apellido', type: 'text' },
     { label: 'Teléfono', type: 'number' },
     { label: 'Saldo', type: 'number' },
@@ -45,11 +47,12 @@ function ModificarUsuarioSc() {
 
     return (
         <div>
-            <PrincipalMenu />
+            <Head/>
             <h1>Modificar Usuario</h1>
             <ComboBox datos={datos} onSelect={setSelectedOption} />
             <TextInputs selectedOption={selectedOption} newData={newData} setNewData={setNewData} />
             <BotonPrincipalFuncional texto="Modificar" onClick={handleModificar} />
+            <Foot />
         </div>
     );
 }
