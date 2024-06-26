@@ -5,7 +5,7 @@ import ResponsiveFooter from "../../components/responsiveFooter/ResponsiveFooter
 const HomeSc = () => {
     return (
         <div>
-            <h1>Home Screen HOLAAAAAAAAAAAAAAAAAAAAAA</h1>
+            <h1>Home Screen HOLAAAAAAAAAAAAAAAAAAAAAA PAMEEEEEEEEEEEEEEEEEEEEEEELA</h1>
             <PrincipalMenu/>
             <ResponsiveFooter/>
         </div>
