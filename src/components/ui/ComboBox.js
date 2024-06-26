@@ -2,15 +2,18 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-function ComboBox({ Datos, onSelect  }) {
+function ComboBox({ datos, onSelect  }) {
     return (
         <Autocomplete
             disablePortal
             id="combo-box-demo"
-            options={Datos}
+            options={datos}
+            getOptionLabel={(option) => option.label}
             sx={{ width: 300 }}
             onChange={(event, newValue) => {
-                onSelect(newValue ? newValue.value : null); // Llamar a la función onSelect con el valor del tipo seleccionado
+                const selectedType = newValue ? newValue.type : null;
+                console.log("Selected type:", selectedType); // Imprimir el type seleccionado en la consola
+                onSelect(selectedType); // Llamar a la función onSelect con el type del dato seleccionado
             }}
             renderInput={(params) => <TextField {...params} label="Datos Usuario" />}
         />
