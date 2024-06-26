@@ -10,8 +10,6 @@ import PrecioSc from "../pages/Home/PrecioSc";
 //importaciones de usuario
 import InformacionUserSc from "../pages/loggedUser/InformacionUserSc";
 
-//importacion para el cambio de contrasena usuario
-import PasswordChangeSc from "../pages/passwordChange/PasswordChangeSc";
 
 
 //importaciones de administrador
@@ -43,14 +41,12 @@ const AppRoutes = () => {
 
                 <Route path="/usuario/" element={<InformacionUserSc />} />
 
-                <Route path="/usuario/passwordChange/:correo" element={<PasswordChangeSc />} />
-
                 <Route path="/admin/" element={<LandAdminSc />} />
 
                 <Route path="/admin/crearRutina" element={<CrearRutinaSc />} />
 
                 <Route path="/admin/usuario/registrar" element={<RegistrarUsuarioSc />} />
-                <Route path="/admin/usuario/modificar" element={<ModificarUsuarioSc />} />
+                <Route path="/admin/usuario/modificar/:id" element={<ModificarUsuarioSc />} />
                 <Route path="/admin/usuario/visualizar" element={<VisualizarUsuarioSc />} />
 
                 <Route path="/admin/pago/registrar" element={<RegistrarPagoSc/>} />
