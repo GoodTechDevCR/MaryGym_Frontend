@@ -6,9 +6,9 @@ import Foot from "../../components/Footer/Foot";
 const HomeSc = () => {
     return (
         <div>
-            <Head/>
-            <h1>Home Screen</h1>
-            <Foot />
+            <h1>Home Screen HOLAAAAAAAAAAAAAAAAAAAAAA</h1>
+            <PrincipalMenu/>
+            <ResponsiveFooter/>
         </div>
     );
 };
