@@ -41,7 +41,7 @@ function UsuarioInsertar() {
         window.location.reload();
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const telefonoCompleto = `${formData.CodigoPais}${formData.Telefono}`;
         const estadoNumerico = formData.Estado === 'activo' ? 1 : 0;
@@ -58,11 +58,16 @@ function UsuarioInsertar() {
 
 
 
-        if(createAnything(jsonData)){
-            alert("Usuario Creado Exitosamente");
-        }
-        else{
-            alert("Error al crear el usuario");
+        try {
+            const success = await createAnything(jsonData);
+            if (success) {
+                alert("Usuario Creado Exitosamente");
+            } else {
+                alert("Error al crear el Usuario");
+            }
+        } catch (error) {
+            console.error("Error al crear el Usuario:", error);
+            alert("Error al crear el Usuario");
         }
 
     };

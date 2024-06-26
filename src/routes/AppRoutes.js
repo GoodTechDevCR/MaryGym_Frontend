@@ -19,6 +19,7 @@ import LandAdminSc from "../pages/loggedAdmin/LandAdminSc";
 
 //importacion de crear rutina
 import CrearRutinaSc from "../pages/loggedAdmin/rutina/CrearRutinaSc";
+import EjercicioDisponible from "../pages/loggedAdmin/rutina/EjercicioDisponible";
 
 //importacion de usuarios
 import ModificarUsuarioSc from "../pages/loggedAdmin/usuario/ModificarUsuarioSc";
@@ -48,6 +49,7 @@ const AppRoutes = () => {
                 <Route path="/admin/" element={<LandAdminSc />} />
 
                 <Route path="/admin/crearRutina" element={<CrearRutinaSc />} />
+                <Route path="/admin/ejeDisp" element={<EjercicioDisponible />} />
 
                 <Route path="/admin/usuario/registrar" element={<RegistrarUsuarioSc />} />
                 <Route path="/admin/usuario/modificar" element={<ModificarUsuarioSc />} />

@@ -15,7 +15,7 @@ function PasswordChangeSc() {
         nombreColumna: "Password",
         nuevoValor: null
     })
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (!dataUsuario || dataUsuario.length === 0) {
@@ -34,14 +34,17 @@ function PasswordChangeSc() {
                 idRegistro : usuarioIdentificacion,
                 nuevoValor : password1
             }
-            console.log(jsonData);
-            if(updateAnything(jsonData)){
-                alert('Contraseña cambiada exitosamente');
-                navigate('/');
-            }
-            else{
-                alert('Error al cambiar la contrasena');
-                window.location.reload();
+
+            try {
+                const success = await updateAnything(jsonData);
+                if (success) {
+                    alert("Contrasena modifica exitosamente");
+                } else {
+                    alert("Error al modificar la contrasena");
+                }
+            } catch (error) {
+                console.error("Error al modificar la contrasena:", error);
+                alert("Error al modificar la contrasena");
             }
         }
     };
