@@ -18,6 +18,8 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 function PrincipalMenu() {
@@ -110,7 +112,9 @@ function PrincipalMenu() {
 
     return (
         <div>
-            <Button onClick={toggleDrawer(true)}>Open Menu</Button>
+            <IconButton aria-label="Menu" onClick={toggleDrawer(true)} >
+                <MenuIcon />
+            </IconButton>
             <Drawer open={open} onClose={toggleDrawer(false)}>
                 {DrawerList}
             </Drawer>

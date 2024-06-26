@@ -1,15 +1,18 @@
 import React from 'react';
 import PrincipalMenu from '../../components/menu/PrincipalMenu';
+import MenuHome from '../../components/menu/MenuHome';
 import ResponsiveFooter from "../../components/responsiveFooter/ResponsiveFooter";
+
 
 const HomeSc = () => {
     return (
         <div>
-            <h1>Home Screen</h1>
             <PrincipalMenu/>
+            <MenuHome/>
             <ResponsiveFooter/>
         </div>
     );
 };
 
 export default HomeSc;
+
