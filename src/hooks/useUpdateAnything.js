@@ -9,12 +9,13 @@ const useUpdateAnything = (url) => {
         setLoading(true);
         try {
             const response = await fetch(url, {
-                method: 'PUT', // Utiliza el método PUT para las actualizaciones
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(body),
             });
+            console.log("RESPONSE: ",response);
 
             let responseData;
             const contentType = response.headers.get('Content-Type');
@@ -25,14 +26,16 @@ const useUpdateAnything = (url) => {
             }
 
             if (!response.ok) {
-                throw new Error(responseData);
+                throw new Error(responseData); // Lanza un error si la respuesta no es exitosa
             }
 
-            setData(responseData);
+            setData(responseData); // Actualiza el estado con los datos recibidos
+            return true; // Devuelve true para indicar que la actualización fue exitosa
         } catch (err) {
-            setError(err);
+            setError(err); // Captura y maneja el error
+            return false; // Devuelve false para indicar que hubo un error en la actualización
         } finally {
-            setLoading(false);
+            setLoading(false); // Finaliza el estado de carga, independientemente del resultado
         }
     };
 
