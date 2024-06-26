@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Gym1 from '@mui/icons-material/SportsGymnastics';
 import Gym2 from '@mui/icons-material/FitnessCenter';
 import Gym3 from '@mui/icons-material/Diversity3';
+import GymImagen from '../../assets/gym-interior.jpg'
 
 function HomeScreen(){
     return(
@@ -19,7 +20,7 @@ function HomeScreen(){
         
         <div className="background-blank">
             <div className='centered-title'>
-                <h2> ¿Por qué nosotros?</h2>
+                <h2> ¿Por qué MaryGym?</h2>
             </div>
 
             <Box component="section" className = 'fila' >
@@ -40,13 +41,27 @@ function HomeScreen(){
                 </Box>
                 
             </Box>
-
-            
-
-            <br></br><br></br><br></br><br></br><br></br>
         </div>
         
-        
+        <div className="background-blank">
+            <div className='centered-title'>
+                <h2> Nosotros</h2>
+            </div>
+
+            <Box  sx={{ p: 5}} component="section" className = 'fila' >
+                <Box component="section" className = 'box-grande' >
+                    <body> Nuestro equipo con x años de experiencia en entrenamiento. </body>
+                </Box>
+                <img src={GymImagen} alt="Gym Image" className="imagen"/>
+            </Box>
+        </div>
+
+
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         </>
     );  
 } 

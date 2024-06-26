@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 const PrecioSc = () => {
     return (
         <div className='centered-title'>
-            <h2>Precios</h2>
+            <h1 className='black'>Precios</h1>
             <Box className = 'fila' >
                 {card("Sesión","2700", "Entrenador personal certificado", "Evaluación física inicial", "Plan de entrenamiento personalizado")}
                 {card("Semana","5000", "hola")}

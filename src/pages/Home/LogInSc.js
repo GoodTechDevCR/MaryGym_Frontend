@@ -1,15 +1,28 @@
 import React from 'react';
 import BotonPrincipalNavegacion from '../../components/ui/BotonPrincipalNavegacion';
-import Head from "../../components/Header/Head";
-import Foot from "../../components/Footer/Foot";
+import TextField from '../../components/ui/TextField.js';
+import Box from '@mui/material/Box';
 
 const LogInSc = () => {
     return (
         <div>
-            <Head/>
-            <h1>Login Page</h1>
+            <div className='centered-title'>
+                <h1 className='black'> Iniciar Sesión</h1>
+                <Box sx={{ paddingLeft: 10, paddingRight:10}}>
+                    <body> Ingresa tu correo electrónico para ingresar a tu perfil </body>
+                    <TextField/>
+                    hello
+                    <TextField/>
+                </Box>
+                
+
+
+            </div>
+
+
+
             <BotonPrincipalNavegacion texto="Regresar" to="/" />
-            <Foot />
+            
         </div>
     );
 };
