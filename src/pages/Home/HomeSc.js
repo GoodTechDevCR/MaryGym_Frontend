@@ -1,16 +1,16 @@
 import React from 'react';
 import PrincipalMenu from '../../components/menu/PrincipalMenu';
+import Head from "../../components/Header/Head";
+import Foot from "../../components/Footer/Foot";
 import MenuHome from '../../components/menu/MenuHome';
-import ResponsiveFooter from "../../components/responsiveFooter/ResponsiveFooter";
-import HomeScreen from '../../pages/Home/HomeScreen';
 
 const HomeSc = () => {
     return (
         <div>
+            <Head/>
             <PrincipalMenu/>
             <HomeScreen/>
-            
-            <ResponsiveFooter/>
+            <Foot />
         </div>
     );
 };

@@ -46,7 +46,7 @@ const AppRoutes = () => {
                 <Route path="/admin/crearRutina" element={<CrearRutinaSc />} />
 
                 <Route path="/admin/usuario/registrar" element={<RegistrarUsuarioSc />} />
-                <Route path="/admin/usuario/modificar" element={<ModificarUsuarioSc />} />
+                <Route path="/admin/usuario/modificar/:id" element={<ModificarUsuarioSc />} />
                 <Route path="/admin/usuario/visualizar" element={<VisualizarUsuarioSc />} />
 
                 <Route path="/admin/pago/registrar" element={<RegistrarPagoSc/>} />
