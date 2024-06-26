@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import LoginIcon from '@mui/icons-material/Login';
 import HomeScreen from '../../pages/Home/HomeScreen';
+import PrecioSc from '../../pages/Home/PrecioSc';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -47,7 +48,7 @@ function MenuHome() {
       
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" dir="rtl">
            
-            <Tab icon = {<LoginIcon />}  iconPosition="end" label="Ingresar" {...a11yProps(2)} />
+            <Tab icon = {<LoginIcon />}  iconPosition="end"  label="Ingresar" {...a11yProps(2)} />
             <Tab label="Contacto" {...a11yProps(0)} />
             <Tab label="Precios" {...a11yProps(2)} />
             <Tab label="Nosotros" {...a11yProps(1)} />
@@ -62,7 +63,7 @@ function MenuHome() {
         Contacto
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Precios
+        <PrecioSc/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
         Nosotros
