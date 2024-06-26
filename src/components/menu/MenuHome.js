@@ -68,7 +68,6 @@ function MenuHome() {
         Nosotros
       </CustomTabPanel>
       <CustomTabPanel value={value} index={4}>
-        Inicio
         <HomeScreen/>
         Hola
       </CustomTabPanel>
