@@ -1,12 +1,14 @@
 import React from 'react';
 import PrincipalMenu from "../../../components/menu/PrincipalMenu";
-import PagoInsertar from "../../../components/insertar/PagoInsertar";
+import Head from "../../../components/Header/Head";
+import Foot from "../../../components/Footer/Foot";
 
 const RegistrarPagoSc = () => {
     return (
         <div>
-            <PrincipalMenu/>
-            <PagoInsertar/>
+            <Head/>
+            <h1>Registrar PagoSc</h1>
+            <Foot />
         </div>
     );
 };
