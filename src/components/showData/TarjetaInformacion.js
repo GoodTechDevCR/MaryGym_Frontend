@@ -10,10 +10,18 @@ const TarjetaInformacion = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             const data = await dataUserbyId(id);
-            setUserData(data);
+            if (Array.isArray(data) && data.length > 0) {
+                setUserData(data[0]); // Acceder al primer elemento del array
+            } else {
+                setUserData(null);
+            }
         };
         fetchUserData();
     }, [id]);
+
+    useEffect(() => {
+        console.log('User Data:', userData);
+    }, [userData]);
 
     return (
         <Box
@@ -30,12 +38,12 @@ const TarjetaInformacion = () => {
             {userData ? (
                 <>
                     <h2>Información del Usuario</h2>
-                    <p><strong>Nombre:</strong> {userData.Nombre}</p>
-                    <p><strong>Apellido:</strong> {userData.Apellido}</p>
-                    <p><strong>Teléfono:</strong> {userData.Telefono}</p>
-                    <p><strong>Saldo:</strong> {userData.Saldo}</p>
-                    <p><strong>Estado:</strong> {userData.Estado}</p>
-                    <p><strong>Fecha Nacimiento:</strong> {userData.FechaNacimiento}</p>
+                    <p><strong>Nombre:</strong> {userData.nombre}</p>
+                    <p><strong>Apellido:</strong> {userData.apellido}</p>
+                    <p><strong>Teléfono:</strong> {userData.telefono}</p>
+                    <p><strong>Saldo:</strong> {userData.saldo}</p>
+                    <p><strong>Estado:</strong> {userData.estado}</p>
+                    <p><strong>Fecha Nacimiento:</strong> {userData.fechanacimiento}</p>
                 </>
             ) : (
                 <p>Cargando datos del usuario...</p>
@@ -45,4 +53,3 @@ const TarjetaInformacion = () => {
 };
 
 export default TarjetaInformacion;
-
