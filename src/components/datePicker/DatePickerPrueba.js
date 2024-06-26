@@ -66,5 +66,4 @@ function DatePickerPrueba({ onDateChange }) {
     );
 }
 
-
 export default DatePickerPrueba;
