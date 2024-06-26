@@ -26,9 +26,18 @@ function ModificarUsuarioSc() {
 
     const handleModificar = async (event) => {
         event.preventDefault();
+        let nombreColumna;
+        if (selectedOption.label === 'Fecha Nacimiento') {
+            nombreColumna = 'fechanacimiento';
+        } else if (selectedOption.label === 'Teléfono') {
+            nombreColumna = 'telefono';
+        } else {
+            nombreColumna = selectedOption.label.toLowerCase(); // Ajusta según corresponda
+        }
+
         const jsonData = {
             idRegistro: userId,
-            nombreColumna: selectedOption.label,
+            nombreColumna: nombreColumna,
             nuevoValor: newData
         };
         console.log(jsonData);

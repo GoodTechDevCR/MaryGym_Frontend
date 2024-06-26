@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import {logIfDateIsBeforeJuly5th2024} from "../../utils/DateUtils";
 import DatePickerPrueba from "../datePicker/DatePickerPrueba";
 
 const TextInputs = ({ selectedOption, newData, setNewData }) => {
