@@ -10,7 +10,10 @@ const LogInSc = () => {
         <div className='centered-title'>
             <h1 className='black'> Iniciar Sesión</h1>
             <Box component="section" className = 'elemento' >
-                <body> Ingresa tu correo electrónico para ingresar a tu perfil </body>
+                <body> Ingresa tu correo electrónico y contraseña para ingresar a tu perfil </body>
+            </Box>
+            <Box component="section" value="texto" className = 'elemento' >
+                <TextField/>
             </Box>
             <Box component="section" className = 'elemento' >
                 <TextField/>
@@ -19,7 +22,7 @@ const LogInSc = () => {
                 <BotonPrincipalFuncional texto="Iniciar Sesión" to="/" />
             </Box>
             <Box component="section" className = 'elemento' >
-                <Button  variant="text" className='black-button' onClick={() => {
+                <Button  variant="text" onClick={() => {
                     alert('Olvide contraseña');
                     }}>Olvidé mi contraseña
 

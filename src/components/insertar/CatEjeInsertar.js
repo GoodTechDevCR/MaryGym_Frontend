@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+/*
 import useCreateAnything from '../../hooks/useCreateAnything';
-
+*/
 function CatEjeInsertar(){
+    /*
     const { createAnything } = useCreateAnything('http://localhost:4000/catEje');
-
+    */
     const [formData, setFormData] = useState({
         NombreCatEje: ''
     });
@@ -23,12 +25,15 @@ function CatEjeInsertar(){
         console.log(jsonData);
 
         try {
+            /*
             const success = await createAnything(jsonData);
+            
             if (success) {
                 alert("Categoria Ejercicio Creado Exitosamente");
             } else {
                 alert("Error al crear la Categoria Ejercicio");
             }
+                */
         } catch (error) {
             console.error("Error al crear la Categoria Ejercicio:", error);
             alert("Error al crear la Categoria Ejercicio");
