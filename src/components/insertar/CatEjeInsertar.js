@@ -13,6 +13,10 @@ function CatEjeInsertar(){
         setFormData({ ...formData, [name]: value });
     }
 
+    const handleReload = () => {
+        window.location.reload();
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -26,6 +30,7 @@ function CatEjeInsertar(){
             const success = await createAnything(jsonData);
             if (success) {
                 alert("Categoria Ejercicio Creado Exitosamente");
+                handleReload();
             } else {
                 alert("Error al crear la Categoria Ejercicio");
             }
