@@ -47,7 +47,7 @@ function PagoInsertar() {
         setFormData({ ...formData, FechaPago: date });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const fechaPagoFinal = formData.FechaPago.toISOString().split('T')[0];
         const montoFinal = parseFloat(formData.Monto);
@@ -58,11 +58,17 @@ function PagoInsertar() {
         };
 
 
-        if(createAnything(jsonData)){
-            alert("Pago creado exitosamente")
-        }
-        else{
-            alert("Error al crear el pago")
+        try {
+            const success = await createAnything(jsonData);
+            if (success) {
+                alert("PagoCreado Exitosamente");
+                handleReload();
+            } else {
+                alert("Error al crear el Pago");
+            }
+        } catch (error) {
+            console.error("Error al crear el Pago:", error);
+            alert("Error al crear el Pago");
         }
     };
 
