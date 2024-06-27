@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import useFetchUsuario from "../../hooks/useFetchUsuario"; // Importa la función useFetchUsuario
+import UseConsultaUsuario from '../../hooks/usuarioHooks/useConsultaUsuario';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -31,7 +31,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function CustomizedTables() {
-    const data = useFetchUsuario(); // Usar la función useFetchUsuario para obtener los datos
+    const data = UseConsultaUsuario(); // Usar la función useFetchUsuario para obtener los datos
     const navigate = useNavigate();
 
     if (!data) return <div>Loading...</div>;

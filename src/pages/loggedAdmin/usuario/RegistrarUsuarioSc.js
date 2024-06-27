@@ -1,15 +1,13 @@
 import React from 'react';
 import PrincipalMenu from "../../../components/menu/PrincipalMenu";
-import Foot from "../../../components/Footer/Foot";
-import Head from "../../../components/Header/Head";
+import UsuarioInsertar from "../../../components/insertar/UsuarioInsertar";
 
 const RegistrarUsuarioSc = () => {
     return (
         <div>
-            <Head/>
-
+            <PrincipalMenu/>
             <h1>Registrar UsuarioSc</h1>
-            <Foot />
+            <UsuarioInsertar/>
         </div>
     );
 };
