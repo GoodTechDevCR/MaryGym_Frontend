@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import PrincipalMenu from '../menu/PrincipalMenu';
 import GymImagen from '../../assets/logoMaryGym.jpg'
+import { Block } from '@mui/icons-material';
 
 const Header = () => {
     const [isNavOpen, setIsNavOpen] = useState(false);
@@ -20,12 +21,23 @@ const Header = () => {
     };
 
     return (
-        <header style={styles.header}>
-            <div stryle = {styles.container} >
+        <header style={styles.header} >
+            <div >
                 <img src={GymImagen} alt="Gym Image" style={styles.logo}/>
+                <nav className={isNavOpen ? 'nav-open' : 'nav-closed'}>
+                    <a href="/" onClick={closeNav}>Inicio</a>
+                    <a href="/" onClick={closeNav}>Rutinas</a>
+                    <a href="/" onClick={closeNav}>Usuarios</a>
+                    <a href="/" onClick={closeNav}>Pagos</a>
+                </nav>
+                <button className="nav-btn" onClick={toggleNav}>
+                    {isNavOpen ? <FaTimes style={styles.icon} /> : <FaBars style={styles.icon} />}
+                </button>
             </div>
             {isNavOpen && (
+
                     <PrincipalMenu />
+
             )}
         </header>
     );
@@ -34,12 +46,15 @@ const Header = () => {
 const styles = {
     header: {
         backgroundColor: '#000000',
-        color: '#000000',
-        padding: '0px',
+        color: '#FFFFFF',
+        padding: '20px',
         width: '100%',
+        /*position: 'fixed',*/
+        alignItems: 'center',
         top: 0,
         left: 0,
-        alignItems: 'center',
+        zIndex: 1000,
+        boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.2)',
     },
     container: {
         maxWidth: '960px',
@@ -52,6 +67,11 @@ const styles = {
         display:'center',
         width:'auto',
         height:'50px',
+        color: '#000000',
+        textDecoration: 'none',
+        display: 'block',
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     nav: {
         display: 'flex',
