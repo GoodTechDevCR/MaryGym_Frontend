@@ -29,8 +29,10 @@ function ModificarUsuarioSc() {
         let nombreColumna;
         if (selectedOption.label === 'Fecha Nacimiento') {
             nombreColumna = 'fechanacimiento';
+            //const fechaNacimientoFinal = formData.FechaNacimiento.toISOString().split('T')[0];
         } else if (selectedOption.label === 'Teléfono') {
             nombreColumna = 'telefono';
+            
         } else {
             nombreColumna = selectedOption.label.toLowerCase(); // Ajusta según corresponda
         }
