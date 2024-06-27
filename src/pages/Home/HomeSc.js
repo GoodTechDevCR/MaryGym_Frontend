@@ -2,15 +2,19 @@ import React from 'react';
 import PrincipalMenu from '../../components/menu/PrincipalMenu';
 import Head from "../../components/Header/Head";
 import Foot from "../../components/Footer/Foot";
+import HomeScreen from './HomeScreen';
+import MenuHome from '../../components/menu/MenuHome';
 
 const HomeSc = () => {
     return (
         <div>
-            <h1>Home Screen HOLAAAAAAAAAAAAAAAAAAAAAA PAMEEEEEEEEEEEEEEEEEEEEEEELA ejemplo union</h1>
+            <Head/>
             <PrincipalMenu/>
-            <ResponsiveFooter/>
+            <MenuHome/>
+            <Foot />
         </div>
     );
 };
 
 export default HomeSc;
+
