@@ -2,27 +2,35 @@ import React from 'react';
 import BotonPrincipalNavegacion from '../../components/ui/BotonPrincipalNavegacion';
 import TextField from '../../components/ui/TextField.js';
 import Box from '@mui/material/Box';
+import BotonPrincipalFuncional from  '../../components/ui/BotonPrincipalFuncional';
+import Button from '@mui/material/Button';
 
 const LogInSc = () => {
     return (
-        <div>
-            <div className='centered-title'>
-                <h1 className='black'> Iniciar Sesión</h1>
-                <Box sx={{ paddingLeft: 10, paddingRight:10}}>
-                    <body> Ingresa tu correo electrónico para ingresar a tu perfil </body>
-                    <TextField/>
-                    hello
-                    <TextField/>
-                </Box>
-                
+        <div className='centered-title'>
+            <h1 className='black'> Iniciar Sesión</h1>
+            <Box component="section" className = 'elemento' >
+                <body> Ingresa tu correo electrónico para ingresar a tu perfil </body>
+            </Box>
+            <Box component="section" className = 'elemento' >
+                <TextField/>
+            </Box>
+            <Box component="section" className = 'elemento' >
+                <BotonPrincipalFuncional texto="Iniciar Sesión" to="/" />
+            </Box>
+            <Box component="section" className = 'elemento' >
+                <Button  variant="text" className='black-button' onClick={() => {
+                    alert('Olvide contraseña');
+                    }}>Olvidé mi contraseña
+
+                </Button>
+            </Box>
 
 
-            </div>
+        <br/>
+        <br/>
+        <br/>
 
-
-
-            <BotonPrincipalNavegacion texto="Regresar" to="/" />
-            
         </div>
     );
 };

@@ -27,30 +27,19 @@ const ContactoSc = () => {
                 </Box>
                 <Box component="section" className = 'elemento'>
                     <LocationOnIcon sx={{ color: 'black'  , fontSize: 40}}/>
-                    <body> Direcccion larga de la ubicacion de este lugar la cual no me la se lol pero quiero ver si se corta en la pantalla de forma bonita </body>
+                    <body> Roble de Alajuela, frente al restaurante coquis ingresando en calle macacona 75 metros, contiguo al super macacona segundo portón color café </body>
                 </Box>
 
                 
                 <div className='map-section'>
-                    <iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=2QCR+P88,%20Ruta%20Nacional%20Secundaria%20125,%20Provincia%20de%20Alajuela,%20Alajuela,%20Llano+(Estadio%20Alejandro%20Morera%20Soto)&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
-                        <a href="https://www.gps.ie/">gps vehicle tracker</a>
-                    </iframe>
-                </div>
-                
-                
-                
+                    <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=9%C2%B059'26.2%22N%2084%C2%B014'24.7%22W+(MaryGym%20Alajuela)&amp;t=&amp;z=20&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps systems</a></iframe>
+                </div>  
 
 
+                
 
 
             </Box>
-            
-                
-            
-
-
-
-
         </div>
     );
 };

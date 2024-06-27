@@ -14,9 +14,9 @@ const PrecioSc = () => {
         <div className='centered-title'>
             <h1 className='black'>Precios</h1>
             <Box className = 'fila' >
-                {card("Sesión","2700", "Entrenador personal certificado", "Evaluación física inicial", "Plan de entrenamiento personalizado")}
-                {card("Semana","5000", "hola")}
-                {card("Mensualidad","17500", "Entrenador personal certificado", "Evaluaciones físicas mensualmente", "Plan de entrenamiento")}
+                {card("Sesión","2700")}
+                {card("Semana","5000")}
+                {card("Mensualidad","17500")}
             </Box>         
         </div>
     );
