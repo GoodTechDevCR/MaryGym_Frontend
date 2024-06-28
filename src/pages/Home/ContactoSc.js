@@ -22,7 +22,7 @@ const ContactoSc = () => {
                 </Box>
                 <Box component="section" className = 'elemento'>
                     <WhatsAppIcon sx={{ color: 'black'  , fontSize: 40}}/>
-                    <Button variant="outlined"  color="success"> Habla con nosotros</Button>
+                    <Button variant="outlined"  color="success" href="https://wa.me/50689675761"> Habla con nosotros</Button>
                 </Box>
                 <Box component="section" className = 'elemento'>
                     <LocationOnIcon sx={{ color: 'black'  , fontSize: 40}}/>

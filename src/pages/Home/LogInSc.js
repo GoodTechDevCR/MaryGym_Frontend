@@ -26,6 +26,7 @@ const LogInSc = () => {
                     alert('Olvide contraseña');
                     }}>Olvidé mi contraseña
 
+
                 </Button>
             </Box>
 

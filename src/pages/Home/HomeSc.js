@@ -7,7 +7,6 @@ import MenuHome from '../../components/menu/MenuHome';
 const HomeSc = () => {
     return (
         <div>
-            <PrincipalMenu/>
             <Head/>
             <MenuHome/>
             <Foot />

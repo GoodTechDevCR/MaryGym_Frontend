@@ -21,9 +21,11 @@ const Header = () => {
     };
 
     return (
+        <>
         <header style={styles.header} >
             <div >
                 <img src={GymImagen} alt="Gym Image" style={styles.logo}/>
+                
                 <nav className={isNavOpen ? 'nav-open' : 'nav-closed'}>
                     <a href="/" onClick={closeNav}>Inicio</a>
                     <a href="/" onClick={closeNav}>Rutinas</a>
@@ -39,7 +41,11 @@ const Header = () => {
                     <PrincipalMenu />
 
             )}
+            
         </header>
+        <PrincipalMenu />
+        </>
+        
     );
 };
 
