@@ -5,7 +5,7 @@ import DatePickerPrueba from "../datePicker/DatePickerPrueba";
 import useCreateAnything from "../../hooks/useCreateAnything";
 
 function PagoInsertar() {
-    const { createAnything } = useCreateAnything('http://localhost:4000/pago');
+    const { createAnything } = useCreateAnything('http://25.7.30.30:4000/pago');
 
     const [formData, setFormData] = useState({
         IdUsuario: null,
