@@ -11,6 +11,8 @@ import ContactoSc from '../../pages/Home/ContactoSc';
 
 
 
+
+
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -32,8 +34,8 @@ CustomTabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function MenuHome(num) {
-  const [value, setValue] = React.useState(num);
+function MenuHome() {
+  const [value, setValue] = React.useState(3);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
