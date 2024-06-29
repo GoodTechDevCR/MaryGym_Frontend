@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react';
 
-const UseConsultaPago = () => {
+const UseConsultaPago = (IdUsuario) => {
     const [data, setData] = useState(null);
-    // eslint-disable-next-line
     const [loading, setLoading] = useState(true);
-    // eslint-disable-next-line
     const [error, setError] = useState(null);
-
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://25.7.30.30:4000/pago`);
+                const url = IdUsuario ? `http://localhost:4000/pago/${IdUsuario}` : `http://localhost:4000/pago`;
+                const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -25,9 +23,9 @@ const UseConsultaPago = () => {
         };
 
         fetchData();
-    }, []);
+    }, [IdUsuario]);
 
-    return data;
+    return { data, loading, error };
 };
 
 export default UseConsultaPago;
