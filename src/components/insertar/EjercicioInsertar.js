@@ -13,7 +13,6 @@ function EjercicioInsertar() {
         nombreEjercicio: '',
         categoriaId: 0
     });
-    const [showTabla, setShowTabla] = useState(false); // Estado para mostrar la tabla
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -22,7 +21,7 @@ function EjercicioInsertar() {
 
     const handleCatEjeChange = (id) => {
         setFormData({ ...formData, categoriaId: id });
-        setShowTabla(true); // Mostrar la tabla al cambiar la categoría
+
     };
 
     const handleSubmit = async (e) => {
@@ -54,7 +53,7 @@ function EjercicioInsertar() {
                     <SelectSingleCatEje onCatEjeChange={handleCatEjeChange} />
                 </label>
                 <br />
-                {showTabla && <TablaEjercicioPorCat key={formData.categoriaId} categoria={formData.categoriaId} />}
+                <TablaEjercicioPorCat key={formData.categoriaId} categoria={formData.categoriaId} />
                 <br />
                 <label>
                     Ingrese el nombre del ejercicio:

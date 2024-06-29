@@ -29,37 +29,36 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function TablaEjercicioPorCat({ categoria }) {
-    // Ensure categoria is a number, defaulting to 0 if not provided
-    const catId = categoria || 0;
+    const cat = categoria || 0;
+    const data = ConsultaEjercicioByCat(cat);
 
-    // Call ConsultaEjercicioByCat with catId
-    const data = ConsultaEjercicioByCat(catId) || [];
+    // Función para renderizar la tabla
+    const renderTable = () => {
+        if (!data) return <div>Loading...</div>;
 
-    // Function to render the table
-    const renderTable = () => (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell>IdEjercicio</StyledTableCell>
-                        <StyledTableCell>Nombre</StyledTableCell>
-                        <StyledTableCell>CategoriaId</StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {data.map((row) => (
-                        <StyledTableRow key={row.IdEjercicio}>
-                            <StyledTableCell>{row.IdEjercicio}</StyledTableCell>
-                            <StyledTableCell>{row.Nombre}</StyledTableCell>
-                            <StyledTableCell>{row.CategoriaId}</StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-    );
-
-    
+        return (
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>IdEjercicio</StyledTableCell>
+                            <StyledTableCell>Nombre</StyledTableCell>
+                            <StyledTableCell>CategoriaId</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {data.map((row) => (
+                            <StyledTableRow key={row.IdEjercicio}>
+                                <StyledTableCell>{row.IdEjercicio}</StyledTableCell>
+                                <StyledTableCell>{row.Nombre}</StyledTableCell>
+                                <StyledTableCell>{row.CategoriaId}</StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        );
+    };
 
     return (
         <div>
