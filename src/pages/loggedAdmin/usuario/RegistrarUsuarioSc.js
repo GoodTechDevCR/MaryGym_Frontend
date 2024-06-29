@@ -1,15 +1,31 @@
 import React from 'react';
-import PrincipalMenu from "../../../components/menu/PrincipalMenu";
 import Foot from "../../../components/Footer/Foot";
-import Head from "../../../components/Header/Head";
+import HeadAdmin from "../../../components/Header/HeadAdmin";
+import TextInputs from '../../../components/ui/TextInput';
+import Box from '@mui/material/Box';
+import BotonPrincipalFuncional from  '../../../components/ui/BotonPrincipalFuncional';
 
 const RegistrarUsuarioSc = () => {
+    const [newData, setNewData] = "";
     return (
         <div>
-            <Head/>
-
-            <h1>Registrar UsuarioSc</h1>
-            <Foot />
+            <HeadAdmin/>
+            <div className='centered-title2'> 
+                <h1 className='black'>Registro de usuarios</h1>  
+                <Box component="section" className = 'elemento' >
+                    <TextInputs selectedOption="correo electronico"  newData={newData} setNewData={setNewData}/>
+                </Box>
+                <Box component="section" className = 'elemento' >
+                    <TextInputs selectedOption='nombre' newData={newData} setNewData={setNewData}/>
+                </Box> 
+                <Box component="section" className = 'elemento' >
+                    <TextInputs selectedOption='contraseña' newData={newData} setNewData={setNewData}/>
+                </Box> 
+                <Box component="section" className = 'elemento' >
+                    <BotonPrincipalFuncional texto="Registrar usuario" to="/" />
+                </Box>
+            </div>
+            <Foot/>
         </div>
     );
 };

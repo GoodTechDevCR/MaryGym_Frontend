@@ -2,7 +2,6 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
 const PrecioSc = () => {
     return (
@@ -26,12 +25,12 @@ function card (tipo, precio) {
         <Card variant="outlined">  
             <React.Fragment>
                 <CardContent className='left'>
-                    <Typography sx={{ fontSize: 30}} color="text.secondary" gutterBottom>
+                    <div className="body3">
                         {tipo}
-                    </Typography>
-                    <Typography variant="h2" component="div">
+                    </div>
+                    <h1 className='black' >
                         ₡{precio}
-                    </Typography>
+                    </h1>
                     
                 </CardContent>
                 

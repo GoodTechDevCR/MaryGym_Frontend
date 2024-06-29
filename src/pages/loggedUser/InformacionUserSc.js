@@ -10,7 +10,6 @@ import Box from '@mui/material/Box';
 /* 
 Se llama asi:
 {InformacionUserSc("Samir", "hoy","manana","1000")}
-
 */
 
 function InformacionUserSc (nombre, fecha1, fecha2, saldo) {
