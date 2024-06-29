@@ -53,7 +53,7 @@ function EjercicioInsertar() {
                     <SelectSingleCatEje onCatEjeChange={handleCatEjeChange} />
                 </label>
                 <br />
-                <TablaEjercicioPorCat key={formData.categoriaId} categoria={formData.categoriaId} />
+
                 <br />
                 <label>
                     Ingrese el nombre del ejercicio:
