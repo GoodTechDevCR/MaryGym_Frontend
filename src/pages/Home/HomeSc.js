@@ -1,14 +1,14 @@
 import React from 'react';
-import PrincipalMenu from '../../components/menu/PrincipalMenu';
-import Head from "../../components/Header/Head";
 import Foot from "../../components/Footer/Foot";
 import MenuHome from '../../components/menu/MenuHome';
-import InformacionUserSc from '../../pages/loggedUser/InformacionUserSc';
+import HeadAdmin from "../../components/Header/HeadAdmin";
+
+/* Head admin se debe reemplazar por un header que contenga solo lo negro*/
 
 const HomeSc = () => {
     return (
         <div>
-            <Head/>
+            <HeadAdmin/> 
             <MenuHome/>
             <Foot />
         </div>
