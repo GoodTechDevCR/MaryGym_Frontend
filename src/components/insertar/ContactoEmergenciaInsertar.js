@@ -43,7 +43,14 @@ function ContactoEmergenciaInsertar({ correo }) {
     // Manejar el envío del formulario
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(formData);
+        console.log("filter filter filter: ", IdUsuarioGuardar[0].IdUsuario)
+
+        const jsonData = {
+            ...formData,
+            IdUsuario:IdUsuarioGuardar[0].IdUsuario
+        };
+
+        console.log(jsonData);
     };
 
     return (
