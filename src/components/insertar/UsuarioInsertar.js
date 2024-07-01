@@ -103,7 +103,7 @@ function UsuarioInsertar() {
                     <DatePickerPrueba onDateChange={handleDateChange} />
                 </Box>
                 <div className = 'elemento2'>
-                    <button type="submit" >Enviar</button>
+                    <button type="submit" className='black-button' >Enviar</button>
                 </div>
             </form>
         </div>

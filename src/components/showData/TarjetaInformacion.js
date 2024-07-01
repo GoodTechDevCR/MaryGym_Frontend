@@ -32,7 +32,7 @@ const TarjetaInformacion = () => {
                     <p><strong>Nombre:</strong> {userData.nombre}</p>
                     <p><strong>Apellido:</strong> {userData.apellido}</p>
                     <p><strong>Teléfono:</strong> {userData.telefono}</p>
-                    <p><strong>Saldo:</strong> {userData.saldo}</p>
+                    <p><strong>Saldo:</strong> ₡{userData.saldo}</p>
                     <p><strong>Estado:</strong> {userData.estado}</p>
                     <p><strong>Fecha Nacimiento:</strong> {userData.fechanacimiento}</p>
                 </div>
