@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Gym1 from '@mui/icons-material/SportsGymnastics';
 import Gym2 from '@mui/icons-material/FitnessCenter';
 import Gym3 from '@mui/icons-material/Diversity3';
-import GymImagen from '../../assets/gym-interior.jpg'
+import GymImagen from '../../assets/MaryGymPicture1.jpg'
 
 function scroll(name){
     document.getElementById(name).scrollIntoView();

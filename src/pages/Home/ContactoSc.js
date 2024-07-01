@@ -18,11 +18,11 @@ const ContactoSc = () => {
                 </Box>
                 <Box component="section" className = 'elemento' >
                     <CallIcon sx={{ color: 'black' , fontSize: 40}}/>
-                    <body> +506 8888 8888 / +506 8888 8888 </body>
+                    <body> +506 8412 1006 </body>
                 </Box>
                 <Box component="section" className = 'elemento'>
                     <WhatsAppIcon sx={{ color: 'black'  , fontSize: 40}}/>
-                    <Button variant="outlined"  color="success" href="https://wa.me/50689675761"> Habla con nosotros</Button>
+                    <Button variant="outlined"  color="success" href="https://wa.me/50684121006"> Habla con nosotros</Button>
                 </Box>
                 <Box component="section" className = 'elemento'>
                     <LocationOnIcon sx={{ color: 'black'  , fontSize: 40}}/>
