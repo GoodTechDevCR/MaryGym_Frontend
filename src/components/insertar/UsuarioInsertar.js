@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PaisesTelefono from '../ui/PaisesTelefono';
 import useCreateAnything from '../../hooks/useCreateAnything';
 import DatePickerPrueba from "../datePicker/DatePickerPrueba";
-
+import Box from '@mui/material/Box';
 
 function UsuarioInsertar() {
     const { createAnything } = useCreateAnything('http://25.7.30.30:4000/usuario');
@@ -73,43 +73,38 @@ function UsuarioInsertar() {
     };
 
     return (
-        <div>
-            <h2>Prueba de insertar usuario:</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Nombre:
-                    <input type="text" name="Nombre" value={formData.Nombre} onChange={handleInputChange} />
+        <div className='centered-title'>
+            <h1 className='black'>Registro de usuarios</h1>  
+            <form onSubmit={handleSubmit} className='centered-title2'>
+                <label className = 'elemento2' >
+                    <input type="text" placeholder="Nombre" name="Nombre" value={formData.Nombre} onChange={handleInputChange}/>
                 </label>
-                <br />
-                <label>
-                    Apellido:
-                    <input type="text" name="Apellido" value={formData.Apellido} onChange={handleInputChange} />
+                <label className = 'elemento2' >
+                    <input type="text" placeholder="Apellido" name="Apellido" value={formData.Apellido} onChange={handleInputChange} />
                 </label>
-                <br />
-                <label>
-                    Correo:
-                    <input type="email" name="Correo" value={formData.Correo} onChange={handleInputChange} />
+                <label className = 'elemento2' >
+                    <input type="email" placeholder="Correo" name="Correo" value={formData.Correo} onChange={handleInputChange} />
                 </label>
-                <br />
-                <PaisesTelefono onCountryChange={handleCountryChange} />
-                <label>
-                    Número de Teléfono:
-                    <input type="text" name="Telefono" value={formData.Telefono} onChange={handleInputChange} />
+                <Box  className= "elemento2">
+                    <PaisesTelefono onCountryChange={handleCountryChange}/>
+                </Box>
+                <label className = 'elemento2'>
+                    <input type="text" placeholder="Teléfono" name="Telefono" value={formData.Telefono} onChange={handleInputChange} />
                 </label>
-                <br />
-                <label>
-                    Estado:
+                <label className = 'elemento2'>
+                    <div className='body2'> Estado: </div>
                     <select name="Estado" value={formData.Estado} onChange={handleInputChange}>
                         <option value="activo">Activo</option>
                         <option value="noActivo">No Activo</option>
                     </select>
                 </label>
-                <br />
-                <label>
-                    Fecha de nacimiento:
+                <Box className = 'elemento2'>
+                    <div className='body2'> Fecha de nacimiento: </div>
                     <DatePickerPrueba onDateChange={handleDateChange} />
-                </label>
-                <button type="submit">Enviar</button>
+                </Box>
+                <div className = 'elemento2'>
+                    <button type="submit" >Enviar</button>
+                </div>
             </form>
         </div>
     );

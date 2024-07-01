@@ -22,7 +22,7 @@ const ProSpan = styled('span')({
 function Label({ componentName, valueType, isProOnly }) {
     const content = (
         <span>
-      <strong>{componentName}</strong> for {valueType} editing
+   
     </span>
     );
 

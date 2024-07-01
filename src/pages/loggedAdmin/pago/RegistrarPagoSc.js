@@ -12,6 +12,8 @@ const RegistrarPagoSc = () => {
     return (
         <div>
             <HeadAdmin/>
+            <PrincipalMenu/>
+            <PagoInsertar/>
             <div className='centered-title2'> 
                 <h1 className='black'>Registro de pagos</h1>  
                 <Box component="section" className = 'elemento' >
@@ -32,8 +34,7 @@ const RegistrarPagoSc = () => {
                 <br/><br/><br/><br/>
             </div>
             <Foot/>
-            <PrincipalMenu/>
-            <PagoInsertar/>
+            
         </div>
     );
 };
