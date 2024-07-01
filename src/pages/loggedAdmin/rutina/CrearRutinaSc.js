@@ -3,6 +3,7 @@ import { saveAs } from 'file-saver';
 import PrincipalMenu from '../../../components/menu/PrincipalMenu';
 import SelectSingleUsuarioByName from '../../../components/ui/selectSingle/selectSingleUsuarioByName';
 import DatePickerPrueba from '../../../components/datePicker/DatePickerPrueba';
+import SelectSingleEjercicioByName from '../../../components/ui/selectSingle/SelectSingleEjercicioByName';
 
 const CrearRutinaSc = () => {
     const [step, setStep] = useState(1);
@@ -56,6 +57,19 @@ const CrearRutinaSc = () => {
         setFuncionalidades([...funcionalidades, nuevaFuncionalidad]);
     };
 
+    const handleFuncionalidadChange = (index, e) => {
+        const { name, value } = e.target;
+        const nuevasFuncionalidades = [...funcionalidades];
+        nuevasFuncionalidades[index][name] = value;
+        setFuncionalidades(nuevasFuncionalidades);
+    };
+
+    const handleEjercicioChange = (indexFuncionalidad, indexEjercicio, newValue) => {
+        const nuevasFuncionalidades = [...funcionalidades];
+        nuevasFuncionalidades[indexFuncionalidad].ejercicios[indexEjercicio].nombreEjercicio = newValue;
+        setFuncionalidades(nuevasFuncionalidades);
+    };
+
     const handleAddEjercicio = (indexFuncionalidad) => {
         const nuevoEjercicio = {
             nombreEjercicio: "",
@@ -70,14 +84,14 @@ const CrearRutinaSc = () => {
         setFuncionalidades(nuevasFuncionalidades);
     };
 
-    const handleFuncionalidadChange = (index, e) => {
+    const handleComentarioChange = (indexFuncionalidad, indexEjercicio, e) => {
         const { name, value } = e.target;
         const nuevasFuncionalidades = [...funcionalidades];
-        nuevasFuncionalidades[index][name] = value;
+        nuevasFuncionalidades[indexFuncionalidad].ejercicios[indexEjercicio][name] = value;
         setFuncionalidades(nuevasFuncionalidades);
     };
 
-    const handleEjercicioChange = (indexFuncionalidad, indexEjercicio, e) => {
+    const handleSemanaChange = (indexFuncionalidad, indexEjercicio, e) => {
         const { name, value } = e.target;
         const nuevasFuncionalidades = [...funcionalidades];
         nuevasFuncionalidades[indexFuncionalidad].ejercicios[indexEjercicio][name] = value;
@@ -124,7 +138,7 @@ const CrearRutinaSc = () => {
             funcionalidades
         };
 
-        console.log(jsonData);
+        console.log("Dataaaaa: ",jsonData);
 
         // Envía los datos al backend para generar el PDF
         const response = await fetch('http://localhost:4000/servicioAPI/generarPDF', {
@@ -143,7 +157,7 @@ const CrearRutinaSc = () => {
         const blob = await response.blob();
 
         // Guarda el PDF en el navegador
-        saveAs(blob, `rutina_${formData.usuario}.pdf`); 
+        saveAs(blob, `rutina_${formData.usuario}.pdf`);
     };
 
     return (
@@ -201,11 +215,8 @@ const CrearRutinaSc = () => {
                                 <div key={indexEjercicio}>
                                     <label>
                                         Nombre del ejercicio
-                                        <input
-                                            type="text"
-                                            name="nombreEjercicio"
-                                            value={ejercicio.nombreEjercicio}
-                                            onChange={(e) => handleEjercicioChange(indexFuncionalidad, indexEjercicio, e)}
+                                        <SelectSingleEjercicioByName
+                                            onEjercicioChange={(value) => handleEjercicioChange(indexFuncionalidad, indexEjercicio, value)}
                                         />
                                     </label>
                                     <label>
@@ -214,7 +225,7 @@ const CrearRutinaSc = () => {
                                             type="text"
                                             name="comentario"
                                             value={ejercicio.comentario}
-                                            onChange={(e) => handleEjercicioChange(indexFuncionalidad, indexEjercicio, e)}
+                                            onChange={(e) => handleComentarioChange(indexFuncionalidad, indexEjercicio, e)}
                                         />
                                     </label>
                                     {Array.from({ length: formData.cantSemana }).map((_, semanaIndex) => (
@@ -224,7 +235,7 @@ const CrearRutinaSc = () => {
                                                 type="text"
                                                 name={`semana${semanaIndex + 1}`}
                                                 value={ejercicio[`semana${semanaIndex + 1}`] || ""}
-                                                onChange={(e) => handleEjercicioChange(indexFuncionalidad, indexEjercicio, e)}
+                                                onChange={(e) => handleSemanaChange(indexFuncionalidad, indexEjercicio, e)}
                                             />
                                         </label>
                                     ))}
@@ -235,8 +246,7 @@ const CrearRutinaSc = () => {
                     <button type="button" onClick={handleAddFuncionalidad}>
                         Agregar Funcionalidad
                     </button>
-                    <br />
-                    <button type="submit">Generar Rutina</button>
+                    <button type="submit">Generar PDF</button>
                 </form>
             )}
         </div>
