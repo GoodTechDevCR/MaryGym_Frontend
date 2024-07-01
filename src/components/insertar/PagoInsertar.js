@@ -5,7 +5,8 @@ import DatePickerPrueba from "../datePicker/DatePickerPrueba";
 import useCreateAnything from "../../hooks/useCreateAnything";
 
 function PagoInsertar() {
-    const { createAnything } = useCreateAnything('http://localhost:4000/cobro/cobroypago');
+    const { createAnything: createCobroYPago } = useCreateAnything('http://localhost:4000/cobro/cobroypago');
+    const { createAnything: createAbono } = useCreateAnything('http://localhost:4000/abono');
 
     const [formData, setFormData] = useState({
         IdUsuario: null,
@@ -14,7 +15,9 @@ function PagoInsertar() {
         IdTipoTran: null,
         DiasAdicionales: '',
         FechaFinalEspecial: null,
-        OpcionSeleccionada: ''
+        OpcionSeleccionada: '',
+        MontoAbono: '',
+        FechaAbono: null
     });
 
     const handleInputChange = (e) => {
@@ -59,26 +62,52 @@ function PagoInsertar() {
         setFormData({ ...formData, OpcionSeleccionada: e.target.value, DiasAdicionales: '', FechaFinalEspecial: null });
     };
 
+    const handleFechaAbonoChange = (date) => {
+        setFormData({ ...formData, FechaAbono: date });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const fechaPagoFinal = formData.FechaPago.toISOString().split('T')[0];
-        const montoFinal = parseFloat(formData.Monto);
 
-        const jsonData = {
-            IdUsuario: formData.IdUsuario,
-            Monto: montoFinal,
-            FechaPago: fechaPagoFinal,
-            IdTipoTran: formData.IdTipoTran,
-            DiasAdicionales: formData.DiasAdicionales ? parseInt(formData.DiasAdicionales) : null,
-            FechaFinalEspecial: formData.FechaFinalEspecial ? formData.FechaFinalEspecial.toISOString().split('T')[0] : null
-        };
+        if (formData.IdTipoTran === 6) {
+            // Registro de abono
+            const fechaAbonoFinal = formData.FechaAbono.toISOString().split('T')[0];
+            const montoAbonoFinal = parseFloat(formData.MontoAbono);
 
-        const result = await createAnything(jsonData);
+            const abonoData = {
+                IdUsuario: formData.IdUsuario,
+                FechaAbono: fechaAbonoFinal,
+                MontoAbono: montoAbonoFinal
+            };
 
-        if (result) {
-            alert("Cobro y pago creados/actualizados exitosamente");
+            const abonoResult = await createAbono(abonoData);
+
+            if (abonoResult) {
+                alert("Abono registrado exitosamente");
+            } else {
+                alert("Error al registrar el abono");
+            }
         } else {
-            alert("Error al crear el cobro y el pago");
+            // Registro de cobro y pago
+            const fechaPagoFinal = formData.FechaPago.toISOString().split('T')[0];
+            const montoFinal = parseFloat(formData.Monto);
+
+            const jsonData = {
+                IdUsuario: formData.IdUsuario,
+                Monto: montoFinal,
+                FechaPago: fechaPagoFinal,
+                IdTipoTran: formData.IdTipoTran,
+                DiasAdicionales: formData.DiasAdicionales ? parseInt(formData.DiasAdicionales) : null,
+                FechaFinalEspecial: formData.FechaFinalEspecial ? formData.FechaFinalEspecial.toISOString().split('T')[0] : null
+            };
+
+            const result = await createCobroYPago(jsonData);
+
+            if (result) {
+                alert("Cobro y pago creados/actualizados exitosamente");
+            } else {
+                alert("Error al crear el cobro y el pago");
+            }
         }
     };
 
@@ -88,51 +117,74 @@ function PagoInsertar() {
             <form onSubmit={handleSubmit}>
                 <SelectSingleUsuario onUsuarioChange={handleUsuarioChange} />
                 <SelectSingleTipoTran onTipoTranChange={handleTipoTranChange} />
-                <label>
-                    Monto:
-                    <input
-                        id="monto-input"
-                        type="text"
-                        name="Monto"
-                        value={formData.Monto}
-                        onChange={handleInputChange}
-                    />
-                </label>
-                <br />
-                <label>
-                    Fecha de pago:
-                    <DatePickerPrueba onDateChange={handleDateChange} />
-                </label>
-                {formData.IdTipoTran === 10 && (
-                    <div>
+                {formData.IdTipoTran !== 6 && (
+                    <>
                         <label>
-                            Seleccione una opción:
-                            <select name="OpcionSeleccionada" value={formData.OpcionSeleccionada} onChange={handleOpcionSeleccionadaChange}>
-                                <option value="">Seleccione</option>
-                                <option value="DiasAdicionales">Días adicionales</option>
-                                <option value="FechaFinalEspecial">Fecha final especial</option>
-                            </select>
+                            Monto:
+                            <input
+                                id="monto-input"
+                                type="text"
+                                name="Monto"
+                                value={formData.Monto}
+                                onChange={handleInputChange}
+                            />
                         </label>
                         <br />
-                        {formData.OpcionSeleccionada === 'DiasAdicionales' && (
-                            <label>
-                                Días adicionales:
-                                <input
-                                    type="number"
-                                    name="DiasAdicionales"
-                                    value={formData.DiasAdicionales}
-                                    onChange={handleDiasAdicionalesChange}
-                                />
-                            </label>
+                        <label>
+                            Fecha de pago:
+                            <DatePickerPrueba onDateChange={handleDateChange} />
+                        </label>
+                        {formData.IdTipoTran === 10 && (
+                            <div>
+                                <label>
+                                    Seleccione una opción:
+                                    <select name="OpcionSeleccionada" value={formData.OpcionSeleccionada} onChange={handleOpcionSeleccionadaChange}>
+                                        <option value="">Seleccione</option>
+                                        <option value="DiasAdicionales">Días adicionales</option>
+                                        <option value="FechaFinalEspecial">Fecha final especial</option>
+                                    </select>
+                                </label>
+                                <br />
+                                {formData.OpcionSeleccionada === 'DiasAdicionales' && (
+                                    <label>
+                                        Días adicionales:
+                                        <input
+                                            type="number"
+                                            name="DiasAdicionales"
+                                            value={formData.DiasAdicionales}
+                                            onChange={handleDiasAdicionalesChange}
+                                        />
+                                    </label>
+                                )}
+                                {formData.OpcionSeleccionada === 'FechaFinalEspecial' && (
+                                    <label>
+                                        Fecha final especial:
+                                        <DatePickerPrueba onDateChange={handleFechaFinalEspecialChange} />
+                                    </label>
+                                )}
+                            </div>
                         )}
-                        {formData.OpcionSeleccionada === 'FechaFinalEspecial' && (
-                            <label>
-                                Fecha final especial:
-                                <DatePickerPrueba onDateChange={handleFechaFinalEspecialChange} />
-                            </label>
-                        )}
+                    </>
+                )}
+                {formData.IdTipoTran === 6 && (
+                    <div>
+                        <label>
+                            Monto del Abono:
+                            <input
+                                type="text"
+                                name="MontoAbono"
+                                value={formData.MontoAbono}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            Fecha del Abono:
+                            <DatePickerPrueba onDateChange={handleFechaAbonoChange} />
+                        </label>
                     </div>
                 )}
+                <br />
                 <button type="submit">Guardar</button>
             </form>
         </div>
