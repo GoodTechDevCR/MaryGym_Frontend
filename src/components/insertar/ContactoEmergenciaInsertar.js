@@ -8,6 +8,7 @@ function ContactoEmergenciaInsertar({ correo }) {
     const IdUsuarioGuardar = UseConsultaByCorreo(correo);
     console.log("correo correo: ", correo);
     console.log("dato dato dato: ", IdUsuarioGuardar);
+
     // Estado inicial con los campos necesarios
     const [formData, setFormData] = useState({
         IdUsuario: '', 
@@ -15,6 +16,9 @@ function ContactoEmergenciaInsertar({ correo }) {
         NumeroTelefono: '',
         Relacion: '',
     });
+
+    // Estado para almacenar todos los contactos de emergencia
+    const [contactos, setContactos] = useState([]);
 
     // Manejar el cambio de nombre
     const handleNombreChange = (event) => {
@@ -40,17 +44,41 @@ function ContactoEmergenciaInsertar({ correo }) {
         });
     };
 
+    // Agregar un nuevo contacto a la lista
+    const handleAddContact = () => {
+        if (formData.Nombre && formData.NumeroTelefono && formData.Relacion) {
+            setContactos([
+                ...contactos,
+                { ...formData, IdUsuario: IdUsuarioGuardar[0].IdUsuario }
+            ]);
+            // Limpiar los campos del formulario
+            setFormData({
+                IdUsuario: IdUsuarioGuardar[0].IdUsuario,
+                Nombre: '',
+                NumeroTelefono: '',
+                Relacion: '',
+            });
+        } else {
+            alert('Por favor, complete todos los campos.');
+        }
+    };
+
     // Manejar el envío del formulario
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("filter filter filter: ", IdUsuarioGuardar[0].IdUsuario)
 
-        const jsonData = {
-            ...formData,
-            IdUsuario:IdUsuarioGuardar[0].IdUsuario
-        };
-
-        console.log(jsonData);
+        try {
+            const success = await createAnything(contactos);
+            if (success) {
+                alert("Contactos Creados Exitosamente");
+                window.location.reload();
+            } else {
+                alert("Error al crear el Usuario");
+            }
+        } catch (error) {
+            console.error("Error al crear el Usuario:", error);
+            alert("Error al crear el Usuario");
+        }
     };
 
     return (
@@ -82,8 +110,20 @@ function ContactoEmergenciaInsertar({ correo }) {
                     <SelectSingleRelacion onRelacionChange={handleRelacionChange} />
                 </label>
                 <br/>
+                <button type="button" onClick={handleAddContact}>Agregar Contacto</button>
                 <button type="submit">Enviar</button>
             </form>
+
+            <div>
+                <h3>Contactos de Emergencia</h3>
+                <ul>
+                    {contactos.map((contacto, index) => (
+                        <li key={index}>
+                            {contacto.Nombre} - {contacto.NumeroTelefono} - {contacto.Relacion}
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 }
