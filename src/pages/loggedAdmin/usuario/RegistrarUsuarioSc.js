@@ -7,19 +7,25 @@ import BotonPrincipalFuncional from  '../../../components/ui/BotonPrincipalFunci
 
 const RegistrarUsuarioSc = () => {
     const [newData, setNewData] = "";
+    const selectedOptionCorreo = {};
+    selectedOptionCorreo.label = "Correo Electrónico";
+    const selectedOptionNombre = {};
+    selectedOptionNombre.label = "Nombre";
+    const selectedOptionContrasena = {};
+    selectedOptionContrasena.label = "Contraseña";
     return (
         <div>
             <HeadAdmin/>
             <div className='centered-title2'> 
                 <h1 className='black'>Registro de usuarios</h1>  
                 <Box component="section" className = 'elemento' >
-                    <TextInputs selectedOption="correo electronico"  newData={newData} setNewData={setNewData}/>
+                    <TextInputs selectedOption={selectedOptionCorreo}  newData={newData} setNewData={setNewData}/>
                 </Box>
                 <Box component="section" className = 'elemento' >
-                    <TextInputs selectedOption='nombre' newData={newData} setNewData={setNewData}/>
+                    <TextInputs selectedOption={selectedOptionNombre} newData={newData} setNewData={setNewData}/>
                 </Box> 
                 <Box component="section" className = 'elemento' >
-                    <TextInputs selectedOption='contraseña' newData={newData} setNewData={setNewData}/>
+                    <TextInputs selectedOption={selectedOptionContrasena} newData={newData} setNewData={setNewData}/>
                 </Box> 
                 <Box component="section" className = 'elemento' >
                     <BotonPrincipalFuncional texto="Registrar usuario" to="/" />
