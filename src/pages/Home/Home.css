@@ -180,6 +180,12 @@ body{
     min-height: 200px;
     max-height: 700px;
 }
+.card3{
+    width: 50%;
+    margin: auto;
+    min-height: 200px;
+    max-height: 700px;
+}
 
 .left{
     text-align: left;
