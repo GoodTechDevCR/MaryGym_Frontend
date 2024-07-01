@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useFetchUsuario = () => {
+const UseConsultaEjercicio = () => {
     const [data, setData] = useState(null);
     // eslint-disable-next-line
     const [loading, setLoading] = useState(true);
@@ -11,7 +11,7 @@ const useFetchUsuario = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://25.7.30.30:4000/usuario`);
+                const response = await fetch(`http://25.7.30.30:4000/ejercicio`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -30,4 +30,4 @@ const useFetchUsuario = () => {
     return data;
 };
 
-export default useFetchUsuario;
+export default UseConsultaEjercicio;

@@ -4,6 +4,8 @@ import HeadAdmin from "../../../components/Header/HeadAdmin";
 import TextInputs from '../../../components/ui/TextInput';
 import Box from '@mui/material/Box';
 import BotonPrincipalFuncional from  '../../../components/ui/BotonPrincipalFuncional';
+import PrincipalMenu from "../../../components/menu/PrincipalMenu";
+import UsuarioInsertar from "../../../components/insertar/UsuarioInsertar";
 
 const RegistrarUsuarioSc = () => {
     const [newData, setNewData] = "";
@@ -32,6 +34,9 @@ const RegistrarUsuarioSc = () => {
                 </Box>
             </div>
             <Foot/>
+            <PrincipalMenu/>
+            <h1>Registrar UsuarioSc</h1>
+            <UsuarioInsertar/>
         </div>
     );
 };

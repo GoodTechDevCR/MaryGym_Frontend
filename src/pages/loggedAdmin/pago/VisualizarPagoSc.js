@@ -1,14 +1,13 @@
 import React from 'react';
 import PrincipalMenu from "../../../components/menu/PrincipalMenu";
-import Head from "../../../components/Header/Head";
-import Foot from "../../../components/Footer/Foot";
+import TablaPago from "../../../components/showData/TablaPago";
 
 const VisualizarPagoSc = () => {
     return (
         <div>
-            <Head/>
+            <PrincipalMenu/>
             <h1>VisualizarPagoSc</h1>
-            <Foot />
+            <TablaPago/>
         </div>
     );
 };

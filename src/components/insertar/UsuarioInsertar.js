@@ -5,7 +5,7 @@ import DatePickerPrueba from "../datePicker/DatePickerPrueba";
 
 
 function UsuarioInsertar() {
-    const { createAnything } = useCreateAnything('http://localhost:4000/usuario');
+    const { createAnything } = useCreateAnything('http://25.7.30.30:4000/usuario');
 
     const [formData, setFormData] = useState({
         Nombre: '',
@@ -62,7 +62,6 @@ function UsuarioInsertar() {
             const success = await createAnything(jsonData);
             if (success) {
                 alert("Usuario Creado Exitosamente");
-                handleReload();
             } else {
                 alert("Error al crear el Usuario");
             }

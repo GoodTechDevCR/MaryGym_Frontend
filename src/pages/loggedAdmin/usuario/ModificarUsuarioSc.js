@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import PrincipalMenu from '../../../components/menu/PrincipalMenu';
 import ComboBox from '../../../components/ui/ComboBox';
 import TextInputs from '../../../components/ui/TextInput';
 import BotonPrincipalFuncional from '../../../components/ui/BotonPrincipalFuncional';
@@ -27,14 +26,32 @@ function ModificarUsuarioSc() {
 
     const handleModificar = async (event) => {
         event.preventDefault();
+
+        let nombreColumna;
+        if (selectedOption.label === 'Fecha Nacimiento') {
+            nombreColumna = 'fechanacimiento';
+        } else if (selectedOption.label === 'Teléfono') {
+            nombreColumna = 'telefono';
+        } else {
+            nombreColumna = selectedOption.label.toLowerCase(); // Ajusta según corresponda
+        }
+
+        let formattedData = newData;
+        if (selectedOption.label === 'Fecha Nacimiento') {
+            formattedData = newData.toISOString().split('T')[0]; // Formatea la fecha a "YYYY-MM-DD"
+            console.log("FECHA:  ",formattedData);
+        }
+
         const jsonData = {
             idRegistro: userId,
-            nombreColumna: selectedOption.label,
-            nuevoValor: newData
+            nombreColumna: nombreColumna,
+            nuevoValor: formattedData
         };
+
         console.log(jsonData);
 
         const success = await updateAnything(jsonData);
+        console.log("Respuesta del servidor:", success);
         if (success) {
             alert('Usuario modificado exitosamente');
             navigate('/');

@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-/*
 import useCreateAnything from '../../hooks/useCreateAnything';
-*/
+
 function CatEjeInsertar(){
-    /*
-    const { createAnything } = useCreateAnything('http://localhost:4000/catEje');
-    */
+    const { createAnything } = useCreateAnything('http://25.7.30.30:4000/catEje');
+
     const [formData, setFormData] = useState({
         NombreCatEje: ''
     });
@@ -14,6 +12,10 @@ function CatEjeInsertar(){
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     }
+
+    const handleReload = () => {
+        window.location.reload();
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,15 +27,13 @@ function CatEjeInsertar(){
         console.log(jsonData);
 
         try {
-            /*
             const success = await createAnything(jsonData);
-            
             if (success) {
                 alert("Categoria Ejercicio Creado Exitosamente");
+                handleReload();
             } else {
                 alert("Error al crear la Categoria Ejercicio");
             }
-                */
         } catch (error) {
             console.error("Error al crear la Categoria Ejercicio:", error);
             alert("Error al crear la Categoria Ejercicio");

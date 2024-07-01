@@ -52,7 +52,7 @@ function PrincipalMenu() {
                 </ListItem>
             </List>
             <List>
-                <ListItem key="Rutina Ejercicios" disablePadding>
+                <ListItem key="Visualizar Ejercicios" disablePadding>
                     <ListItemButton component={Link} to="/admin/ejeDisp">
                         <ListItemIcon>
                             <FitnessCenterIcon />
