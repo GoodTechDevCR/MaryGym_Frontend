@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SelectSingleUsuario from "../ui/selectSingle/SelectSingleUsuario";
 import SelectSingleTipoTran from "../ui/selectSingle/SelectSingleTipoTran";
 import DatePickerPrueba from "../datePicker/DatePickerPrueba";
 import useCreateAnything from "../../hooks/useCreateAnything";
+import useConsultaAbonos from "../../hooks/AbonoHooks/UseConsultaAbonos"; 
 
 function PagoInsertar() {
     const { createAnything: createCobroYPago } = useCreateAnything('http://localhost:4000/cobro/cobroypago');
     const { createAnything: createAbono } = useCreateAnything('http://localhost:4000/abono');
+    const { data: abonos, loading, error, consultaAbonos } = useConsultaAbonos(); // Usa el hook correctamente
+    const [selectedAbonos, setSelectedAbonos] = useState([]);
 
     const [formData, setFormData] = useState({
         IdUsuario: null,
@@ -20,6 +23,14 @@ function PagoInsertar() {
         FechaAbono: null
     });
 
+    useEffect(() => {
+        if (formData.IdUsuario) {
+            consultaAbonos(formData.IdUsuario);
+        } else {
+            setSelectedAbonos([]); // Reset abonos when no user is selected
+        }
+    }, [formData.IdUsuario]);
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -27,6 +38,7 @@ function PagoInsertar() {
 
     const handleUsuarioChange = (id) => {
         setFormData({ ...formData, IdUsuario: id });
+        setSelectedAbonos([]); // Reset selected abonos when user changes
     };
 
     const handleTipoTranChange = (id) => {
@@ -34,12 +46,15 @@ function PagoInsertar() {
             let newMonto = '';
             if (id === 7 || id === 8 || id === 9) {
                 newMonto = id === 7 ? '17500' : (id === 8 ? '5000' : '2700');
-                document.getElementById('monto-input').setAttribute('readonly', 'readonly');
+                const montoInput = document.getElementById('monto-input');
+                if (montoInput) montoInput.setAttribute('readonly', 'readonly');
             } else if (id === 10) {
                 newMonto = '-';
-                document.getElementById('monto-input').removeAttribute('readonly');
+                const montoInput = document.getElementById('monto-input');
+                if (montoInput) montoInput.removeAttribute('readonly');
             } else {
-                document.getElementById('monto-input').removeAttribute('readonly');
+                const montoInput = document.getElementById('monto-input');
+                if (montoInput) montoInput.removeAttribute('readonly');
             }
             return { ...prevFormData, IdTipoTran: id, Monto: newMonto, DiasAdicionales: '', FechaFinalEspecial: null, OpcionSeleccionada: '' };
         });
@@ -64,6 +79,23 @@ function PagoInsertar() {
 
     const handleFechaAbonoChange = (date) => {
         setFormData({ ...formData, FechaAbono: date });
+    };
+
+    const handleAbonoSelection = (id) => {
+        setSelectedAbonos((prevSelected) => {
+            if (prevSelected.includes(id)) {
+                return prevSelected.filter((abonoId) => abonoId !== id);
+            } else {
+                return [...prevSelected, id];
+            }
+        });
+    };
+
+    const calculateAbonoTotal = () => {
+        return selectedAbonos.reduce((total, id) => {
+            const abono = abonos.find((a) => a.IdAbono === id);
+            return abono ? total + abono.MontoAbono : total;
+        }, 0);
     };
 
     const handleSubmit = async (e) => {
@@ -91,6 +123,7 @@ function PagoInsertar() {
             // Registro de cobro y pago
             const fechaPagoFinal = formData.FechaPago.toISOString().split('T')[0];
             const montoFinal = parseFloat(formData.Monto);
+            const abonoTotal = calculateAbonoTotal();
 
             const jsonData = {
                 IdUsuario: formData.IdUsuario,
@@ -105,6 +138,31 @@ function PagoInsertar() {
 
             if (result) {
                 alert("Cobro y pago creados/actualizados exitosamente");
+
+                if (abonoTotal > 0) {
+                    if (abonoTotal >= montoFinal) {
+                        // Eliminar abonos usados y registrar nuevo abono si hay exceso
+                        for (const id of selectedAbonos) {
+                            await fetch(`http://localhost:4000/abono/${id}`, { method: 'DELETE' });
+                        }
+
+                        if (abonoTotal > montoFinal) {
+                            const exceso = abonoTotal - montoFinal;
+                            const abonoExcesoData = {
+                                IdUsuario: formData.IdUsuario,
+                                FechaAbono: fechaPagoFinal,
+                                MontoAbono: exceso
+                            };
+
+                            await createAbono(abonoExcesoData);
+                        }
+                    } else {
+                        // Eliminar abonos usados
+                        for (const id of selectedAbonos) {
+                            await fetch(`http://localhost:4000/abono/${id}`, { method: 'DELETE' });
+                        }
+                    }
+                }
             } else {
                 alert("Error al crear el cobro y el pago");
             }
@@ -162,6 +220,25 @@ function PagoInsertar() {
                                         <DatePickerPrueba onDateChange={handleFechaFinalEspecialChange} />
                                     </label>
                                 )}
+                            </div>
+                        )}
+                        <br />
+                        {abonos && abonos.length > 0 && (
+                            <div>
+                                <h3>Seleccionar Abonos</h3>
+                                {abonos.map((abono) => (
+                                    <div key={abono.IdAbono}>
+                                        <input
+                                            type="checkbox"
+                                            value={abono.IdAbono}
+                                            checked={selectedAbonos.includes(abono.IdAbono)}
+                                            onChange={() => handleAbonoSelection(abono.IdAbono)}
+                                        />
+                                        <label>
+                                            {`Monto: ${abono.MontoAbono}, Fecha: ${new Date(abono.FechaAbono).toLocaleDateString()}`}
+                                        </label>
+                                    </div>
+                                ))}
                             </div>
                         )}
                     </>

@@ -6,6 +6,7 @@ const useConsultaAbonos = () => {
     const [error, setError] = useState(null);
 
     const consultaAbonos = async (userId) => {
+        setLoading(true); // Asegúrate de que loading sea verdadero cuando se inicie la consulta
         try {
             const response = await fetch(`http://localhost:4000/abono/${userId}`);
             if (!response.ok) {
@@ -13,9 +14,9 @@ const useConsultaAbonos = () => {
             }
             const data = await response.json();
             setData(data);
-            setLoading(false);
         } catch (error) {
             setError(error);
+        } finally {
             setLoading(false);
         }
     };
