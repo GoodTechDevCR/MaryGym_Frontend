@@ -5,7 +5,7 @@ import DatePickerPrueba from "../datePicker/DatePickerPrueba";
 import useCreateAnything from "../../hooks/useCreateAnything";
 
 function PagoInsertar() {
-    const { createAnything } = useCreateAnything('http://localhost:4000/pago');
+    const { createAnything } = useCreateAnything('http://localhost:4000/cobro/cobroypago');
 
     const [formData, setFormData] = useState({
         IdUsuario: null,
@@ -27,7 +27,7 @@ function PagoInsertar() {
         setFormData((prevFormData) => {
             let newMonto = '';
             if (id === 7 || id === 8 || id === 9) {
-                newMonto = id === 7 ? -'17500' : (id === 8 ? '-5000' : '-2700');
+                newMonto = id === 7 ? '17500' : (id === 8 ? '5000' : '2700');
                 document.getElementById('monto-input').setAttribute('readonly', 'readonly');
             } else if (id === 10) {
                 newMonto = '-';
@@ -51,24 +51,20 @@ function PagoInsertar() {
         e.preventDefault();
         const fechaPagoFinal = formData.FechaPago.toISOString().split('T')[0];
         const montoFinal = parseFloat(formData.Monto);
+
         const jsonData = {
-            ...formData,
+            IdUsuario: formData.IdUsuario,
             Monto: montoFinal,
-            FechaPago: fechaPagoFinal
+            FechaPago: fechaPagoFinal,
+            IdTipoTran: formData.IdTipoTran
         };
 
+        const result = await createAnything(jsonData);
 
-        try {
-            const success = await createAnything(jsonData);
-            if (success) {
-                alert("PagoCreado Exitosamente");
-                handleReload();
-            } else {
-                alert("Error al crear el Pago");
-            }
-        } catch (error) {
-            console.error("Error al crear el Pago:", error);
-            alert("Error al crear el Pago");
+        if (result) {
+            alert("Cobro y pago creados/actualizados exitosamente");
+        } else {
+            alert("Error al crear el cobro y el pago");
         }
     };
 

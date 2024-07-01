@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,7 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import ConsultaPago from "../../hooks/pagoHooks/useConsultaPago";
+import SelectSingleUsuario from "../ui/selectSingle/SelectSingleUsuario";
+import UseConsultaPago from "../../hooks/pagoHooks/useConsultaPago";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -29,35 +30,46 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function TablaPago() {
-    const data = ConsultaPago(); // Usar la función consultaUsuarioHook para obtener los datos
+    const [selectedUser, setSelectedUser] = useState(null);
+    const { data, loading, error } = UseConsultaPago(selectedUser);
 
-    if (!data) return <div>Loading...</div>;
+    const handleUsuarioChange = (id) => {
+        setSelectedUser(id);
+    };
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
 
     return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell>IdPago</StyledTableCell>
-                        <StyledTableCell>Nombre Usuario</StyledTableCell>
-                        <StyledTableCell align="right">Fecha Pago</StyledTableCell>
-                        <StyledTableCell align="right">Tipo Transaccion</StyledTableCell>
-                        <StyledTableCell align="right">Monto</StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {data.map((row) => (
-                        <StyledTableRow key={row.IdPago}>
-                            <StyledTableCell>{row.IdPago}</StyledTableCell>
-                            <StyledTableCell>{row.NombreUsuario}</StyledTableCell>
-                            <StyledTableCell align="right">{row.FechaPago}</StyledTableCell>
-                            <StyledTableCell align="right">{row.TipoTran}</StyledTableCell>
-                            <StyledTableCell align="right">{row.Monto}</StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <div>
+            <SelectSingleUsuario onUsuarioChange={handleUsuarioChange} />
+            {data && (
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                        <TableHead>
+                            <TableRow>
+                                <StyledTableCell>IdPago</StyledTableCell>
+                                <StyledTableCell>Nombre Usuario</StyledTableCell>
+                                <StyledTableCell align="right">Fecha Pago</StyledTableCell>
+                                <StyledTableCell align="right">Tipo Transaccion</StyledTableCell>
+                                <StyledTableCell align="right">Monto</StyledTableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {data.map((row) => (
+                                <StyledTableRow key={row.IdPago}>
+                                    <StyledTableCell>{row.IdPago}</StyledTableCell>
+                                    <StyledTableCell>{row.NombreUsuario}</StyledTableCell>
+                                    <StyledTableCell align="right">{row.FechaPago}</StyledTableCell>
+                                    <StyledTableCell align="right">{row.TipoTran}</StyledTableCell>
+                                    <StyledTableCell align="right">{row.Monto}</StyledTableCell>
+                                </StyledTableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            )}
+        </div>
     );
 }
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const UseConsultaEjercicio = () => {
+const UseConsultaEjercicioByCat = (catId) => {
     const [data, setData] = useState(null);
     // eslint-disable-next-line
     const [loading, setLoading] = useState(true);
@@ -11,7 +11,7 @@ const UseConsultaEjercicio = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://25.7.30.30:4000/ejercicio`);
+                const response = await fetch(`http://25.7.30.30:4000/ejercicio/byCat/${catId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -30,4 +30,4 @@ const UseConsultaEjercicio = () => {
     return data;
 };
 
-export default UseConsultaEjercicio;
+export default UseConsultaEjercicioByCat;

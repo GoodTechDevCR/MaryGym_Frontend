@@ -11,7 +11,7 @@ const UseConsultaCatEje = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:4000/catEje`);
+                const response = await fetch(`http://25.7.30.30:4000/catEje`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
