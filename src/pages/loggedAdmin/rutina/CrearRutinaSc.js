@@ -11,7 +11,8 @@ const CrearRutinaSc = () => {
         usuario: "",
         fechaInicio: null,
         fechaFin: null,
-        cantSemana: 0
+        cantSemana: 0,
+        fechaPago: null
     });
 
     const [funcionalidades, setFuncionalidades] = useState([]);
@@ -26,6 +27,11 @@ const CrearRutinaSc = () => {
             return newFormData;
         });
     };
+
+    const handleFechaPago = (date) => {
+        const dateFix = date.toISOString().split('T')[0];
+        setFormData({...formData,fechaPago: dateFix })
+    }
 
     const handleUsuarioChange = (id) => {
         setFormData({ ...formData, usuario: id });
@@ -200,6 +206,13 @@ const CrearRutinaSc = () => {
                         />
                     </label>
                     <br />
+                    <label>
+                        Seleccione la fecha de pago del cliente
+                        <DatePickerPrueba
+                            selected={formData.fechaInicio}
+                            onDateChange={(date) => handleFechaPago(date)}
+                        />
+                    </label>
                     <button type="submit">Guardar Información Inicial</button>
                 </form>
             )}
