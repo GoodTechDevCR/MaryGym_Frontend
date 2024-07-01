@@ -57,6 +57,10 @@ const CrearRutinaSc = () => {
         setFuncionalidades([...funcionalidades, nuevaFuncionalidad]);
     };
 
+    const handleRemoveFuncionalidad = (index) => {
+        setFuncionalidades(funcionalidades.filter((_, i) => i !== index));
+    };
+
     const handleFuncionalidadChange = (index, e) => {
         const { name, value } = e.target;
         const nuevasFuncionalidades = [...funcionalidades];
@@ -81,6 +85,12 @@ const CrearRutinaSc = () => {
 
         const nuevasFuncionalidades = [...funcionalidades];
         nuevasFuncionalidades[indexFuncionalidad].ejercicios.push(nuevoEjercicio);
+        setFuncionalidades(nuevasFuncionalidades);
+    };
+
+    const handleRemoveEjercicio = (indexFuncionalidad, indexEjercicio) => {
+        const nuevasFuncionalidades = [...funcionalidades];
+        nuevasFuncionalidades[indexFuncionalidad].ejercicios = nuevasFuncionalidades[indexFuncionalidad].ejercicios.filter((_, i) => i !== indexEjercicio);
         setFuncionalidades(nuevasFuncionalidades);
     };
 
@@ -138,7 +148,7 @@ const CrearRutinaSc = () => {
             funcionalidades
         };
 
-        console.log("Dataaaaa: ",jsonData);
+        console.log("Dataaaaa: ", jsonData);
 
         // Envía los datos al backend para generar el PDF
         const response = await fetch('http://localhost:4000/servicioAPI/generarPDF', {
@@ -179,7 +189,7 @@ const CrearRutinaSc = () => {
                             onDateChange={(date) => handleDateChange('fechaInicio', date)}
                         />
                     </label>
-                    <br/>
+                    <br />
                     <label>
                         Seleccione la cantidad de semanas de la Rutina
                         <input
@@ -208,6 +218,9 @@ const CrearRutinaSc = () => {
                                     onChange={(e) => handleFuncionalidadChange(indexFuncionalidad, e)}
                                 />
                             </label>
+                            <button type="button" onClick={() => handleRemoveFuncionalidad(indexFuncionalidad)}>
+                                Borrar Funcionalidad
+                            </button>
                             <button type="button" onClick={() => handleAddEjercicio(indexFuncionalidad)}>
                                 Agregar Ejercicio
                             </button>
@@ -219,6 +232,9 @@ const CrearRutinaSc = () => {
                                             onEjercicioChange={(value) => handleEjercicioChange(indexFuncionalidad, indexEjercicio, value)}
                                         />
                                     </label>
+                                    <button type="button" onClick={() => handleRemoveEjercicio(indexFuncionalidad, indexEjercicio)}>
+                                        Borrar Ejercicio
+                                    </button>
                                     <label>
                                         Comentario
                                         <input
@@ -228,13 +244,13 @@ const CrearRutinaSc = () => {
                                             onChange={(e) => handleComentarioChange(indexFuncionalidad, indexEjercicio, e)}
                                         />
                                     </label>
-                                    {Array.from({ length: formData.cantSemana }).map((_, semanaIndex) => (
-                                        <label key={semanaIndex}>
-                                            Semana {semanaIndex + 1}
+                                    {Array.from({ length: formData.cantSemana }, (_, i) => (
+                                        <label key={`semana${i + 1}`}>
+                                            Semana {i + 1}
                                             <input
                                                 type="text"
-                                                name={`semana${semanaIndex + 1}`}
-                                                value={ejercicio[`semana${semanaIndex + 1}`] || ""}
+                                                name={`semana${i + 1}`}
+                                                value={ejercicio[`semana${i + 1}`]}
                                                 onChange={(e) => handleSemanaChange(indexFuncionalidad, indexEjercicio, e)}
                                             />
                                         </label>
@@ -246,7 +262,7 @@ const CrearRutinaSc = () => {
                     <button type="button" onClick={handleAddFuncionalidad}>
                         Agregar Funcionalidad
                     </button>
-                    <button type="submit">Generar PDF</button>
+                    <button type="submit">Guardar Rutina</button>
                 </form>
             )}
         </div>
