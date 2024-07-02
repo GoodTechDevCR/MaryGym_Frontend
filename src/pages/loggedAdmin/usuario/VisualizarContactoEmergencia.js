@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import TablaContactoEmergencia from '../../../components/showData/TableContactoEmergencia';
 import SelectSingleRelacion from '../../../components/ui/selectSingle/SelectSingleRelacion';
 import useCreateAnything from '../../../hooks/useCreateAnything';
+import HeadAdmin from "../../../components/Header/HeadAdmin";
+import Foot from "../../../components/Footer/Foot";
 
 function VisualizarContactoEmergencia() {
     const { createAnything } = useCreateAnything('http://localhost:4000/contactoEme/unico');
@@ -61,39 +63,40 @@ function VisualizarContactoEmergencia() {
 
     return (
         <div>
-            <h2>Contacto Emergencia</h2>
-            <p>ID: {id}</p>
-            <TablaContactoEmergencia id = {id}/>
+            <HeadAdmin/>
+            <div className='centered-title'>
+                <h2>Contacto Emergencia</h2>
+                <p>ID: {id}</p>
+                <TablaContactoEmergencia id = {id}/>
 
-            <br/>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Nombre
-                    <input 
-                        type="text" 
-                        value={formData.Nombre} 
-                        onChange={handleNombreChange} 
-                        placeholder="Ingrese el nombre" 
-                    />
-                </label>
-                <br/>
-                <label>
-                    Teléfono
-                    <input 
-                        type="text" 
-                        value={formData.NumeroTelefono} 
-                        onChange={handleTelefonoChange} 
-                        placeholder="Ingrese el teléfono" 
-                    />
-                </label>
-                <br/>
-                <label>
-                    Relación
-                    <SelectSingleRelacion onRelacionChange={handleRelacionChange} />
-                </label>
-                <br/>
-                <button type="submit">Guardar contacto emergencia</button>
-            </form>
+                <div className='centered-title'>
+                    <h3> Nuevo contacto de emergencia</h3>
+                    <form onSubmit={handleSubmit}>
+                        <label className='elemento2'>
+                            <input 
+                                type="text" 
+                                value={formData.Nombre} 
+                                onChange={handleNombreChange} 
+                                placeholder="Ingrese el nombre" 
+                            />
+                        </label>
+                        <label className='elemento2'>
+                            <input 
+                                type="text" 
+                                value={formData.NumeroTelefono} 
+                                onChange={handleTelefonoChange} 
+                                placeholder="Ingrese el teléfono" 
+                            />
+                        </label>
+                        <label className='elemento2'>
+                            <SelectSingleRelacion onRelacionChange={handleRelacionChange} />
+                        </label>
+                        <div className='elemento2'> <button type="submit" className='black-button'>Guardar contacto emergencia</button> </div>
+                    </form>
+                </div>
+            </div>
+            <Foot />
+            <br/> <br/> <br/> <br/> <br/>
         </div>
     );
 }

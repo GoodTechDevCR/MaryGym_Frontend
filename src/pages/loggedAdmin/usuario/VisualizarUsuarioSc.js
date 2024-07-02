@@ -1,6 +1,5 @@
 import React from 'react';
 import TablaUsuario from "../../../components/showData/TablaUsuario";
-import PrincipalMenu from "../../../components/menu/PrincipalMenu";
 import HeadAdmin from "../../../components/Header/HeadAdmin";
 import Foot from "../../../components/Footer/Foot";
 

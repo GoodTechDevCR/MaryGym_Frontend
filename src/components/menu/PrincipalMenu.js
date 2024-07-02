@@ -71,14 +71,6 @@ function PrincipalMenu() {
                         <ListItemText primary="Registrar Usuario" />
                     </ListItemButton>
                 </ListItem>
-                <ListItem key="Modificar Usuario" disablePadding>
-                    <ListItemButton component={Link} to="/admin/usuario/modificar">
-                        <ListItemIcon>
-                            <ManageAccountsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Modificar Usuario" />
-                    </ListItemButton>
-                </ListItem>
                 <ListItem key="Visualizar Usuario" disablePadding>
                     <ListItemButton component={Link} to="/admin/usuario/visualizar">
                         <ListItemIcon>

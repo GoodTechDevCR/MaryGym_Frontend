@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { saveAs } from 'file-saver';
 import Box from '@mui/material/Box';
-import PrincipalMenu from '../../../components/menu/PrincipalMenu';
 import SelectSingleUsuarioByName from '../../../components/ui/selectSingle/selectSingleUsuarioByName';
 import DatePickerPrueba from '../../../components/datePicker/DatePickerPrueba';
 import SelectSingleEjercicioByName from '../../../components/ui/selectSingle/SelectSingleEjercicioByName';
@@ -229,8 +228,8 @@ const CrearRutinaSc = () => {
                     <div className='elemento2'>
                     {funcionalidades.map((funcionalidad, indexFuncionalidad) => (
                         <Box key={indexFuncionalidad} 
-                            sx={{ border: '5px solid grey', borderRadius: '8px', backgroundColor: '#f9f9f9' , maxWidth: 750, margin:'auto' }} 
-                            className='elemento2'>
+                            sx={{ border: '5px solid grey', borderRadius: '8px', backgroundColor: '#f9f9f9' , maxWidth: 750, margin:2 }} 
+                            >
                             <label>
                                 <input
                                     placeholder="Funcionalidad"
@@ -240,38 +239,43 @@ const CrearRutinaSc = () => {
                                     onChange={(e) => handleFuncionalidadChange(indexFuncionalidad, e)}
                                 />
                             </label>
-                            <button type="button"  className='black-button' onClick={() => handleRemoveFuncionalidad(indexFuncionalidad)}>
-                                Borrar Funcionalidad
-                            </button>
-                            <button type="button"  className='black-button' onClick={() => handleAddEjercicio(indexFuncionalidad)}>
-                                Agregar Ejercicio
-                            </button>
+                            <button type="button" className='delete-button' onClick={() => handleRemoveFuncionalidad(indexFuncionalidad)}>
+                                    Borrar Funcionalidad
+                                </button>
+                            <div className='elemento2'>
+                                <button type="button"  className='black-button' onClick={() => handleAddEjercicio(indexFuncionalidad)}>
+                                    Agregar Ejercicio
+                                </button>
+                            </div>
+                            
                             {funcionalidad.ejercicios.map((ejercicio, indexEjercicio) => (
                                 <Box key={indexEjercicio} 
-                                sx={{ border: '2px solid grey', borderRadius: '8px', backgroundColor: '#f9f9f9' , maxWidth: 700, margin:'auto' }}>
-                                    <label>
-                                        Nombre del ejercicio
+                                sx={{ border: '2px solid grey', borderRadius: '8px', backgroundColor: '#f9f9f9' , maxWidth: 700, margin:3 }}>
+                                    <label className='elemento'>
                                         <SelectSingleEjercicioByName
                                             onEjercicioChange={(value) => handleEjercicioChange(indexFuncionalidad, indexEjercicio, value)}
                                         />
+                                        <button type="button"  className='delete-button' onClick={() => handleRemoveEjercicio(indexFuncionalidad, indexEjercicio)}>
+                                            Borrar ejercicio
+                                        </button>
                                     </label>
-                                    <button type="button"  className='black-button' onClick={() => handleRemoveEjercicio(indexFuncionalidad, indexEjercicio)}>
-                                        Borrar Ejercicio
-                                    </button>
-                                    <label>
-                                        Comentario
+                                    
+                                    <label className='elemento'>
+                   
                                         <input
                                             type="text"
+                                            placeholder='Comentario'
                                             name="comentario"
                                             value={ejercicio.comentario}
                                             onChange={(e) => handleComentarioChange(indexFuncionalidad, indexEjercicio, e)}
                                         />
                                     </label>
                                     {Array.from({ length: formData.cantSemana }, (_, i) => (
-                                        <label key={`semana${i + 1}`}>
-                                            Semana {i + 1}
-                                            <input
+                                        <label key={`semana${i + 1}`} className='elemento' >
+                                            
+                                            <input sx={{margin:2}}
                                                 type="text"
+                                                placeholder={`Semana ${i + 1}`}
                                                 name={`semana${i + 1}`}
                                                 value={ejercicio[`semana${i + 1}`]}
                                                 onChange={(e) => handleSemanaChange(indexFuncionalidad, indexEjercicio, e)}
@@ -282,10 +286,13 @@ const CrearRutinaSc = () => {
                             ))}
                         </Box>
                     ))}
-                    <button type="button"  className='black-button' onClick={handleAddFuncionalidad}>
-                        Agregar Funcionalidad
-                    </button>
-                    <button type="submit"  className='black-button' >Guardar Rutina</button>
+                    <div className='centered-title2'>
+                        <button type="button"  className='black-button' onClick={handleAddFuncionalidad}> Agregar Funcionalidad </button>  
+                    </div>
+                    <div className='centered-title2'>
+                         <button type="submit"  className='black-button' >Guardar Rutina</button> 
+                    </div>
+
                     </div>
                 </form>
             )}

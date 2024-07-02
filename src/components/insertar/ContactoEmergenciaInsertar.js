@@ -80,39 +80,37 @@ function ContactoEmergenciaInsertar({ correo }) {
     };
 
     return (
-        <div>
+        <div className='centerd title'>
             <h2>Insertar contacto de emergencia</h2>
             <form onSubmit={handleSubmit}>
-                <label>
-                    Nombre
+                <label className='elemento2'>
                     <input 
                         type="text" 
                         value={formData.Nombre} 
                         onChange={handleNombreChange} 
-                        placeholder="Ingrese el nombre" 
+                        placeholder="Nombre Contacto" 
                     />
                 </label>
-                <br/>
-                <label>
-                    Teléfono
+                <label className='elemento2'>
                     <input 
                         type="text" 
                         value={formData.NumeroTelefono} 
                         onChange={handleTelefonoChange} 
-                        placeholder="Ingrese el teléfono" 
+                        placeholder="Teléfono" 
                     />
                 </label>
-                <br/>
-                <label>
-                    Relación
+                <label className='elemento2'>
                     <SelectSingleRelacion onRelacionChange={handleRelacionChange} />
                 </label>
-                <br/>
-                <button type="button" onClick={handleAddContact}>Agregar Contacto</button>
-                <button type="submit">Enviar</button>
-            </form>
+                <div className='elemento2'>
+                    <button type="button" className='black-button' onClick={handleAddContact}>Agregar Contacto</button>
+                </div>
+                <div className='elemento2'>
+                    <button type="submit" className='black-button'>Enviar</button>
+                </div>
+                </form>
 
-            <div>
+            <div className='centered-title'>
                 <h3>Contactos de Emergencia</h3>
                 <ul>
                     {contactos.map((contacto, index) => (

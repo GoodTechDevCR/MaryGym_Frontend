@@ -103,6 +103,17 @@ body{
     border-radius: 8px;
   }
 
+.delete-button {
+    background-color: white; /* Green */
+    color: black;
+    padding: 8px 15px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-left: 2%;
+  }
+
 .black-button{
     background-color: black; /* Green */
     color: white;
@@ -111,6 +122,8 @@ body{
     font-size: 16px;
     border-radius: 8px;
     display: inline-block;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 .box{

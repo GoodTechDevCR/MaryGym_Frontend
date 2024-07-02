@@ -113,7 +113,7 @@ function UsuarioInsertar() {
             )}
 
             {step === 2 && (
-                <div>
+                <div className='centered-title2'>
                     <ContactoEmergenciaInsertar correo={formData.Correo} />
                 </div>
             )}
