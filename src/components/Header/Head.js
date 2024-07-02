@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import PrincipalMenu from '../menu/PrincipalMenu';
+import GymImagen from '../../assets/logoMaryGym.jpg'
+import { Block } from '@mui/icons-material';
 
 const Header = () => {
     const [isNavOpen, setIsNavOpen] = useState(false);
@@ -19,9 +21,11 @@ const Header = () => {
     };
 
     return (
-        <header >
+        <>
+        <header style={styles.header} >
             <div >
-                <h3 style={styles.logo}>Logo</h3>
+                <img src={GymImagen} alt="Gym Image" style={styles.logo}/>
+                
                 <nav className={isNavOpen ? 'nav-open' : 'nav-closed'}>
                     <a href="/" onClick={closeNav}>Inicio</a>
                     <a href="/" onClick={closeNav}>Rutinas</a>
@@ -37,17 +41,22 @@ const Header = () => {
                     <PrincipalMenu />
 
             )}
+            
         </header>
+        <PrincipalMenu />
+        </>
+        
     );
 };
 
 const styles = {
     header: {
-        backgroundColor: 'rgba(255, 146, 87, 0.91)',
-        color: '#000000',
+        backgroundColor: '#000000',
+        color: '#FFFFFF',
         padding: '20px',
         width: '100%',
-        position: 'fixed',
+        /*position: 'fixed',*/
+        alignItems: 'center',
         top: 0,
         left: 0,
         zIndex: 1000,
@@ -61,10 +70,14 @@ const styles = {
         alignItems: 'center',
     },
     logo: {
-        fontSize: '1.5rem',
-        fontWeight: 'bold',
+        display:'center',
+        width:'auto',
+        height:'50px',
         color: '#000000',
         textDecoration: 'none',
+        display: 'block',
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     nav: {
         display: 'flex',

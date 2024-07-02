@@ -5,8 +5,9 @@ import TextInputs from '../../../components/ui/TextInput';
 import BotonPrincipalFuncional from '../../../components/ui/BotonPrincipalFuncional';
 import useUpdateAnything from '../../../hooks/useUpdateAnything';
 import TarjetaInformacion from '../../../components/showData/TarjetaInformacion';
-import Head from "../../../components/Header/Head";
+import HeadAdmin from "../../../components/Header/HeadAdmin";
 import Foot from "../../../components/Footer/Foot";
+import "../../Home/Home.css";
 
 const datos = [
     { label: 'Nombre', type: 'text' },
@@ -63,12 +64,20 @@ function ModificarUsuarioSc() {
 
     return (
         <div>
-            <Head/>
-            <h1>Modificar Usuario</h1>
-            <TarjetaInformacion/>
-            <ComboBox datos={datos} onSelect={setSelectedOption}/>
-            <TextInputs selectedOption={selectedOption} newData={newData} setNewData={setNewData}/>
-            <BotonPrincipalFuncional texto="Modificar" onClick={handleModificar}/>
+            <HeadAdmin/>
+            <div className='centered-title2'> 
+                <h1 className='black'>Modificar Usuario</h1>
+                <TarjetaInformacion/>
+                <div className = 'elemento2'>
+                    <ComboBox datos={datos} onSelect={setSelectedOption} sx={{margin:'auto'}}/>
+                </div>
+                <div className = 'elemento2'>
+                    <TextInputs selectedOption={selectedOption} newData={newData} setNewData={setNewData}/>
+                </div>
+                <div className = 'elemento2'>
+                    <BotonPrincipalFuncional texto="Modificar" onClick={handleModificar}/>
+                </div>
+            </div>
             <Foot/>
         </div>
     );

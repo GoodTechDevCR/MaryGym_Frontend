@@ -41,6 +41,10 @@ function CustomizedTables() {
         navigate(`/admin/usuario/modificar/${id}`);
     };
 
+    const handleContactoEmergencia = (id) => {
+        navigate(`/admin/usuario/contactoEmergencia/${id}`);
+    }
+
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -69,6 +73,9 @@ function CustomizedTables() {
                             <StyledTableCell align="right">
                                 <Button variant="contained" color="primary" onClick={() => handleModify(row.idusuario)}>
                                     Modificar
+                                </Button>
+                                <Button variant="contained" color="primary" onClick={() => handleContactoEmergencia(row.idusuario)}>
+                                    Contacto Emergencia
                                 </Button>
                             </StyledTableCell>
                         </StyledTableRow>

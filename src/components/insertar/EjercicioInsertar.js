@@ -48,14 +48,9 @@ function EjercicioInsertar() {
         <div>
             <h2>Insertar Ejercicio</h2>
             <form onSubmit={handleSubmit}>
-                <label>
-                    Seleccione la categoría del ejercicio:
-                    <SelectSingleCatEje onCatEjeChange={handleCatEjeChange} />
-                </label>
-                <br />
-
-                <br />
-                <label>
+                <label className='elemento2'> Seleccione la categoría del ejercicio: </label>
+                <label className='elemento2'> <SelectSingleCatEje onCatEjeChange={handleCatEjeChange} /> </label>
+                <label className='elemento2'>
                     Ingrese el nombre del ejercicio:
                     <input
                         id="nombre-input"
@@ -65,8 +60,9 @@ function EjercicioInsertar() {
                         onChange={handleInputChange}
                     />
                 </label>
-                <br />
-                <button type="submit">Guardar Ejercicio</button>
+                <label className='elemento2'> 
+                    <button type="submit" className='black-button'>Guardar Ejercicio</button>
+                </label>
             </form>
         </div>
     );

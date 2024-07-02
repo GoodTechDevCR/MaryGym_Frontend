@@ -5,7 +5,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 function PaisesTelefono({ onCountryChange }) {
     return (
-        <Autocomplete
+            <Autocomplete
             id="country-select-demo"
             sx={{ width: 300 }}
             options={countries}
@@ -30,7 +30,7 @@ function PaisesTelefono({ onCountryChange }) {
             renderInput={(params) => (
                 <TextField
                     {...params}
-                    label="Choose a country"
+                    label="País"
                     inputProps={{
                         ...params.inputProps,
                         autoComplete: 'new-password', // disable autocomplete and autofill
@@ -38,6 +38,7 @@ function PaisesTelefono({ onCountryChange }) {
                 />
             )}
         />
+        
     );
 }
 
