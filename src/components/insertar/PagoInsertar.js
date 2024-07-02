@@ -169,6 +169,9 @@ function PagoInsertar() {
         }
     };
 
+    const abonoTotal = calculateAbonoTotal();
+    const montoTotal = parseFloat(formData.Monto) - abonoTotal;
+
     return (
         <div>
             <h2>Formulario de Pago</h2>
@@ -239,6 +242,8 @@ function PagoInsertar() {
                                         </label>
                                     </div>
                                 ))}
+                                <p>Total de abonos seleccionados: {abonoTotal}</p>
+                                <p>Monto total a cobrar después de abonos: {montoTotal < 0 ? 0 : montoTotal}</p>
                             </div>
                         )}
                     </>
