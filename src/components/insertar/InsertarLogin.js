@@ -3,7 +3,10 @@ import useValidateLogin from '../../hooks/loginHooks/useValidateLogin';
 
 function InsertarLogin() {
     const { loading, error, loggedIn, login } = useValidateLogin();
-    const [formData, setFormData] = useState({ username: '', password: '' });
+    const [formData, setFormData] = useState({
+        usuario: '',
+        contrasena: ''
+    });
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -12,42 +15,40 @@ function InsertarLogin() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { username, password } = formData;
 
         try {
-            const success = await login(username, password);
+            const { success, message } = await login(formData.usuario, formData.contrasena);
 
             if (success) {
-                alert('¡Inicio de sesión exitoso!');
-                // Aquí podrías redirigir al usuario a otra página o realizar otras acciones post-login
+                alert('Ingreso Exitoso');
             } else {
-                alert('Error al iniciar sesión. Por favor, verifica tus credenciales.');
+                alert(`Error al ingresar al sistema: ${message}`);
             }
         } catch (error) {
-            console.error('Error al iniciar sesión:', error);
-            alert('Error al iniciar sesión. Por favor, intenta nuevamente.');
+            console.error('Error al ingresar al sistema:', error);
+            alert('Error al ingresar al sistema');
         }
     };
 
     return (
-        <div className="centered-title">
-            <h2>Iniciar Sesión</h2>
+        <div className='centered-title'>
+            <h2>Iniciar Sesion</h2>
             <form onSubmit={handleSubmit}>
                 <label>
                     Usuario:
-                    <input type="text" name="username" value={formData.username} onChange={handleInputChange} />
+                    <input type="text" name="usuario" value={formData.usuario} onChange={handleInputChange} />
                 </label>
                 <br />
                 <label>
                     Contraseña:
-                    <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
+                    <input type="password" name="contrasena" value={formData.contrasena} onChange={handleInputChange} />
                 </label>
                 <br />
                 <button type="submit" disabled={loading}>
-                    {loading ? 'Cargando...' : 'Ingresar'}
+                    {loading ? 'Ingresando...' : 'Ingresar'}
                 </button>
-                {error && <p>{error}</p>}
             </form>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
     );
 }

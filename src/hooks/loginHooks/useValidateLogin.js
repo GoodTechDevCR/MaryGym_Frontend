@@ -5,35 +5,40 @@ const useValidateLogin = () => {
     const [error, setError] = useState(null);
     const [loggedIn, setLoggedIn] = useState(false);
 
-    const login = async (username, password) => {
+    const login = async (usuario, contrasena) => {
         setLoading(true);
         setError(null);
 
         try {
+            console.log("Enviando datos al servidor:", { usuario, contrasena });
+
             const response = await fetch('http://25.7.30.30:4000/login/validate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({ usuario, contrasena }),
             });
 
-            console.log(response);
+            console.log("Respuesta del servidor:", response);
 
             if (!response.ok) {
-                throw new Error('Login failed');
+                const errorData = await response.json();
+                console.log("Error del servidor:", errorData);
+                throw new Error(errorData.message || 'Login failed');
             }
 
             const data = await response.json();
-            console.log(data); // Logging response data for verification
+            console.log("Datos recibidos del servidor:", data); // Logging response data for verification
 
             // Handle successful login
             setLoggedIn(true);
-            return true;
+            return { success: true, message: data.message };
         } catch (error) {
+            console.error('Error en la solicitud de login:', error);
             setError(error.message);
             setLoggedIn(false);
-            return false;
+            return { success: false, message: error.message };
         } finally {
             setLoading(false);
         }
