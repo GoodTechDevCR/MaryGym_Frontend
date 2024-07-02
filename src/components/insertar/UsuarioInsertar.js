@@ -3,9 +3,8 @@ import PaisesTelefono from '../ui/PaisesTelefono';
 import useCreateAnything from '../../hooks/useCreateAnything';
 import DatePickerPrueba from "../datePicker/DatePickerPrueba";
 
-
 function UsuarioInsertar() {
-    const { createAnything } = useCreateAnything('http://25.7.30.30:4000/usuario');
+    const { createAnything, error } = useCreateAnything('http://25.7.30.30:4000/usuario'); // Obtener el error desde el hook
 
     const [formData, setFormData] = useState({
         Nombre: '',
@@ -56,8 +55,6 @@ function UsuarioInsertar() {
         delete jsonData.CodigoPais;
         delete jsonData.Pais;
 
-
-
         try {
             const success = await createAnything(jsonData);
             if (success) {
@@ -69,12 +66,12 @@ function UsuarioInsertar() {
             console.error("Error al crear el Usuario:", error);
             alert("Error al crear el Usuario");
         }
-
     };
 
     return (
         <div>
             <h2>Prueba de insertar usuario:</h2>
+            {error && <p style={{ color: 'red' }}>{error.message}</p>} {/* Mostrar error si existe y acceder al mensaje */}
             <form onSubmit={handleSubmit}>
                 <label>
                     Nombre:
