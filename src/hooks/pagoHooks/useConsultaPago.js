@@ -8,7 +8,7 @@ const UseConsultaPago = (IdUsuario) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const url = IdUsuario ? `http://localhost:4000/pago/${IdUsuario}` : `http://localhost:4000/pago`;
+                const url = IdUsuario ? `http://25.7.30.30:4000/pago/${IdUsuario}` : `http://25.7.30.30:4000/pago`;
                 const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
