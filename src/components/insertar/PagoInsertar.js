@@ -3,13 +3,14 @@ import SelectSingleUsuario from "../ui/selectSingle/SelectSingleUsuario";
 import SelectSingleTipoTran from "../ui/selectSingle/SelectSingleTipoTran";
 import DatePickerPrueba from "../datePicker/DatePickerPrueba";
 import useCreateAnything from "../../hooks/useCreateAnything";
-import useConsultaAbonos from "../../hooks/AbonoHooks/UseConsultaAbonos"; 
+import useConsultaAbonos from "../../hooks/AbonoHooks/UseConsultaAbonos";
 
 function PagoInsertar() {
     const { createAnything: createCobroYPago } = useCreateAnything('http://localhost:4000/cobro/cobroypago');
     const { createAnything: createAbono } = useCreateAnything('http://localhost:4000/abono');
     const { data: abonos, loading, error, consultaAbonos } = useConsultaAbonos(); // Usa el hook correctamente
     const [selectedAbonos, setSelectedAbonos] = useState([]);
+    const [notificacion, setNotificacion] = useState("");
 
     const [formData, setFormData] = useState({
         IdUsuario: null,
@@ -100,6 +101,7 @@ function PagoInsertar() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setNotificacion(""); // Reset notification
 
         if (formData.IdTipoTran === 6) {
             // Registro de abono
@@ -155,6 +157,7 @@ function PagoInsertar() {
                             };
 
                             await createAbono(abonoExcesoData);
+                            setNotificacion(`Se creo un nuevo abono con el sobrante de este pago, el monto es ${exceso}`);
                         }
                     } else {
                         // Eliminar abonos usados
@@ -175,6 +178,7 @@ function PagoInsertar() {
     return (
         <div>
             <h2>Formulario de Pago</h2>
+            {notificacion && <p style={{ color: 'green' }}>{notificacion}</p>}
             <form onSubmit={handleSubmit}>
                 <SelectSingleUsuario onUsuarioChange={handleUsuarioChange} />
                 <SelectSingleTipoTran onTipoTranChange={handleTipoTranChange} />
