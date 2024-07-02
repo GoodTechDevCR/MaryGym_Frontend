@@ -1,47 +1,45 @@
 import { useState } from 'react';
 
-const useValidateLogin = (url) => {
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
+const useValidateLogin = () => {
     const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(null);
+    const [loggedIn, setLoggedIn] = useState(false);
 
-    const validateLogin = async (body) => {
+    const login = async (username, password) => {
         setLoading(true);
+        setError(null);
+
         try {
-            const response = await fetch(url, {
+            const response = await fetch('http://25.7.30.30:4000/login/validate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(body),
+                body: JSON.stringify({ username, password }),
             });
 
-            let responseData;
-            const contentType = response.headers.get('Content-Type');
-            if (contentType && contentType.includes('application/json')) {
-                responseData = await response.json();
-            } else {
-                responseData = await response.text();
-            }
+            console.log(response);
 
             if (!response.ok) {
-                throw new Error(responseData);
+                throw new Error('Login failed');
             }
 
-            setData(responseData);
-            setSuccess(true); // Marcar la operación como exitosa
+            const data = await response.json();
+            console.log(data); // Logging response data for verification
+
+            // Handle successful login
+            setLoggedIn(true);
             return true;
-        } catch (err) {
-            setError(err);
-            setSuccess(false); // Marcar la operación como fallida
+        } catch (error) {
+            setError(error.message);
+            setLoggedIn(false);
             return false;
         } finally {
             setLoading(false);
         }
     };
 
-    return { data, error, loading, success, validateLogin };
+    return { loading, error, loggedIn, login };
 };
 
 export default useValidateLogin;
