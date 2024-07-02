@@ -6,8 +6,6 @@ import UseConsultaByCorreo from '../../hooks/usuarioHooks/useConsultaUsuarioByCo
 function ContactoEmergenciaInsertar({ correo }) {
     const { createAnything } = useCreateAnything('http://localhost:4000/contactoEme');
     const IdUsuarioGuardar = UseConsultaByCorreo(correo);
-    console.log("correo correo: ", correo);
-    console.log("dato dato dato: ", IdUsuarioGuardar);
 
     // Estado inicial con los campos necesarios
     const [formData, setFormData] = useState({

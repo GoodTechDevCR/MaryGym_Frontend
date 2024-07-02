@@ -23,6 +23,7 @@ import EjercicioDisponible from "../pages/loggedAdmin/rutina/EjercicioDisponible
 import ModificarUsuarioSc from "../pages/loggedAdmin/usuario/ModificarUsuarioSc";
 import RegistrarUsuarioSc from "../pages/loggedAdmin/usuario/RegistrarUsuarioSc";
 import VisualizarUsuarioSc from "../pages/loggedAdmin/usuario/VisualizarUsuarioSc";
+import VisualizarContactoEmergencia from '../pages/loggedAdmin/usuario/VisualizarContactoEmergencia';
 
 //importacion de pagos
 import ModificarPagoSc from "../pages/loggedAdmin/pago/ModificarPagoSc";
@@ -50,6 +51,7 @@ const AppRoutes = () => {
                 <Route path="/admin/usuario/registrar" element={<RegistrarUsuarioSc />} />
                 <Route path="/admin/usuario/modificar/:id" element={<ModificarUsuarioSc />} />
                 <Route path="/admin/usuario/visualizar" element={<VisualizarUsuarioSc />} />
+                <Route path="/admin/usuario/contactoEmergencia/:id" element={<VisualizarContactoEmergencia />} />
 
                 <Route path="/admin/pago/registrar" element={<RegistrarPagoSc/>} />
                 <Route path="/admin/pago/modificar" element={<ModificarPagoSc />} />
