@@ -3,7 +3,9 @@ import Foot from "../../components/Footer/Foot";
 import MenuHome from '../../components/menu/MenuHome';
 import HeadAdmin from "../../components/Header/HeadAdmin";
 
-/* Head admin se debe reemplazar por un header que contenga solo lo negro*/
+/* Cuando el login funcione, cambiar HeadAdmin por HeadUser 
+(No contiene las opciones de admin, solo la barrita negra con el logo)
+*/
 
 const HomeSc = () => {
     return (

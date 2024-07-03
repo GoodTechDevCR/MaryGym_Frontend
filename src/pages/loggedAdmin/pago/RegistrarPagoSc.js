@@ -12,27 +12,7 @@ const RegistrarPagoSc = () => {
     return (
         <div>
             <HeadAdmin/>
-            <PrincipalMenu/>
             <PagoInsertar/>
-            <div className='centered-title2'> 
-                <h1 className='black'>Registro de pagos</h1>  
-                <Box component="section" className = 'elemento' >
-                    <TextInputs selectedOption="id usuario"  newData={newData} setNewData={setNewData}/>
-                </Box>
-                <Box component="section" className = 'elemento' >
-                    <TextInputs selectedOption='monto' newData={newData} setNewData={setNewData}/>
-                </Box> 
-                <Box component="section" className = 'elemento' >
-                    <TextInputs selectedOption='fecha pago' newData={newData} setNewData={setNewData}/>
-                </Box> 
-                <Box component="section" className = 'elemento' >
-                    <TextInputs selectedOption='tipo transferencia' newData={newData} setNewData={setNewData}/>
-                </Box>
-                <Box component="section" className = 'elemento' >
-                    <BotonPrincipalFuncional texto="Registrar pago" to="/" />
-                </Box>
-                <br/><br/><br/><br/>
-            </div>
             <Foot/>
             
         </div>
