@@ -16,16 +16,20 @@ const useCreateAnything = (url) => {
                 },
                 body: JSON.stringify(body),
             });
-
+            console.log("RESPONSE: ",response);
             let responseData;
             const contentType = response.headers.get('Content-Type');
-            if (contentType && contentType.includes('application/json')) {
+            console.log(body);
+            console.log(contentType.includes('text/html'));
+            if ((contentType && contentType.includes('application/json')) || (contentType && contentType.includes('text/html'))) {
                 responseData = await response.json();
             } else {
                 responseData = await response.text();
+                console.log(responseData);
             }
 
             if (!response.ok) {
+
                 throw new Error(responseData);
             }
 

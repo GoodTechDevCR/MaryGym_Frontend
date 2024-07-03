@@ -41,7 +41,7 @@ const AppRoutes = () => {
                 <Route path="/login" element={<LogInSc />} />
                 <Route path="/precio" element={<PrecioSc />} />
 
-                <Route path="/usuario/" element={<InformacionUserSc />} />
+                <Route path="/usuario/:id" element={<InformacionUserSc />} />
 
                 <Route path="/admin/" element={<LandAdminSc />} />
 

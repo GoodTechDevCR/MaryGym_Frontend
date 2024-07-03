@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PaisesTelefono from '../ui/PaisesTelefono';
 import useCreateAnything from '../../hooks/useCreateAnything';
 import DatePickerPrueba from "../datePicker/DatePickerPrueba";
+
 import Box from '@mui/material/Box';
 import ContactoEmergenciaInsertar from './ContactoEmergenciaInsertar';
 
@@ -15,11 +16,10 @@ function UsuarioInsertar() {
         Password: '123',
         Telefono: '',
         Correo: '',
-        Saldo: 0,
         Estado: 'activo',
         Pais: '',
         CodigoPais: '',
-        FechaNacimiento: null
+        FechaNacimiento: ''
     });
 
     const handleInputChange = (e) => {
@@ -57,23 +57,21 @@ function UsuarioInsertar() {
         };
         delete jsonData.CodigoPais;
         delete jsonData.Pais;
-
-
-
+        console.log("JSON: ", jsonData);
         try {
             const success = await createAnything(jsonData);
             if (success) {
                 alert("Usuario Creado Exitosamente");
                 setStep(2);
             } else {
-                alert("Error al crear el Usuario");
+                alert("Error al crear el Usuario:", error);
             }
         } catch (error) {
             console.error("Error al crear el Usuario:", error);
             alert("Error al crear el Usuario");
         }
-
     };
+
 
     return (
         <div className='centered-title'>
@@ -117,6 +115,7 @@ function UsuarioInsertar() {
                     <ContactoEmergenciaInsertar correo={formData.Correo} />
                 </div>
             )}
+
         </div>
     );
 }

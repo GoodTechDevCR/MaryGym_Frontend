@@ -4,6 +4,10 @@ import TextInputs from '../../components/ui/TextInput';
 import Box from '@mui/material/Box';
 import BotonPrincipalFuncional from  '../../components/ui/BotonPrincipalFuncional';
 import Button from '@mui/material/Button';
+import InsertarLogin from "../../components/insertar/InsertarLogin";
+
+
+/*const LogInSc = () => {
 
 const LogInSc = () => {
     const [newData, setNewData] = "";
@@ -11,6 +15,7 @@ const LogInSc = () => {
     selectedOptionCorreo.label = "Correo Electrónico";
     const selectedOptionContrasena = {};
     selectedOptionContrasena.label = "Contraseña";
+
     return (
         <div className='centered-title'>
             <h1 className='black'> Iniciar Sesión</h1>
@@ -40,6 +45,17 @@ const LogInSc = () => {
         <br/>
         <br/>
 
+        </div>
+    );
+};
+
+export default LogInSc;*/
+
+const LogInSc = () => {
+    return (
+        <div>
+            <h1>Iniciar Sesion</h1>
+            <InsertarLogin/>
         </div>
     );
 };
