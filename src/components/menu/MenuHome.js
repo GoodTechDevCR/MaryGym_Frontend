@@ -4,12 +4,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import LoginIcon from '@mui/icons-material/Login';
-
+import LogInSc from '../../pages/Home/LogInSc';
 import HomeScreen from '../../pages/Home/HomeScreen';
 import PrecioSc from '../../pages/Home/PrecioSc';
-import LogInSc from '../../pages/Home/LogInSc';
 import ContactoSc from '../../pages/Home/ContactoSc';
-
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -21,7 +19,7 @@ function CustomTabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 0}}>{children}</Box>}
+      {value <= index && <Box sx={{ p: 0}}>{children}</Box>}
     </div>
   );
 }
@@ -33,7 +31,7 @@ CustomTabPanel.propTypes = {
 };
 
 function MenuHome() {
-  const [value, setValue] = React.useState();
+  const [value, setValue] = React.useState(3);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -42,27 +40,25 @@ function MenuHome() {
       <div sx={{ borderBottom: 1, borderColor: 'divider'}}>
       
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" dir="rtl">
-           
-            <Tab icon = {<LoginIcon />}  iconPosition="end"  label="Ingresar" />
-            <Tab label="Contacto"  />
+            <Tab icon = {<LoginIcon />}  iconPosition="end"  label="Ingresar"/>
+            <Tab label="Contacto" />
             <Tab label="Precios"  />
             <Tab label="Inicio"  />
         </Tabs>
       </div>
      
       <CustomTabPanel value={value} index={0}>
-        <LogInSc/>
+          <LogInSc/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <ContactoSc/>
+          <ContactoSc/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <PrecioSc/>
+          <PrecioSc/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
-        <HomeScreen/>
+          <HomeScreen/>
       </CustomTabPanel>
-      
       </>
     
   );

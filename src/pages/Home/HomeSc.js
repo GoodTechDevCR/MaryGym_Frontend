@@ -1,15 +1,16 @@
 import React from 'react';
-import PrincipalMenu from '../../components/menu/PrincipalMenu';
-import Head from "../../components/Header/Head";
 import Foot from "../../components/Footer/Foot";
-//import HomeScreen from './HomeScreen';
 import MenuHome from '../../components/menu/MenuHome';
+import HeadAdmin from "../../components/Header/HeadAdmin";
+
+/* Cuando el login funcione, cambiar HeadAdmin por HeadUser 
+(No contiene las opciones de admin, solo la barrita negra con el logo)
+*/
 
 const HomeSc = () => {
     return (
         <div>
-            <Head/>
-            <PrincipalMenu/>
+            <HeadAdmin/> 
             <MenuHome/>
             <Foot />
         </div>

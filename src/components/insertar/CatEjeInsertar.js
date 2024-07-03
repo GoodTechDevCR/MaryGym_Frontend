@@ -41,15 +41,12 @@ function CatEjeInsertar(){
     }
 
     return (
-        <div>
-            Insertar categoria ejercicio
-            <br/>
+        <div className='centered-title'>
+            <h2 className='black'> Insertar categoría ejercicio </h2>
             <form onSubmit={handleSubmit}>
-                <label>
-                    Ingrese el nombre de la categoria ejercicio
-                    <input type="text" name="NombreCatEje" value={formData.NombreCatEje} onChange={handleInputChange} />
-                </label>
-                <button type="submit">Guardar Categoria Ejercicio</button>
+                <label className='elemento2'> Ingrese el nombre de la categoría ejercicio </label>
+                <label className='elemento2'> <input type="text" name="NombreCatEje" value={formData.NombreCatEje} onChange={handleInputChange} /> </label>
+                <button type="submit" className='black-button'>Guardar Categoría Ejercicio</button>
             </form>
         </div>
     )

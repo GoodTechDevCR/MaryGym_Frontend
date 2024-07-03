@@ -15,4 +15,5 @@ const InformacionUserSc = () => {
     );
 };
 
-export default InformacionUserSc;
+export default InformacionUserSc;   );
+}

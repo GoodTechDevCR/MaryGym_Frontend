@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { saveAs } from 'file-saver';
-import PrincipalMenu from '../../../components/menu/PrincipalMenu';
+import Box from '@mui/material/Box';
 import SelectSingleUsuarioByName from '../../../components/ui/selectSingle/selectSingleUsuarioByName';
 import DatePickerPrueba from '../../../components/datePicker/DatePickerPrueba';
 import SelectSingleEjercicioByName from '../../../components/ui/selectSingle/SelectSingleEjercicioByName';
+import HeadAdmin from '../../../components/Header/HeadAdmin';
+import Foot from '../../../components/Footer/Foot';
 
 const CrearRutinaSc = () => {
     const [step, setStep] = useState(1);
@@ -11,7 +13,8 @@ const CrearRutinaSc = () => {
         usuario: "",
         fechaInicio: null,
         fechaFin: null,
-        cantSemana: 0
+        cantSemana: 0,
+        fechaPago: null
     });
 
     const [funcionalidades, setFuncionalidades] = useState([]);
@@ -26,6 +29,11 @@ const CrearRutinaSc = () => {
             return newFormData;
         });
     };
+
+    const handleFechaPago = (date) => {
+        const dateFix = date.toISOString().split('T')[0];
+        setFormData({...formData,fechaPago: dateFix })
+    }
 
     const handleUsuarioChange = (id) => {
         setFormData({ ...formData, usuario: id });
@@ -172,26 +180,24 @@ const CrearRutinaSc = () => {
 
     return (
         <div>
-            <PrincipalMenu />
-            <h1>Crear Rutina</h1>
-
+        <HeadAdmin/>
+        <div className='centered-title2'>
+            <h1 className='black'>Crear Rutina</h1>
+            <br/>
             {step === 1 && (
                 <form onSubmit={handleSubmitInitial}>
-                    <h2>Información Inicial</h2>
-                    <label>
-                        Seleccione el usuario al que pertenece la rutina
-                        <SelectSingleUsuarioByName onUsuarioChange={handleUsuarioChange} />
-                    </label>
-                    <label>
-                        Seleccione la fecha de inicio de la Rutina
+                    <h3>Información Inicial</h3>
+                    <label className='elemento2'> Seleccione el usuario al que pertenece la rutina </label>
+                    <label className='elemento2'> <SelectSingleUsuarioByName onUsuarioChange={handleUsuarioChange} /> </label>    
+                    <label className='elemento2'> Seleccione la fecha de inicio de la Rutina </label>   
+                    <label className='elemento2'> 
                         <DatePickerPrueba
                             selected={formData.fechaInicio}
                             onDateChange={(date) => handleDateChange('fechaInicio', date)}
                         />
                     </label>
-                    <br />
-                    <label>
-                        Seleccione la cantidad de semanas de la Rutina
+                    <label className='elemento2'> Seleccione la cantidad de semanas de la Rutina</label>
+                    <label className='elemento2'> 
                         <input
                             type="number"
                             name="cantSemana"
@@ -199,72 +205,99 @@ const CrearRutinaSc = () => {
                             onChange={handleInputChange}
                         />
                     </label>
-                    <br />
-                    <button type="submit">Guardar Información Inicial</button>
+                    <label className='elemento2'>  Seleccione la fecha de pago del cliente </label>
+                    <label className='elemento2'> 
+                        <DatePickerPrueba
+                            selected={formData.fechaInicio}
+                            onDateChange={(date) => handleFechaPago(date)}
+                        />
+                    </label>
+                    <label className='elemento2'> 
+                        <button type="submit" className='black-button'>Guardar Información Inicial</button>
+                    </label>
+                    <label className='elemento2'> </label>
+
+                    
+                    <br/><br/><br/><br/><br/>
                 </form>
             )}
 
             {step === 2 && (
                 <form onSubmit={handleSubmit}>
                     <h2>Agregar Funcionalidades y Ejercicios</h2>
+                    <div className='elemento2'>
                     {funcionalidades.map((funcionalidad, indexFuncionalidad) => (
-                        <div key={indexFuncionalidad}>
+                        <Box key={indexFuncionalidad} 
+                            sx={{ border: '5px solid grey', borderRadius: '8px', backgroundColor: '#f9f9f9' , maxWidth: 750, margin:2 }} 
+                            >
                             <label>
-                                Nombre de la funcionalidad
                                 <input
+                                    placeholder="Funcionalidad"
                                     type="text"
                                     name="nombreFuncionalidad"
                                     value={funcionalidad.nombreFuncionalidad}
                                     onChange={(e) => handleFuncionalidadChange(indexFuncionalidad, e)}
                                 />
                             </label>
-                            <button type="button" onClick={() => handleRemoveFuncionalidad(indexFuncionalidad)}>
-                                Borrar Funcionalidad
-                            </button>
-                            <button type="button" onClick={() => handleAddEjercicio(indexFuncionalidad)}>
-                                Agregar Ejercicio
-                            </button>
+                            <button type="button" className='delete-button' onClick={() => handleRemoveFuncionalidad(indexFuncionalidad)}>
+                                    Borrar Funcionalidad
+                                </button>
+                            <div className='elemento2'>
+                                <button type="button"  className='black-button' onClick={() => handleAddEjercicio(indexFuncionalidad)}>
+                                    Agregar Ejercicio
+                                </button>
+                            </div>
+                            
                             {funcionalidad.ejercicios.map((ejercicio, indexEjercicio) => (
-                                <div key={indexEjercicio}>
-                                    <label>
-                                        Nombre del ejercicio
+                                <Box key={indexEjercicio} 
+                                sx={{ border: '2px solid grey', borderRadius: '8px', backgroundColor: '#f9f9f9' , maxWidth: 700, margin:3 }}>
+                                    <label className='elemento'>
                                         <SelectSingleEjercicioByName
                                             onEjercicioChange={(value) => handleEjercicioChange(indexFuncionalidad, indexEjercicio, value)}
                                         />
+                                        <button type="button"  className='delete-button' onClick={() => handleRemoveEjercicio(indexFuncionalidad, indexEjercicio)}>
+                                            Borrar ejercicio
+                                        </button>
                                     </label>
-                                    <button type="button" onClick={() => handleRemoveEjercicio(indexFuncionalidad, indexEjercicio)}>
-                                        Borrar Ejercicio
-                                    </button>
-                                    <label>
-                                        Comentario
+                                    
+                                    <label className='elemento'>
+                   
                                         <input
                                             type="text"
+                                            placeholder='Comentario'
                                             name="comentario"
                                             value={ejercicio.comentario}
                                             onChange={(e) => handleComentarioChange(indexFuncionalidad, indexEjercicio, e)}
                                         />
                                     </label>
                                     {Array.from({ length: formData.cantSemana }, (_, i) => (
-                                        <label key={`semana${i + 1}`}>
-                                            Semana {i + 1}
-                                            <input
+                                        <label key={`semana${i + 1}`} className='elemento' >
+                                            
+                                            <input sx={{margin:2}}
                                                 type="text"
+                                                placeholder={`Semana ${i + 1}`}
                                                 name={`semana${i + 1}`}
                                                 value={ejercicio[`semana${i + 1}`]}
                                                 onChange={(e) => handleSemanaChange(indexFuncionalidad, indexEjercicio, e)}
                                             />
                                         </label>
                                     ))}
-                                </div>
+                                </Box>
                             ))}
-                        </div>
+                        </Box>
                     ))}
-                    <button type="button" onClick={handleAddFuncionalidad}>
-                        Agregar Funcionalidad
-                    </button>
-                    <button type="submit">Guardar Rutina</button>
+                    <div className='centered-title2'>
+                        <button type="button"  className='black-button' onClick={handleAddFuncionalidad}> Agregar Funcionalidad </button>  
+                    </div>
+                    <div className='centered-title2'>
+                         <button type="submit"  className='black-button' >Guardar Rutina</button> 
+                    </div>
+
+                    </div>
                 </form>
             )}
+        </div>
+        <Foot/>
         </div>
     );
 };

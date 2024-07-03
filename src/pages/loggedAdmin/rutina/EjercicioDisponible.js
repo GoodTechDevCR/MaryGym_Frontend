@@ -4,7 +4,8 @@ import EjercicioInsertar from '../../../components/insertar/EjercicioInsertar';
 import PrincipalMenu from '../../../components/menu/PrincipalMenu';
 import TablaEjercicioPorCat from "../../../components/showData/TablaEjercicioPorCat";
 import SelectSingleCatEje from "../../../components/ui/selectSingle/SelectSingleCatEje";
-
+import HeadAdmin from '../../../components/Header/HeadAdmin';
+import Foot from '../../../components/Footer/Foot';
 
 
 function EjercicioDisponible(){
@@ -19,20 +20,19 @@ function EjercicioDisponible(){
     };
     return(
         <div>
-            <PrincipalMenu/>
-            EjercicioDisponibles
-            <br/>
-            <br/>
-            Seleccione la categoría del ejercicio:
-            <SelectSingleCatEje onCatEjeChange={handleCatEjeChange}/>
-            <br/>
-            <TablaEjercicioPorCat key={formData.categoriaId} categoria={formData.categoriaId}/>
-            <br/>
-            <CatEjeInsertar/>
-
-            <br/>
-
-            <EjercicioInsertar/>
+            <HeadAdmin/>
+            <div className='centered-title'>
+                <h1 className='black'> Ejercicios </h1>
+                <div className='elemento2'> Seleccione la categoría del ejercicio: </div>
+                <div className='elemento2'> <SelectSingleCatEje onCatEjeChange={handleCatEjeChange}/></div>
+                <div className='elemento2'> 
+                    <TablaEjercicioPorCat key={formData.categoriaId} categoria={formData.categoriaId}/>
+                </div>
+                <CatEjeInsertar/>
+                <EjercicioInsertar/>
+                <br/><br/><br/>
+            </div>
+            <Foot/>
         </div>
     )
 }

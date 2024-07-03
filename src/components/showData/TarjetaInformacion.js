@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { useParams } from 'react-router-dom';
 import dataUserbyId from '../../utils/dataUserbyId';
+import "../../pages/Home/Home.css";
 
 const TarjetaInformacion = () => {
     const { id } = useParams();
@@ -24,31 +25,22 @@ const TarjetaInformacion = () => {
     }, [userData]);
 
     return (
-        <Box
-            height={300}
-            width={300}
-            my={4}
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            p={2}
-            sx={{ border: '2px solid grey', borderRadius: '8px', backgroundColor: '#f9f9f9' }}
-        >
-            {userData ? (
-                <>
-                    <h2>Información del Usuario</h2>
+        <>
+        <Box sx={{ border: '2px solid grey', borderRadius: '8px', backgroundColor: '#f9f9f9' , maxWidth: 700, margin:'auto' }}>
+        {userData ? (
+                <div>
                     <p><strong>Nombre:</strong> {userData.nombre}</p>
                     <p><strong>Apellido:</strong> {userData.apellido}</p>
                     <p><strong>Teléfono:</strong> {userData.telefono}</p>
-                    <p><strong>Saldo:</strong> {userData.saldo}</p>
+                    <p><strong>Saldo:</strong> ₡{userData.saldo}</p>
                     <p><strong>Estado:</strong> {userData.estado}</p>
                     <p><strong>Fecha Nacimiento:</strong> {userData.fechanacimiento}</p>
-                </>
+                </div>
             ) : (
                 <p>Cargando datos del usuario...</p>
             )}
         </Box>
+        </>
     );
 };
 
