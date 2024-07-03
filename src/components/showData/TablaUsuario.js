@@ -52,6 +52,16 @@ function CustomizedTables() {
         return UltimoPago < today;
     };
 
+    const formatFecha = (fecha) => {
+        if (!fecha) return '';
+        const date = new Date(fecha);
+        return date.toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+    };
+
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -75,9 +85,9 @@ function CustomizedTables() {
                             <StyledTableCell align="right">{row.telefono}</StyledTableCell>
                             <StyledTableCell align="right">{row.correo}</StyledTableCell>
                             <StyledTableCell align="right">{row.estado === 1 ? 'Activo' : 'NO activo'}</StyledTableCell>
-                            <StyledTableCell align="right">{row.fechanacimiento}</StyledTableCell>
+                            <StyledTableCell align="right">{formatFecha(row.fechanacimiento)}</StyledTableCell>
                             <StyledTableCell align="right" style={{ color: isMoroso(row.UltimoPago) ? 'red' : 'inherit' }}>
-                                {row.UltimoPago}
+                                {formatFecha(row.UltimoPago)}
                                 {isMoroso(row.UltimoPago) && <div>Esta Moroso</div>}
                             </StyledTableCell>
                             <StyledTableCell align="right">
