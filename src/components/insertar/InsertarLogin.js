@@ -24,7 +24,7 @@ function InsertarLogin() {
                     console.log("usuarios fetched:", data);
                     setUsuarioLog(data);
                 })
-                .catch(error => console.error('Error fetching metodos de pago:', error));
+                .catch(error => console.error('Error fetching usuarios:', error));
         }
     }, [formData.usuario]);
 
@@ -36,16 +36,18 @@ function InsertarLogin() {
 
             if (success) {
                 alert('Ingreso Exitoso');
-                const idUsuarioLog = usuarioLog[0].IdUsuario;
-
-                //cambiar al id del usuario de maria
-                if(idUsuarioLog===64){
-                    navigate('/admin');
+                if (usuarioLog.length > 0) {
+                    const idUsuarioLog = usuarioLog[0].IdUsuario;
+                    
+                    // Redirecciona basado en el idUsuarioLog
+                    if (idUsuarioLog === 64) {
+                        navigate('/admin');
+                    } else {
+                        navigate(`/usuario/${idUsuarioLog}`);
+                    }
+                } else {
+                    alert('No se encontró el usuario.');
                 }
-                else{
-                    navigate('/usuario');
-                }
-                
             } else {
                 alert(`Error al ingresar al sistema: ${message}`);
             }
