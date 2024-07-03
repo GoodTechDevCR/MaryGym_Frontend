@@ -10,7 +10,7 @@ const InformacionUserSc = () => {
     return (
         <div>
             <h1>InformacionUserSc</h1>
-            <p>ID recibido: {id}</p>
+            <p>ID recibido: {id}</p> 
         </div>
     );
 };
