@@ -9,10 +9,6 @@ import HomeScreen from '../../pages/Home/HomeScreen';
 import PrecioSc from '../../pages/Home/PrecioSc';
 import ContactoSc from '../../pages/Home/ContactoSc';
 
-
-
-
-
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
   return (

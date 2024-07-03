@@ -176,44 +176,47 @@ function PagoInsertar() {
     const montoTotal = parseFloat(formData.Monto) - abonoTotal;
 
     return (
-        <div>
-            <h2>Formulario de Pago</h2>
+        <div className='centered-title2'>
+            <h1 className="black">Formulario de Pago </h1>
             {notificacion && <p style={{ color: 'green' }}>{notificacion}</p>}
             <form onSubmit={handleSubmit}>
-                <SelectSingleUsuario onUsuarioChange={handleUsuarioChange} />
-                <SelectSingleTipoTran onTipoTranChange={handleTipoTranChange} />
+                <div className='elemento2'> <SelectSingleUsuario onUsuarioChange={handleUsuarioChange} /> </div>
+                <div className='elemento2'> <SelectSingleTipoTran onTipoTranChange={handleTipoTranChange} /> </div>
                 {formData.IdTipoTran !== 6 && (
                     <>
-                        <label>
-                            Monto:
-                            <input
-                                id="monto-input"
-                                type="text"
-                                name="Monto"
-                                value={formData.Monto}
-                                onChange={handleInputChange}
-                            />
-                        </label>
-                        <br />
-                        <label>
-                            Fecha de pago:
-                            <DatePickerPrueba onDateChange={handleDateChange} />
-                        </label>
+                        <div className='elemento2'>
+                            <label>
+                            <div className='body3'> Monto: </div> 
+                                <input
+                                    id="monto-input"
+                                    placeholder='Monto'
+                                    type="text"
+                                    name="Monto"
+                                    value={formData.Monto}
+                                    onChange={handleInputChange}
+                                />
+                            </label>
+                        </div>
+                        <div className='elemento2'> 
+                            <div className='body3'> Fecha de pago: </div> 
+                            <DatePickerPrueba onDateChange={handleDateChange} /> 
+                        </div>
+                        
                         {formData.IdTipoTran === 10 && (
                             <div>
-                                <label>
-                                    Seleccione una opción:
+                                <label className='elemento2'>
+                                    <div className='body3'> Seleccione una opción: </div>
                                     <select name="OpcionSeleccionada" value={formData.OpcionSeleccionada} onChange={handleOpcionSeleccionadaChange}>
                                         <option value="">Seleccione</option>
                                         <option value="DiasAdicionales">Días adicionales</option>
                                         <option value="FechaFinalEspecial">Fecha final especial</option>
                                     </select>
                                 </label>
-                                <br />
                                 {formData.OpcionSeleccionada === 'DiasAdicionales' && (
-                                    <label>
-                                        Días adicionales:
+                                    <label className='elemento2'>
+                                        <div className='body3'> Digite la cantidad de dias adicionales</div>
                                         <input
+                                            placeholder='Dias adicionales'
                                             type="number"
                                             name="DiasAdicionales"
                                             value={formData.DiasAdicionales}
@@ -222,16 +225,16 @@ function PagoInsertar() {
                                     </label>
                                 )}
                                 {formData.OpcionSeleccionada === 'FechaFinalEspecial' && (
-                                    <label>
-                                        Fecha final especial:
+                                    <label className='elemento2'>
+                                        <div className='body3'> Fecha final especial:</div>
                                         <DatePickerPrueba onDateChange={handleFechaFinalEspecialChange} />
                                     </label>
                                 )}
                             </div>
                         )}
-                        <br />
+                       
                         {abonos && abonos.length > 0 && (
-                            <div>
+                            <div className='centered-title'>
                                 <h3>Seleccionar Abonos</h3>
                                 {abonos.map((abono) => (
                                     <div key={abono.IdAbono}>
@@ -254,24 +257,23 @@ function PagoInsertar() {
                 )}
                 {formData.IdTipoTran === 6 && (
                     <div>
-                        <label>
-                            Monto del Abono:
+                        <label className='elemento2'>
                             <input
+                                placeholder='Monto del abono'
                                 type="text"
                                 name="MontoAbono"
                                 value={formData.MontoAbono}
                                 onChange={handleInputChange}
                             />
                         </label>
-                        <br />
-                        <label>
-                            Fecha del Abono:
+                        <label className='elemento2'>
+                            <div className='body3'> Fecha del Abono: </div>
                             <DatePickerPrueba onDateChange={handleFechaAbonoChange} />
                         </label>
                     </div>
                 )}
-                <br />
-                <button type="submit">Guardar</button>
+                
+                <button type="submit" className='black-button'>Guardar</button>
             </form>
         </div>
     );

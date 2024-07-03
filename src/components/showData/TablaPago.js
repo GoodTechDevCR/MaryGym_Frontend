@@ -42,7 +42,11 @@ function TablaPago() {
 
     return (
         <div>
-            <SelectSingleUsuario onUsuarioChange={handleUsuarioChange} />
+            <div className='elemento2'>
+                <body> Para visualizar los pagos de un usuario en especifico, selecciónelo:</body>
+            </div>
+            <div className='elemento2'> <SelectSingleUsuario onUsuarioChange={handleUsuarioChange} /> </div>
+            <br/>
             {data && (
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
