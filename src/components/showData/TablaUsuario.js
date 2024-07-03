@@ -45,6 +45,13 @@ function CustomizedTables() {
         navigate(`/admin/usuario/contactoEmergencia/${id}`);
     }
 
+    const isMoroso = (fecha) => {
+        if (!fecha) return true;
+        const today = new Date();
+        const UltimoPago = new Date(fecha);
+        return UltimoPago < today;
+    };
+
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -54,9 +61,9 @@ function CustomizedTables() {
                         <StyledTableCell>Nombre Completo</StyledTableCell>
                         <StyledTableCell align="right">Telefono</StyledTableCell>
                         <StyledTableCell align="right">Correo</StyledTableCell>
-                        <StyledTableCell align="right">Saldo</StyledTableCell>
                         <StyledTableCell align="right">Estado</StyledTableCell>
                         <StyledTableCell align="right">Fecha Nacimiento</StyledTableCell>
+                        <StyledTableCell align="right">UltimoDia</StyledTableCell>
                         <StyledTableCell align="right">Acciones</StyledTableCell> {/* Nueva columna para el botón */}
                     </TableRow>
                 </TableHead>
@@ -67,9 +74,12 @@ function CustomizedTables() {
                             <StyledTableCell>{`${row.nombre} ${row.apellido}`}</StyledTableCell>
                             <StyledTableCell align="right">{row.telefono}</StyledTableCell>
                             <StyledTableCell align="right">{row.correo}</StyledTableCell>
-                            <StyledTableCell align="right">{row.saldo}</StyledTableCell>
                             <StyledTableCell align="right">{row.estado === 1 ? 'Activo' : 'NO activo'}</StyledTableCell>
                             <StyledTableCell align="right">{row.fechanacimiento}</StyledTableCell>
+                            <StyledTableCell align="right" style={{ color: isMoroso(row.UltimoPago) ? 'red' : 'inherit' }}>
+                                {row.UltimoPago}
+                                {isMoroso(row.UltimoPago) && <div>Esta Moroso</div>}
+                            </StyledTableCell>
                             <StyledTableCell align="right">
                                 <Button variant="contained" color="primary" onClick={() => handleModify(row.idusuario)}>
                                     Modificar
