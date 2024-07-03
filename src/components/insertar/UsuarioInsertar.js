@@ -12,11 +12,10 @@ function UsuarioInsertar() {
         Password: '123',
         Telefono: '',
         Correo: '',
-        Saldo: 0,
         Estado: 'activo',
         Pais: '',
         CodigoPais: '',
-        FechaNacimiento: null
+        FechaNacimiento: ''
     });
 
     const handleInputChange = (e) => {
@@ -54,19 +53,20 @@ function UsuarioInsertar() {
         };
         delete jsonData.CodigoPais;
         delete jsonData.Pais;
-
+        console.log("JSON: ", jsonData);
         try {
             const success = await createAnything(jsonData);
             if (success) {
                 alert("Usuario Creado Exitosamente");
             } else {
-                alert("Error al crear el Usuario");
+                alert("Error al crear el Usuario:", error);
             }
         } catch (error) {
             console.error("Error al crear el Usuario:", error);
             alert("Error al crear el Usuario");
         }
     };
+
 
     return (
         <div>
