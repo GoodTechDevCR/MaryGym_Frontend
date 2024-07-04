@@ -38,7 +38,7 @@ function UserMenu() {
             <Divider/>
             <List>
                 <ListItem key="Visualizar Ejercicios" disablePadding>
-                    <ListItemButton component={Link} to="/usuario/rutina/:id">
+                    <ListItemButton component={Link} to="/usuario/rutina/">
                         <ListItemIcon>
                             <FitnessCenterIcon />
                         </ListItemIcon>
@@ -49,7 +49,7 @@ function UserMenu() {
             <Divider />
             <List>
                 <ListItem key="Visualizar Pago" disablePadding>
-                    <ListItemButton component={Link} to="/usuario/pagoHistorial:id">
+                    <ListItemButton component={Link} to="/usuario/pagoHistorial/">
                         <ListItemIcon>
                             <ShoppingCartIcon />
                         </ListItemIcon>

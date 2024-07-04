@@ -1,18 +1,20 @@
-// InformacionUserSc.jsx
-import React from 'react';
-import { useParams } from 'react-router-dom';
+// VisualizarRutinaUserSc.jsx
+import React, { useContext } from 'react';
+import UserContext from '../../UserContext';
 import UserMenu from '../../components/menu/UserMenu';
 
 const VisualizarRutinaUserSc = () => {
-    const { id } = useParams();
+    const { user } = useContext(UserContext);
 
-    console.log("id a mostrar: ", id);
+    if (!user) {
+        return <p>No user data available</p>;
+    }
 
     return (
         <div>
-            <UserMenu/>
-            <h2>IVisualizar Rutina del user</h2>
-            <p>ID recibido: {id}</p> 
+            <UserMenu />
+            <h2>Visualizar Rutina</h2>
+            <p>ID del usuario: {user.id}</p>
         </div>
     );
 };

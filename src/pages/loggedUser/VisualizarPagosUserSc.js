@@ -1,20 +1,20 @@
-// InformacionUserSc.jsx
-import React from 'react';
-import { useParams } from 'react-router-dom';
+// VisualizarPagosUserSc.jsx
+import React, { useContext } from 'react';
+import UserContext from '../../UserContext';
 import UserMenu from '../../components/menu/UserMenu';
-import TablaPago from '../../components/showData/TablaPago';
 
 const VisualizarPagosUserSc = () => {
-    const { id } = useParams();
+    const { user } = useContext(UserContext);
 
-    console.log("id a mostrar: ", id);
+    if (!user) {
+        return <p>No user data available</p>;
+    }
 
     return (
         <div>
-            <UserMenu/>
-            <h2>VisualizarPagosUserSc</h2>
-            <p>ID recibido: {id}</p> 
-            <TablaPago/>
+            <UserMenu />
+            <h2>Visualizar Pagos</h2>
+            <p>ID del usuario: {user.id}</p>
         </div>
     );
 };

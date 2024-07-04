@@ -1,6 +1,6 @@
 // InformacionUserSc.jsx
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext } from 'react';
+import UserContext from '../../UserContext';
 import "../../pages/Home/Home.css";
 import Head from "../../components/Header/Head";
 import Foot from "../../components/Footer/Foot";
@@ -9,15 +9,12 @@ import CardContent from '@mui/material/CardContent';
 import Box from '@mui/material/Box';
 import UserMenu from '../../components/menu/UserMenu';
 
-/* 
-Se llama así desde otro componente:
-<InformacionUserSc nombre="Samir" fecha1="hoy" fecha2="mañana" saldo="1000" />
-*/
-
 const InformacionUserSc = ({ nombre, fecha1, fecha2, saldo }) => {
-    const { id } = useParams();
+    const { user } = useContext(UserContext);
 
-    console.log("ID recibido: ", id);
+    if (!user) {
+        return <p>No user data available</p>;
+    }
 
     return (
         <div>

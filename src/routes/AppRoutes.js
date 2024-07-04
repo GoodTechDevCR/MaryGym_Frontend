@@ -43,8 +43,8 @@ const AppRoutes = () => {
                 <Route path="/precio" element={<PrecioSc />} />
 
                 <Route path="/usuario/:id" element={<InformacionUserSc />} />
-                <Route path="/usuario/rutina/:id" element={<VisualizarRutinaUserSc />} />
-                <Route path="/usuario/pagoHistorial/:id" element={<VisualizarPagosUserSc />} />
+                <Route path="/usuario/rutina/" element={<VisualizarRutinaUserSc />} />
+                <Route path="/usuario/pagoHistorial/" element={<VisualizarPagosUserSc />} />
 
                 <Route path="/admin/" element={<LandAdminSc />} />
 
