@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+// InsertarLogin.jsx
+import React, { useState, useEffect, useContext } from 'react';
 import useValidateLogin from '../../hooks/loginHooks/useValidateLogin';
 import { useNavigate } from 'react-router-dom';
+import UserContext from '../../UserContext';
 
 function InsertarLogin() {
     const navigate = useNavigate();
     const { loading, error, loggedIn, login } = useValidateLogin();
+    const { setUserContext } = useContext(UserContext);
     const [formData, setFormData] = useState({
         usuario: '',
         contrasena: ''
@@ -38,8 +41,9 @@ function InsertarLogin() {
                 alert('Ingreso Exitoso');
                 if (usuarioLog.length > 0) {
                     const idUsuarioLog = usuarioLog[0].IdUsuario;
-                    
-                    // Redirecciona basado en el idUsuarioLog
+                    setUserContext({ id: idUsuarioLog, username: formData.usuario });
+
+                    // Redirect based on idUsuarioLog
                     if (idUsuarioLog === 64) {
                         navigate('/admin');
                     } else {
