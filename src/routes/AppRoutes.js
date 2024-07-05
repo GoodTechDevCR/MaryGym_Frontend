@@ -14,7 +14,6 @@ import VisualizarRutinaUserSc from '../pages/loggedUser/VisualizarRutinaUserSc';
 import PasswordChangeSc from '../pages/passwordChange/PasswordChangeSc';
 
 
-
 //importaciones de administrador
 import LandAdminSc from "../pages/loggedAdmin/LandAdminSc";
 
@@ -48,7 +47,6 @@ const AppRoutes = () => {
                 <Route path="/usuario/rutina/" element={<VisualizarRutinaUserSc />} />
                 <Route path="/usuario/pagoHistorial/" element={<VisualizarPagosUserSc />} />
                 <Route path="/usuario/passwordChange/:correo" element={<PasswordChangeSc />} />
-
 
                 <Route path="/admin/" element={<LandAdminSc />} />
 
