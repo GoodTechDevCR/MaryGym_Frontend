@@ -11,6 +11,8 @@ import PrecioSc from "../pages/Home/PrecioSc";
 import InformacionUserSc from "../pages/loggedUser/InformacionUserSc";
 import VisualizarPagosUserSc from '../pages/loggedUser/VisualizarPagosUserSc';
 import VisualizarRutinaUserSc from '../pages/loggedUser/VisualizarRutinaUserSc';
+import PasswordChangeSc from '../pages/passwordChange/PasswordChangeSc';
+
 
 
 //importaciones de administrador
@@ -45,6 +47,8 @@ const AppRoutes = () => {
                 <Route path="/usuario/:id" element={<InformacionUserSc />} />
                 <Route path="/usuario/rutina/" element={<VisualizarRutinaUserSc />} />
                 <Route path="/usuario/pagoHistorial/" element={<VisualizarPagosUserSc />} />
+                <Route path="/usuario/passwordChange/:correo" element={<PasswordChangeSc />} />
+
 
                 <Route path="/admin/" element={<LandAdminSc />} />
 
