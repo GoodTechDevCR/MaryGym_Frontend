@@ -90,14 +90,7 @@ function PrincipalMenu() {
                         <ListItemText primary="Registrar Pago" />
                     </ListItemButton>
                 </ListItem>
-                <ListItem key="Modificar Pago" disablePadding>
-                    <ListItemButton component={Link} to="/admin/pago/modificar">
-                        <ListItemIcon>
-                            <ProductionQuantityLimitsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Modificar Pago" />
-                    </ListItemButton>
-                </ListItem>
+                
                 <ListItem key="Visualizar Pago" disablePadding>
                     <ListItemButton component={Link} to="/admin/pago/visualizar">
                         <ListItemIcon>
