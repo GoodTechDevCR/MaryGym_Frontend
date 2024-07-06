@@ -15,7 +15,8 @@ const datos = [
     { label: 'Teléfono', type: 'number' },
     { label: 'Saldo', type: 'number' },
     { label: 'Estado', type: 'bit' },
-    { label: 'Fecha Nacimiento', type: 'date' }
+    { label: 'Fecha Nacimiento', type: 'date' },
+    { label: 'Comentario', type: 'text' }
 ];
 
 function ModificarUsuarioSc() {

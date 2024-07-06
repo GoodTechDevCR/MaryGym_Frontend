@@ -19,7 +19,8 @@ function UsuarioInsertar() {
         Estado: 'activo',
         Pais: '',
         CodigoPais: '',
-        FechaNacimiento: ''
+        FechaNacimiento: '',
+        Comentario: ''
     });
 
     const handleInputChange = (e) => {
@@ -104,6 +105,9 @@ function UsuarioInsertar() {
                         <div className='body2'> Fecha de nacimiento: </div>
                         <DatePickerPrueba onDateChange={handleDateChange} />
                     </Box>
+                    <label className = 'elemento2' >
+                        <input type="text" placeholder="Comentario" name="Comentario" value={formData.Comentario} onChange={handleInputChange} />
+                    </label>
                     <div className = 'elemento2'>
                         <button type="submit" className='black-button' >Enviar</button>
                     </div>
