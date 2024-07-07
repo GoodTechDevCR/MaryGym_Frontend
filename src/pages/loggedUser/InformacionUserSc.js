@@ -1,5 +1,5 @@
 // InformacionUserSc.jsx
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import UserContext from '../../UserContext';
 import "../../pages/Home/Home.css";
 import Head from "../../components/Header/Head";
@@ -11,6 +11,28 @@ import UserMenu from '../../components/menu/UserMenu';
 
 const InformacionUserSc = ({ nombre, fecha1, fecha2, saldo }) => {
     const { user } = useContext(UserContext);
+    const [ultimaFecha, setUltimaFecha] = useState(null);
+
+    useEffect(() => {
+        if (user && user.id) {
+            fetch(`http://localhost:4000/cobro/fechaLimite/${user.id}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Fecha de pago fetched:", data);
+                    if (data.length > 0 && data[0].FechaFinal) {
+                        setUltimaFecha(data[0].FechaFinal);
+                    } else {
+                        console.error('FechaFinal is not in the response', data);
+                    }
+                })
+                .catch(error => console.error('Error fetching fecha limite:', error));
+        }
+    }, [user]);
 
     if (!user) {
         return <p>No user data available</p>;
@@ -26,17 +48,15 @@ const InformacionUserSc = ({ nombre, fecha1, fecha2, saldo }) => {
                 <h1 className='grey'> {nombre} </h1>
             </div>
             <div className='fila'>
-                {card(fecha1, fecha2, saldo)}
+                {card(ultimaFecha)}
             </div>
-
-            <Foot />
         </div>
     );
 };
 
 export default InformacionUserSc;
 
-function card(fecha1, fecha2, saldo) {
+function card(ultimaFecha) {
     return (
         <Box sx={{ minWidth: 0 }} className='card2'>
             <Card variant="outlined">
@@ -46,17 +66,12 @@ function card(fecha1, fecha2, saldo) {
                             Datos de pago
                         </div>
                         <div className="body3">
-                            Fecha último pago:
+                            {ultimaFecha ? (
+                                <div>Siguiente fecha pago: {new Date(ultimaFecha).toLocaleDateString()}</div>
+                            ) : (
+                                <div>Cargando siguiente fecha de pago...</div>
+                            )}
                         </div>
-                        <h1 className='black'> {fecha1} </h1>
-                        <div className="body3">
-                            Siguiente fecha pago:
-                        </div>
-                        <h1 className='black'> {fecha2} </h1>
-                        <div className="body3">
-                            Saldo actual:
-                        </div>
-                        <h1 className='black'> ₡{saldo} </h1>
                     </CardContent>
                 </React.Fragment>
             </Card>
