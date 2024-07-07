@@ -1,4 +1,3 @@
-// TablaPagoForUser.jsx
 import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -8,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import UseConsultaPago from "../../hooks/pagoHooks/useConsultaPago";
+import UseConsultaPago from '../../hooks/pagoHooks/useConsultaPago';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -30,41 +29,43 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function TablaPagoForUser({ idUsuario }) {
-    const [selectedUser, setSelectedUser] = useState(idUsuario);
-    const { data, loading, error } = UseConsultaPago(selectedUser);
-
-    useEffect(() => {
-        setSelectedUser(idUsuario); // Actualiza `selectedUser` cuando `idUsuario` cambia
-    }, [idUsuario]);
+    const { data, loading, error } = UseConsultaPago(idUsuario);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 
+    // Verifica si `data` es un arreglo y si tiene elementos
+    if ( data.length === 0) {
+        return (
+            <div>
+                <p>No hay pagos registrados para el usuario.</p>
+            </div>
+        );
+    }
+
     return (
         <div>
             <br />
-            {data && (
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell align="right">Fecha Pago</StyledTableCell>
-                                <StyledTableCell align="right">Tipo Transaccion</StyledTableCell>
-                                <StyledTableCell align="right">Monto</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {data.map((row) => (
-                                <StyledTableRow key={row.IdPago}>
-                                    <StyledTableCell align="right">{new Date(row.FechaPago).toLocaleDateString()}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.TipoTran}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.Monto}</StyledTableCell>
-                                </StyledTableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            )}
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell align="right">Fecha Pago</StyledTableCell>
+                            <StyledTableCell align="right">Tipo Transacción</StyledTableCell>
+                            <StyledTableCell align="right">Monto</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {data.map((row) => (
+                            <StyledTableRow key={row.IdPago}>
+                                <StyledTableCell align="right">{new Date(row.FechaPago).toLocaleDateString()}</StyledTableCell>
+                                <StyledTableCell align="right">{row.TipoTran}</StyledTableCell>
+                                <StyledTableCell align="right">{row.Monto}</StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
     );
 }
