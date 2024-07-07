@@ -14,8 +14,6 @@ import VisualizarRutinaUserSc from '../pages/loggedUser/VisualizarRutinaUserSc';
 import PasswordChangeSc from '../pages/passwordChange/PasswordChangeSc';
 
 
-
-
 //importaciones de administrador
 import LandAdminSc from "../pages/loggedAdmin/LandAdminSc";
 
