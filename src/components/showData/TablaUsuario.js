@@ -69,37 +69,47 @@ function CustomizedTables() {
                     <TableRow>
                         <StyledTableCell>IdUsuario</StyledTableCell>
                         <StyledTableCell>Nombre Completo</StyledTableCell>
-                        <StyledTableCell align="right">Telefono</StyledTableCell>
-                        <StyledTableCell align="right">Correo</StyledTableCell>
-                        <StyledTableCell align="right">Estado</StyledTableCell>
-                        <StyledTableCell align="right">Fecha Nacimiento</StyledTableCell>
-                        <StyledTableCell align="right">UltimoDia</StyledTableCell>
-                        <StyledTableCell align="right">Acciones</StyledTableCell> {/* Nueva columna para el botón */}
+                        <StyledTableCell align="center">Telefono</StyledTableCell>
+                        <StyledTableCell align="center">Correo</StyledTableCell>
+                        <StyledTableCell align="center">Estado</StyledTableCell>
+                        <StyledTableCell align="center">Fecha Nacimiento</StyledTableCell>
+                        <StyledTableCell align="center">Comentario</StyledTableCell>
+                        <StyledTableCell align="center">Aceptacion TC</StyledTableCell>
+                        <StyledTableCell align="center">Ultimo Dia</StyledTableCell>
+                        <StyledTableCell align="center">Acciones</StyledTableCell> {/* Nueva columna para el botón */}
+                        
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.map((row) => (
-                        <StyledTableRow key={row.idusuario}>
-                            <StyledTableCell>{row.idusuario}</StyledTableCell>
-                            <StyledTableCell>{`${row.nombre} ${row.apellido}`}</StyledTableCell>
-                            <StyledTableCell align="right">{row.telefono}</StyledTableCell>
-                            <StyledTableCell align="right">{row.correo}</StyledTableCell>
-                            <StyledTableCell align="right">{row.estado === 1 ? 'Activo' : 'NO activo'}</StyledTableCell>
-                            <StyledTableCell align="right">{formatFecha(row.fechanacimiento)}</StyledTableCell>
-                            <StyledTableCell align="right" style={{ color: isMoroso(row.UltimoPago) ? 'red' : 'inherit' }}>
-                                {formatFecha(row.UltimoPago)}
-                                {isMoroso(row.UltimoPago) && <div>Esta Moroso</div>}
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
-                                <Button variant="contained" color="primary" onClick={() => handleModify(row.idusuario)}>
-                                    Modificar
-                                </Button>
-                                <Button variant="contained" color="primary" onClick={() => handleContactoEmergencia(row.idusuario)}>
-                                    Contacto Emergencia
-                                </Button>
-                            </StyledTableCell>
-                        </StyledTableRow>
-                    ))}
+                    {data.map((row) => {
+                        return (
+                            <StyledTableRow key={row.idusuario}>
+                                <StyledTableCell>{row.idusuario}</StyledTableCell>
+                                <StyledTableCell>{`${row.nombre} ${row.apellido}`}</StyledTableCell>
+                                <StyledTableCell align="center">{row.telefono}</StyledTableCell>
+                                <StyledTableCell align="center">{row.correo}</StyledTableCell>
+                                <StyledTableCell align="center">{row.estado === 1 ? 'Activo' : 'NO activo'}</StyledTableCell>
+                                <StyledTableCell align="center">{formatFecha(row.fechanacimiento)}</StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {row.Comentario || '- - -'}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">{row.AceptacionTC === 1 ? 'Aceptado' : 'No Aceptado'}</StyledTableCell>
+                                <StyledTableCell align="center" style={{ color: isMoroso(row.UltimoPago) ? 'red' : 'inherit' }}>
+                                    {formatFecha(row.UltimoPago)}
+                                    {isMoroso(row.UltimoPago) && <div>Esta Moroso</div>}
+                                </StyledTableCell>
+                                <StyledTableCell align="right">
+                                    <Button variant="contained" color="primary" onClick={() => handleModify(row.idusuario)}>
+                                        Modificar
+                                    </Button>
+                                    <Button variant="contained" color="primary" onClick={() => handleContactoEmergencia(row.idusuario)}>
+                                        Contacto Emergencia
+                                    </Button>
+                                </StyledTableCell>
+                                
+                            </StyledTableRow>
+                        );
+                    })}
                 </TableBody>
             </Table>
         </TableContainer>

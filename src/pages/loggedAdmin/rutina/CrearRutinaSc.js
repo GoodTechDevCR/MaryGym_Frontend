@@ -14,10 +14,29 @@ const CrearRutinaSc = () => {
         fechaInicio: null,
         fechaFin: null,
         cantSemana: 0,
-        fechaPago: null
+        fechaPago: null,
+        initialComment: "",
+        finalComment: ""
     });
 
+    /*const [formData, setFormData] = useState({
+        usuario: "12345",
+        fechaInicio: new Date(),
+        fechaFin: new Date(new Date().setDate(new Date().getDate() + 7 * 4)), // 4 weeks from now
+        cantSemana: 4,
+        fechaPago: new Date(),
+        initialComment: "",
+        finalComment: ""
+
+    });*/
+
     const [funcionalidades, setFuncionalidades] = useState([]);
+
+    
+    const [addInitialComment, setAddInitialComment] = useState(false);
+    const [initialComment, setInitialComment] = useState('');
+    const [addFinalComment, setAddFinalComment] = useState(false);
+    const [finalComment, setFinalComment] = useState('');
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -153,13 +172,15 @@ const CrearRutinaSc = () => {
             ...formData,
             fechaInicio: fechaInicioFinal,
             fechaFin: fechaFinFinal,
-            funcionalidades
+            funcionalidades,
+            initialComment: addInitialComment ? initialComment : '',
+            finalComment: addFinalComment ? finalComment : ''
         };
 
         console.log("Dataaaaa: ", jsonData);
 
         // Envía los datos al backend para generar el PDF
-        const response = await fetch('http://localhost:4000/servicioAPI/generarPDF', {
+        const response = await fetch('http://25.7.30.30:4000/servicioAPI/generarPDF', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -178,6 +199,22 @@ const CrearRutinaSc = () => {
         saveAs(blob, `rutina_${formData.usuario}.pdf`);
     };
 
+    const handleCheckboxChangeInitial = (e) => {
+        setAddInitialComment(e.target.checked);
+    };
+
+    const handleCheckboxChangeFinal = (e) => {
+        setAddFinalComment(e.target.checked);
+    };
+
+    const handleInitialCommentChange = (e) => {
+        setInitialComment(e.target.value);
+    };
+
+    const handleFinalCommentChange = (e) => {
+        setFinalComment(e.target.value);
+    };
+    
     return (
         <div>
         <HeadAdmin/>
@@ -226,10 +263,34 @@ const CrearRutinaSc = () => {
                 <form onSubmit={handleSubmit}>
                     <h2>Agregar Funcionalidades y Ejercicios</h2>
                     <div className='elemento2'>
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={addInitialComment}
+                                onChange={handleCheckboxChangeInitial}
+                            />
+                            Agregar un comentario inicial
+                        </label>
+                        {addInitialComment && (
+                            <input
+                                type="text"
+                                placeholder="Comentario inicial"
+                                value={initialComment}
+                                onChange={handleInitialCommentChange}
+                            />
+                        )}
+                        
+                    </div>
                     {funcionalidades.map((funcionalidad, indexFuncionalidad) => (
-                        <Box key={indexFuncionalidad} 
-                            sx={{ border: '5px solid grey', borderRadius: '8px', backgroundColor: '#f9f9f9' , maxWidth: 750, margin:2 }} 
-                            >
+                        <Box key={indexFuncionalidad}
+                             sx={{
+                                 border: '5px solid grey',
+                                 borderRadius: '8px',
+                                 backgroundColor: '#f9f9f9',
+                                 maxWidth: 750,
+                                 margin: 2
+                             }}
+                        >
                             <label>
                                 <input
                                     placeholder="Funcionalidad"
@@ -239,29 +300,38 @@ const CrearRutinaSc = () => {
                                     onChange={(e) => handleFuncionalidadChange(indexFuncionalidad, e)}
                                 />
                             </label>
-                            <button type="button" className='delete-button' onClick={() => handleRemoveFuncionalidad(indexFuncionalidad)}>
-                                    Borrar Funcionalidad
-                                </button>
+                            <button type="button" className='delete-button'
+                                    onClick={() => handleRemoveFuncionalidad(indexFuncionalidad)}>
+                                Borrar Funcionalidad
+                            </button>
                             <div className='elemento2'>
-                                <button type="button"  className='black-button' onClick={() => handleAddEjercicio(indexFuncionalidad)}>
+                                <button type="button" className='black-button'
+                                        onClick={() => handleAddEjercicio(indexFuncionalidad)}>
                                     Agregar Ejercicio
                                 </button>
                             </div>
-                            
+
                             {funcionalidad.ejercicios.map((ejercicio, indexEjercicio) => (
-                                <Box key={indexEjercicio} 
-                                sx={{ border: '2px solid grey', borderRadius: '8px', backgroundColor: '#f9f9f9' , maxWidth: 700, margin:3 }}>
+                                <Box key={indexEjercicio}
+                                     sx={{
+                                         border: '2px solid grey',
+                                         borderRadius: '8px',
+                                         backgroundColor: '#f9f9f9',
+                                         maxWidth: 700,
+                                         margin: 3
+                                     }}>
                                     <label className='elemento'>
                                         <SelectSingleEjercicioByName
                                             onEjercicioChange={(value) => handleEjercicioChange(indexFuncionalidad, indexEjercicio, value)}
                                         />
-                                        <button type="button"  className='delete-button' onClick={() => handleRemoveEjercicio(indexFuncionalidad, indexEjercicio)}>
+                                        <button type="button" className='delete-button'
+                                                onClick={() => handleRemoveEjercicio(indexFuncionalidad, indexEjercicio)}>
                                             Borrar ejercicio
                                         </button>
                                     </label>
-                                    
+
                                     <label className='elemento'>
-                   
+
                                         <input
                                             type="text"
                                             placeholder='Comentario'
@@ -270,15 +340,15 @@ const CrearRutinaSc = () => {
                                             onChange={(e) => handleComentarioChange(indexFuncionalidad, indexEjercicio, e)}
                                         />
                                     </label>
-                                    {Array.from({ length: formData.cantSemana }, (_, i) => (
-                                        <label key={`semana${i + 1}`} className='elemento' >
-                                            
-                                            <input sx={{margin:2}}
-                                                type="text"
-                                                placeholder={`Semana ${i + 1}`}
-                                                name={`semana${i + 1}`}
-                                                value={ejercicio[`semana${i + 1}`]}
-                                                onChange={(e) => handleSemanaChange(indexFuncionalidad, indexEjercicio, e)}
+                                    {Array.from({length: formData.cantSemana}, (_, i) => (
+                                        <label key={`semana${i + 1}`} className='elemento'>
+
+                                            <input sx={{margin: 2}}
+                                                   type="text"
+                                                   placeholder={`Semana ${i + 1}`}
+                                                   name={`semana${i + 1}`}
+                                                   value={ejercicio[`semana${i + 1}`]}
+                                                   onChange={(e) => handleSemanaChange(indexFuncionalidad, indexEjercicio, e)}
                                             />
                                         </label>
                                     ))}
@@ -287,17 +357,38 @@ const CrearRutinaSc = () => {
                         </Box>
                     ))}
                     <div className='centered-title2'>
-                        <button type="button"  className='black-button' onClick={handleAddFuncionalidad}> Agregar Funcionalidad </button>  
+                        <button type="button" className='black-button' onClick={handleAddFuncionalidad}> Agregar
+                            Funcionalidad
+                        </button>
+                    </div>
+                    <div className='comentarioFinal'>
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={addFinalComment}
+                                onChange={handleCheckboxChangeFinal}
+                            />
+                            Agregar un comentario final
+                        </label>
+                        {addFinalComment && (
+                            <input
+                                type="text"
+                                placeholder="Comentario final"
+                                value={finalComment}
+                                onChange={handleFinalCommentChange}
+                            />
+                        )}
+                        
                     </div>
                     <div className='centered-title2'>
-                         <button type="submit"  className='black-button' >Guardar Rutina</button> 
+                        <button type="submit" className='black-button'>Guardar Rutina</button>
                     </div>
 
-                    </div>
+
                 </form>
-            )}
+                )}
         </div>
-        <Foot/>
+            <Foot/>
         </div>
     );
 };
