@@ -35,7 +35,8 @@ const TarjetaInformacion = () => {
                     <p><strong>Saldo:</strong> ₡{userData.saldo}</p>
                     <p><strong>Estado:</strong> {userData.estado}</p>
                     <p><strong>Fecha Nacimiento:</strong> {userData.fechanacimiento}</p>
-                    <p><strong>Comentario:</strong> {userData.comentario}</p>
+                    <p><strong>Comentario:</strong> {userData.Comentario}</p>
+                    <p><strong>AceptacionTC:</strong> {userData.AceptacionTC}</p>
                 </div>
             ) : (
                 <p>Cargando datos del usuario...</p>

@@ -37,6 +37,17 @@ const TextInputs = ({ selectedOption, newData, setNewData }) => {
                     <MenuItem value={1}>Activo</MenuItem>
                 </Select>
             )}
+            
+            {selectedOption.type === 'bitTC' && (
+                <Select
+                    value={newData}
+                    onChange={handleChange}
+                    sx={{ width: 300 }}
+                >
+                    <MenuItem value={0}>TC NO Aceptados</MenuItem>
+                    <MenuItem value={1}>TC Aceptados</MenuItem>
+                </Select>
+            )}
 
             {(selectedOption.type === 'text' || selectedOption.type === 'number') && (
                 <TextField

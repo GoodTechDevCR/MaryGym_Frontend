@@ -16,7 +16,8 @@ const datos = [
     { label: 'Saldo', type: 'number' },
     { label: 'Estado', type: 'bit' },
     { label: 'Fecha Nacimiento', type: 'date' },
-    { label: 'Comentario', type: 'text' }
+    { label: 'Comentario', type: 'text' },
+    { label: 'Aceptacion de terminos y condiciones', type: 'bitTC' }
 ];
 
 function ModificarUsuarioSc() {
@@ -34,6 +35,8 @@ function ModificarUsuarioSc() {
             nombreColumna = 'fechanacimiento';
         } else if (selectedOption.label === 'Teléfono') {
             nombreColumna = 'telefono';
+        } else if (selectedOption.label === 'Aceptacion de terminos y condiciones') {
+            nombreColumna = 'AceptacionTC';
         } else {
             nombreColumna = selectedOption.label.toLowerCase(); // Ajusta según corresponda
         }
