@@ -59,7 +59,7 @@ function ModificarUsuarioSc() {
         console.log("Respuesta del servidor:", success);
         if (success) {
             alert('Usuario modificado exitosamente');
-            navigate('/');
+            navigate('/admin/usuario/visualizar');
         } else {
             alert('Error al modificar al usuario');
             window.location.reload();
