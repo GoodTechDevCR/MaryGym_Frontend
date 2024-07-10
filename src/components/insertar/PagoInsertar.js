@@ -103,24 +103,24 @@ function PagoInsertar() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setNotificacion(""); // Reset notification
-
+    
         if (formData.IdTipoTran === 6) {
             // Registro de abono
             const fechaAbonoFinal = formData.FechaAbono.toISOString().split('T')[0];
             const montoAbonoFinal = parseFloat(formData.MontoAbono);
-
+    
             const abonoData = {
                 IdUsuario: formData.IdUsuario,
                 FechaAbono: fechaAbonoFinal,
                 MontoAbono: montoAbonoFinal
             };
-
-            const abonoResult = await createAbono(abonoData);
-
-            if (abonoResult) {
+    
+            const { success, error } = await createAbono(abonoData);
+    
+            if (success) {
                 alert("Abono registrado exitosamente");
             } else {
-                alert("Error al registrar el abono");
+                alert(`Error al registrar el abono: ${error.message}`);
             }
         } else {
             // Registro de cobro y pago
@@ -128,7 +128,7 @@ function PagoInsertar() {
             const fechaPagoFinal = formData.FechaPago.toISOString().split('T')[0];
             const montoFinal = parseFloat(formData.Monto);
             const abonoTotal = calculateAbonoTotal();
-
+    
             const jsonData = {
                 IdUsuario: formData.IdUsuario,
                 Monto: montoFinal,
@@ -138,19 +138,19 @@ function PagoInsertar() {
                 DiasAdicionales: formData.DiasAdicionales ? parseInt(formData.DiasAdicionales) : null,
                 FechaFinalEspecial: formData.FechaFinalEspecial ? formData.FechaFinalEspecial.toISOString().split('T')[0] : null
             };
-
-            const result = await createCobroYPago(jsonData);
-
-            if (result) {
+    
+            const { success, error } = await createCobroYPago(jsonData);
+    
+            if (success) {
                 alert("Cobro y pago creados/actualizados exitosamente");
-
+    
                 if (abonoTotal > 0) {
                     if (abonoTotal >= montoFinal) {
                         // Eliminar abonos usados y registrar nuevo abono si hay exceso
                         for (const id of selectedAbonos) {
                             await fetch(`http://localhost:4000/abono/${id}`, { method: 'DELETE' });
                         }
-
+    
                         if (abonoTotal > montoFinal) {
                             const exceso = abonoTotal - montoFinal;
                             const abonoExcesoData = {
@@ -158,7 +158,7 @@ function PagoInsertar() {
                                 FechaAbono: fechaPagoFinal,
                                 MontoAbono: exceso
                             };
-
+    
                             await createAbono(abonoExcesoData);
                             setNotificacion(`Se creo un nuevo abono con el sobrante de este pago, el monto es ${exceso}`);
                         }
@@ -170,10 +170,10 @@ function PagoInsertar() {
                     }
                 }
             } else {
-                alert("Error al crear el cobro y el pago");
+                alert(`Error al crear el cobro y el pago: ${error.message}`);
             }
         }
-    };
+    };       
 
     const abonoTotal = calculateAbonoTotal();
     const montoTotal = parseFloat(formData.Monto) - abonoTotal;
