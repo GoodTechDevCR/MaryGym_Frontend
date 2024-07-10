@@ -5,7 +5,7 @@ const Footer = () => {
         <footer style={styles.footer}>
             <div style={styles.container}>
                 <p>© 2024 MaryGym. Todos los derechos reservados.</p>
-                <p>Contacto: info@tucompania.com</p>
+                <p>Contacto: goodtechdev@gmail.com</p>
             </div>
         </footer>
     );
