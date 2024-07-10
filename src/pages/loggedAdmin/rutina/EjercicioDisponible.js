@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import CatEjeInsertar from '../../../components/insertar/CatEjeInsertar';
 import EjercicioInsertar from '../../../components/insertar/EjercicioInsertar';
-import PrincipalMenu from '../../../components/menu/PrincipalMenu';
 import TablaEjercicioPorCat from "../../../components/showData/TablaEjercicioPorCat";
 import SelectSingleCatEje from "../../../components/ui/selectSingle/SelectSingleCatEje";
 import HeadAdmin from '../../../components/Header/HeadAdmin';

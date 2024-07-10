@@ -3,7 +3,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import UserContext from '../../UserContext';
 import "../../pages/Home/Home.css";
 import Head from "../../components/Header/Head";
-import Foot from "../../components/Footer/Foot";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Box from '@mui/material/Box';
