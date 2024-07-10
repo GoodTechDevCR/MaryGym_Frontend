@@ -8,13 +8,14 @@ import useConsultaAbonos from "../../hooks/AbonoHooks/UseConsultaAbonos";
 function PagoInsertar() {
     const { createAnything: createCobroYPago } = useCreateAnything('http://localhost:4000/cobro/cobroypago');
     const { createAnything: createAbono } = useCreateAnything('http://localhost:4000/abono');
-    const { data: abonos, loading, error, consultaAbonos } = useConsultaAbonos(); // Usa el hook correctamente
+    const { data: abonos, loading, error, consultaAbonos } = useConsultaAbonos();
     const [selectedAbonos, setSelectedAbonos] = useState([]);
     const [notificacion, setNotificacion] = useState("");
 
     const [formData, setFormData] = useState({
         IdUsuario: null,
         Monto: '',
+        FechaInicio: null,
         FechaPago: null,
         IdTipoTran: null,
         DiasAdicionales: '',
@@ -61,8 +62,8 @@ function PagoInsertar() {
         });
     };
 
-    const handleDateChange = (date) => {
-        setFormData({ ...formData, FechaPago: date });
+    const handleDateChange = (date, field) => {
+        setFormData({ ...formData, [field]: date });
     };
 
     const handleFechaFinalEspecialChange = (date) => {
@@ -123,6 +124,7 @@ function PagoInsertar() {
             }
         } else {
             // Registro de cobro y pago
+            const fechaInicioFinal = formData.FechaInicio.toISOString().split('T')[0];
             const fechaPagoFinal = formData.FechaPago.toISOString().split('T')[0];
             const montoFinal = parseFloat(formData.Monto);
             const abonoTotal = calculateAbonoTotal();
@@ -130,6 +132,7 @@ function PagoInsertar() {
             const jsonData = {
                 IdUsuario: formData.IdUsuario,
                 Monto: montoFinal,
+                FechaInicio: fechaInicioFinal,
                 FechaPago: fechaPagoFinal,
                 IdTipoTran: formData.IdTipoTran,
                 DiasAdicionales: formData.DiasAdicionales ? parseInt(formData.DiasAdicionales) : null,
@@ -197,9 +200,13 @@ function PagoInsertar() {
                                 />
                             </label>
                         </div>
+                        <div className='elemento2'>
+                            <div className='body3'> Fecha de inicio de Membresia: </div> 
+                            <DatePickerPrueba onDateChange={(date) => handleDateChange(date, 'FechaInicio')} /> 
+                        </div>
                         <div className='elemento2'> 
                             <div className='body3'> Fecha de pago: </div> 
-                            <DatePickerPrueba onDateChange={handleDateChange} /> 
+                            <DatePickerPrueba onDateChange={(date) => handleDateChange(date, 'FechaPago')} /> 
                         </div>
                         
                         {formData.IdTipoTran === 10 && (
