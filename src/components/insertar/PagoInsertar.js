@@ -46,11 +46,11 @@ function PagoInsertar() {
     const handleTipoTranChange = (id) => {
         setFormData((prevFormData) => {
             let newMonto = '';
-            if (id === 7 || id === 8 || id === 9) {
-                newMonto = id === 7 ? '17500' : (id === 8 ? '5000' : '2700');
+            if (id === 12 || id === 13 || id === 14) {
+                newMonto = id === 12 ? '17500' : (id === 13 ? '5000' : '2700');
                 const montoInput = document.getElementById('monto-input');
                 if (montoInput) montoInput.setAttribute('readonly', 'readonly');
-            } else if (id === 10) {
+            } else if (id === 15) {
                 newMonto = '-';
                 const montoInput = document.getElementById('monto-input');
                 if (montoInput) montoInput.removeAttribute('readonly');
@@ -104,7 +104,7 @@ function PagoInsertar() {
         e.preventDefault();
         setNotificacion(""); // Reset notification
     
-        if (formData.IdTipoTran === 6) {
+        if (formData.IdTipoTran ===11) {
             // Registro de abono
             const fechaAbonoFinal = formData.FechaAbono.toISOString().split('T')[0];
             const montoAbonoFinal = parseFloat(formData.MontoAbono);
@@ -185,7 +185,7 @@ function PagoInsertar() {
             <form onSubmit={handleSubmit}>
                 <div className='elemento2'> <SelectSingleUsuario onUsuarioChange={handleUsuarioChange} /> </div>
                 <div className='elemento2'> <SelectSingleTipoTran onTipoTranChange={handleTipoTranChange} /> </div>
-                {formData.IdTipoTran !== 6 && (
+                {formData.IdTipoTran !== 11 && (
                     <>
                         <div className='elemento2'>
                             <label>
@@ -209,7 +209,7 @@ function PagoInsertar() {
                             <DatePickerPrueba onDateChange={(date) => handleDateChange(date, 'FechaPago')} /> 
                         </div>
                         
-                        {formData.IdTipoTran === 10 && (
+                        {formData.IdTipoTran === 15 && (
                             <div>
                                 <label className='elemento2'>
                                     <div className='body3'> Seleccione una opción: </div>
@@ -262,7 +262,7 @@ function PagoInsertar() {
                         )}
                     </>
                 )}
-                {formData.IdTipoTran === 6 && (
+                {formData.IdTipoTran === 11 && (
                     <div>
                         <label className='elemento2'>
                             <input
