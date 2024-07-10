@@ -12,7 +12,7 @@ const useValidateLogin = () => {
         try {
             console.log("Enviando datos al servidor:", { usuario, contrasena });
 
-            const response = await fetch('http://25.7.30.30:4000/login/validate', {
+            const response = await fetch('https://marygymbackend-production.up.railway.app/login/validate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

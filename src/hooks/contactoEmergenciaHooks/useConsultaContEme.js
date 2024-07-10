@@ -12,7 +12,7 @@ const UseConsultaContEme = (id) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:4000/contactoEme/${id}`);
+                const response = await fetch(`https://marygymbackend-production.up.railway.app/contactoEme/${id}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

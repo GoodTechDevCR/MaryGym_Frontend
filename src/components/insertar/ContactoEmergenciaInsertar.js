@@ -4,7 +4,7 @@ import SelectSingleRelacion from '../ui/selectSingle/SelectSingleRelacion';
 import UseConsultaByCorreo from '../../hooks/usuarioHooks/useConsultaUsuarioByCorreo';
 
 function ContactoEmergenciaInsertar({ correo }) {
-    const { createAnything } = useCreateAnything('http://localhost:4000/contactoEme');
+    const { createAnything } = useCreateAnything('https://marygymbackend-production.up.railway.app/contactoEme');
     const IdUsuarioGuardar = UseConsultaByCorreo(correo);
 
     // Estado inicial con los campos necesarios

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useCreateAnything from '../../hooks/useCreateAnything';
 
 function CatEjeInsertar(){
-    const { createAnything } = useCreateAnything('http://25.7.30.30:4000/catEje');
+    const { createAnything } = useCreateAnything('https://marygymbackend-production.up.railway.app/catEje');
 
     const [formData, setFormData] = useState({
         NombreCatEje: ''

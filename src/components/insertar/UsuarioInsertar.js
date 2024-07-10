@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import ContactoEmergenciaInsertar from './ContactoEmergenciaInsertar';
 
 function UsuarioInsertar() {
-    const { createAnything, error } = useCreateAnything('http://25.7.30.30:4000/usuario');
+    const { createAnything, error } = useCreateAnything('https://marygymbackend-production.up.railway.app/usuario');
     const [step, setStep] = useState(1);
 
     const [formData, setFormData] = useState({

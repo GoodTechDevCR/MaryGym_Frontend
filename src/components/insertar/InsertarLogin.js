@@ -21,7 +21,7 @@ function InsertarLogin() {
 
     useEffect(() => {
         if (formData.usuario) {
-            fetch(`http://25.7.30.30:4000/usuario/getUserCorreo/${formData.usuario}`)
+            fetch(`https://marygymbackend-production.up.railway.app/usuario/getUserCorreo/${formData.usuario}`)
                 .then(response => response.json())
                 .then(data => {
                     console.log("usuarios fetched:", data);

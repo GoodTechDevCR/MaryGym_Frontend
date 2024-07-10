@@ -11,7 +11,7 @@ const UseConsultaTipoTran = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://25.7.30.30:4000/tipoTran`);
+                const response = await fetch(`https://marygymbackend-production.up.railway.app/tipoTran`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

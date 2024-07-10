@@ -21,7 +21,7 @@ const datos = [
 ];
 
 function ModificarUsuarioSc() {
-    const { updateAnything } = useUpdateAnything('http://25.7.30.30:4000/usuario/update');
+    const { updateAnything } = useUpdateAnything('https://marygymbackend-production.up.railway.app/usuario/update');
     const { id: userId } = useParams();
     const navigate = useNavigate();
     const [selectedOption, setSelectedOption] = useState(null);

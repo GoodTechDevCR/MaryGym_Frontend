@@ -7,7 +7,7 @@ import HeadAdmin from "../../../components/Header/HeadAdmin";
 import Foot from "../../../components/Footer/Foot";
 
 function VisualizarContactoEmergencia() {
-    const { createAnything } = useCreateAnything('http://localhost:4000/contactoEme/unico');
+    const { createAnything } = useCreateAnything('https://marygymbackend-production.up.railway.app/contactoEme/unico');
     const { id } = useParams();
     // Estado inicial con los campos necesarios
     const [formData, setFormData] = useState({

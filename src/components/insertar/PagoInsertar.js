@@ -6,8 +6,8 @@ import useCreateAnything from "../../hooks/useCreateAnything";
 import useConsultaAbonos from "../../hooks/AbonoHooks/UseConsultaAbonos";
 
 function PagoInsertar() {
-    const { createAnything: createCobroYPago } = useCreateAnything('http://localhost:4000/cobro/cobroypago');
-    const { createAnything: createAbono } = useCreateAnything('http://localhost:4000/abono');
+    const { createAnything: createCobroYPago } = useCreateAnything('https://marygymbackend-production.up.railway.app/cobro/cobroypago');
+    const { createAnything: createAbono } = useCreateAnything('https://marygymbackend-production.up.railway.app/abono');
     const { data: abonos, loading, error, consultaAbonos } = useConsultaAbonos(); // Usa el hook correctamente
     const [selectedAbonos, setSelectedAbonos] = useState([]);
     const [notificacion, setNotificacion] = useState("");
@@ -145,7 +145,7 @@ function PagoInsertar() {
                     if (abonoTotal >= montoFinal) {
                         // Eliminar abonos usados y registrar nuevo abono si hay exceso
                         for (const id of selectedAbonos) {
-                            await fetch(`http://localhost:4000/abono/${id}`, { method: 'DELETE' });
+                            await fetch(`https://marygymbackend-production.up.railway.app/abono/${id}`, { method: 'DELETE' });
                         }
 
                         if (abonoTotal > montoFinal) {
@@ -162,7 +162,7 @@ function PagoInsertar() {
                     } else {
                         // Eliminar abonos usados
                         for (const id of selectedAbonos) {
-                            await fetch(`http://localhost:4000/abono/${id}`, { method: 'DELETE' });
+                            await fetch(`https://marygymbackend-production.up.railway.app/abono/${id}`, { method: 'DELETE' });
                         }
                     }
                 }
