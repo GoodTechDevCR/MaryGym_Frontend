@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState} from 'react';
+import { useParams} from 'react-router-dom';
 import useConsultaUsuarioByCorreo from "../../hooks/usuarioHooks/useConsultaUsuarioByCorreo";
 import useUpdateAnything from "../../hooks/useUpdateAnything";
 
@@ -8,9 +8,8 @@ function PasswordChangeSc() {
     const { correo } = useParams();
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
-    const navigate = useNavigate();
     const dataUsuario = useConsultaUsuarioByCorreo(correo);
-    const [formData, setFormData] = useState({
+    const [formData] = useState({
         idRegistro: null,
         nombreColumna: "Password",
         nuevoValor: null
