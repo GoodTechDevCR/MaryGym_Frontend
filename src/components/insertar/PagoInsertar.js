@@ -15,6 +15,7 @@ function PagoInsertar() {
     const [formData, setFormData] = useState({
         IdUsuario: null,
         Monto: '',
+        FechaInicio: null,
         FechaPago: null,
         IdTipoTran: null,
         DiasAdicionales: '',
@@ -61,8 +62,8 @@ function PagoInsertar() {
         });
     };
 
-    const handleDateChange = (date) => {
-        setFormData({ ...formData, FechaPago: date });
+    const handleDateChange = (date, field) => {
+        setFormData({ ...formData, [field]: date });
     };
 
     const handleFechaFinalEspecialChange = (date) => {
@@ -102,52 +103,54 @@ function PagoInsertar() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setNotificacion(""); // Reset notification
-
+    
         if (formData.IdTipoTran === 6) {
             // Registro de abono
             const fechaAbonoFinal = formData.FechaAbono.toISOString().split('T')[0];
             const montoAbonoFinal = parseFloat(formData.MontoAbono);
-
+    
             const abonoData = {
                 IdUsuario: formData.IdUsuario,
                 FechaAbono: fechaAbonoFinal,
                 MontoAbono: montoAbonoFinal
             };
-
-            const abonoResult = await createAbono(abonoData);
-
-            if (abonoResult) {
+    
+            const { success, error } = await createAbono(abonoData);
+    
+            if (success) {
                 alert("Abono registrado exitosamente");
             } else {
-                alert("Error al registrar el abono");
+                alert(`Error al registrar el abono: ${error.message}`);
             }
         } else {
             // Registro de cobro y pago
+            const fechaInicioFinal = formData.FechaInicio.toISOString().split('T')[0];
             const fechaPagoFinal = formData.FechaPago.toISOString().split('T')[0];
             const montoFinal = parseFloat(formData.Monto);
             const abonoTotal = calculateAbonoTotal();
-
+    
             const jsonData = {
                 IdUsuario: formData.IdUsuario,
                 Monto: montoFinal,
+                FechaInicio: fechaInicioFinal,
                 FechaPago: fechaPagoFinal,
                 IdTipoTran: formData.IdTipoTran,
                 DiasAdicionales: formData.DiasAdicionales ? parseInt(formData.DiasAdicionales) : null,
                 FechaFinalEspecial: formData.FechaFinalEspecial ? formData.FechaFinalEspecial.toISOString().split('T')[0] : null
             };
-
-            const result = await createCobroYPago(jsonData);
-
-            if (result) {
+    
+            const { success, error } = await createCobroYPago(jsonData);
+    
+            if (success) {
                 alert("Cobro y pago creados/actualizados exitosamente");
-
+    
                 if (abonoTotal > 0) {
                     if (abonoTotal >= montoFinal) {
                         // Eliminar abonos usados y registrar nuevo abono si hay exceso
                         for (const id of selectedAbonos) {
                             await fetch(`https://marygymbackend-production.up.railway.app/abono/${id}`, { method: 'DELETE' });
                         }
-
+    
                         if (abonoTotal > montoFinal) {
                             const exceso = abonoTotal - montoFinal;
                             const abonoExcesoData = {
@@ -155,7 +158,7 @@ function PagoInsertar() {
                                 FechaAbono: fechaPagoFinal,
                                 MontoAbono: exceso
                             };
-
+    
                             await createAbono(abonoExcesoData);
                             setNotificacion(`Se creo un nuevo abono con el sobrante de este pago, el monto es ${exceso}`);
                         }
@@ -167,10 +170,10 @@ function PagoInsertar() {
                     }
                 }
             } else {
-                alert("Error al crear el cobro y el pago");
+                alert(`Error al crear el cobro y el pago: ${error.message}`);
             }
         }
-    };
+    };       
 
     const abonoTotal = calculateAbonoTotal();
     const montoTotal = parseFloat(formData.Monto) - abonoTotal;
@@ -197,9 +200,13 @@ function PagoInsertar() {
                                 />
                             </label>
                         </div>
+                        <div className='elemento2'>
+                            <div className='body3'> Fecha de inicio de Membresia: </div> 
+                            <DatePickerPrueba onDateChange={(date) => handleDateChange(date, 'FechaInicio')} /> 
+                        </div>
                         <div className='elemento2'> 
                             <div className='body3'> Fecha de pago: </div> 
-                            <DatePickerPrueba onDateChange={handleDateChange} /> 
+                            <DatePickerPrueba onDateChange={(date) => handleDateChange(date, 'FechaPago')} /> 
                         </div>
                         
                         {formData.IdTipoTran === 10 && (

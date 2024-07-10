@@ -16,12 +16,14 @@ const useCreateAnything = (url) => {
                 },
                 body: JSON.stringify(body),
             });
-            console.log("RESPONSE: ",response);
+            console.log("RESPONSE: ", response);
+
             let responseData;
             const contentType = response.headers.get('Content-Type');
             console.log(body);
-            console.log(contentType.includes('text/html'));
-            if ((contentType && contentType.includes('application/json')) || (contentType && contentType.includes('text/html'))) {
+            console.log(contentType?.includes('text/html'));
+
+            if (contentType && (contentType.includes('application/json') || contentType.includes('text/html'))) {
                 responseData = await response.json();
             } else {
                 responseData = await response.text();
@@ -29,17 +31,16 @@ const useCreateAnything = (url) => {
             }
 
             if (!response.ok) {
-
-                throw new Error(responseData);
+                throw new Error(responseData?.message || 'Error desconocido');
             }
 
             setData(responseData);
-            setSuccess(true); // Marcar la operación como exitosa
-            return true;
+            setSuccess(true);
+            return { success: true, data: responseData };
         } catch (err) {
             setError(err);
-            setSuccess(false); // Marcar la operación como fallida
-            return false;
+            setSuccess(false);
+            return { success: false, error: err };
         } finally {
             setLoading(false);
         }
