@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import useCreateAnything from '../../hooks/useCreateAnything';
 import SelectSingleRelacion from '../ui/selectSingle/SelectSingleRelacion';
 import UseConsultaByCorreo from '../../hooks/usuarioHooks/useConsultaUsuarioByCorreo';
+import { useNavigate } from 'react-router-dom';
+
 
 function ContactoEmergenciaInsertar({ correo }) {
-    const { createAnything } = useCreateAnything('http://localhost:4000/contactoEme');
+    const { createAnything } = useCreateAnything('https://marygymbackend-production.up.railway.app/contactoEme');
     const IdUsuarioGuardar = UseConsultaByCorreo(correo);
+    const navigate = useNavigate();
 
     // Estado inicial con los campos necesarios
     const [formData, setFormData] = useState({
@@ -69,7 +72,7 @@ function ContactoEmergenciaInsertar({ correo }) {
             const success = await createAnything(contactos);
             if (success) {
                 alert("Contactos Creados Exitosamente");
-                window.location.reload();
+                navigate(`/admin/usuario/visualizar`);
             } else {
                 alert("Error al crear el Usuario");
             }
@@ -79,9 +82,20 @@ function ContactoEmergenciaInsertar({ correo }) {
         }
     };
 
+    const handleSalir = async(event) => {
+        event.preventDefault();
+
+        navigate(`/admin/usuario/visualizar`);
+    }
+
     return (
         <div className='centerd title'>
             <h2>Insertar contacto de emergencia</h2>
+            <p>
+                Para agregar los contactos de emergencia se debe de ir llenar los datos y oprimir el boton "agregar",
+                una vez digitados todos los contactos se debe digitar el boton "enviar", en caso de NO querer agregar contactos
+                digitar el boton "Salir"
+            </p>
             <form onSubmit={handleSubmit}>
                 <label className='elemento2'>
                     <input 
@@ -107,6 +121,9 @@ function ContactoEmergenciaInsertar({ correo }) {
                 </div>
                 <div className='elemento2'>
                     <button type="submit" className='black-button'>Enviar</button>
+                </div>
+                <div className='elemento2'>
+                    <button type="button" className='black-button' onClick={handleSalir}>Salir</button>
                 </div>
                 </form>
 

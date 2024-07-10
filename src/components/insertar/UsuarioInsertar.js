@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import PaisesTelefono from '../ui/PaisesTelefono';
 import useCreateAnything from '../../hooks/useCreateAnything';
 import DatePickerPrueba from "../datePicker/DatePickerPrueba";
-
 import Box from '@mui/material/Box';
 import ContactoEmergenciaInsertar from './ContactoEmergenciaInsertar';
 
 function UsuarioInsertar() {
-    const { createAnything, error } = useCreateAnything('http://25.7.30.30:4000/usuario');
+    const { createAnything, error } = useCreateAnything('https://marygymbackend-production.up.railway.app/usuario');
     const [step, setStep] = useState(1);
 
     const [formData, setFormData] = useState({
@@ -46,6 +45,15 @@ function UsuarioInsertar() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Verificación de campos vacíos
+        for (let key in formData) {
+            if (formData[key] === '' && key !== 'Comentario') {
+                alert('Error: Todos los campos deben de estar llenos');
+                return;
+            }
+        }
+
         const telefonoCompleto = `${formData.CodigoPais}${formData.Telefono}`;
         const estadoNumerico = formData.Estado === 'activo' ? 1 : 0;
         const fechaNacimientoFinal = formData.FechaNacimiento.toISOString().split('T')[0];
@@ -61,11 +69,12 @@ function UsuarioInsertar() {
         console.log("JSON: ", jsonData);
         try {
             const success = await createAnything(jsonData);
-            if (success) {
+            console.log("imprimir success success: ",success.success)
+            if (success.success) {
                 alert("Usuario Creado Exitosamente");
                 setStep(2);
             } else {
-                alert("Error al crear el Usuario:", error);
+                alert("Error al crear el Usuario:", success.error);
             }
         } catch (error) {
             console.error("Error al crear el Usuario:", error);
@@ -73,43 +82,42 @@ function UsuarioInsertar() {
         }
     };
 
-
     return (
         <div className='centered-title'>
             <h1 className='black'>Registro de usuarios</h1>  
             {step === 1 && (
                 <form onSubmit={handleSubmit} className='centered-title2'>
-                    <label className = 'elemento2' >
+                    <label className='elemento2'>
                         <input type="text" placeholder="Nombre" name="Nombre" value={formData.Nombre} onChange={handleInputChange}/>
                     </label>
-                    <label className = 'elemento2' >
+                    <label className='elemento2'>
                         <input type="text" placeholder="Apellido" name="Apellido" value={formData.Apellido} onChange={handleInputChange} />
                     </label>
-                    <label className = 'elemento2' >
+                    <label className='elemento2'>
                         <input type="email" placeholder="Correo" name="Correo" value={formData.Correo} onChange={handleInputChange} />
                     </label>
-                    <Box  className= "elemento2">
+                    <Box className="elemento2">
                         <PaisesTelefono onCountryChange={handleCountryChange}/>
                     </Box>
-                    <label className = 'elemento2'>
+                    <label className='elemento2'>
                         <input type="text" placeholder="Teléfono" name="Telefono" value={formData.Telefono} onChange={handleInputChange} />
                     </label>
-                    <label className = 'elemento2'>
+                    <label className='elemento2'>
                         <div className='body2'> Estado: </div>
                         <select name="Estado" value={formData.Estado} onChange={handleInputChange}>
                             <option value="activo">Activo</option>
                             <option value="noActivo">No Activo</option>
                         </select>
                     </label>
-                    <Box className = 'elemento2'>
+                    <Box className='elemento2'>
                         <div className='body2'> Fecha de nacimiento: </div>
                         <DatePickerPrueba onDateChange={handleDateChange} />
                     </Box>
-                    <label className = 'elemento2' >
+                    <label className='elemento2'>
                         <input type="text" placeholder="Comentario" name="Comentario" value={formData.Comentario} onChange={handleInputChange} />
                     </label>
-                    <div className = 'elemento2'>
-                        <button type="submit" className='black-button' >Enviar</button>
+                    <div className='elemento2'>
+                        <button type="submit" className='black-button'>Enviar</button>
                     </div>
                 </form>
             )}
@@ -119,7 +127,6 @@ function UsuarioInsertar() {
                     <ContactoEmergenciaInsertar correo={formData.Correo} />
                 </div>
             )}
-
         </div>
     );
 }

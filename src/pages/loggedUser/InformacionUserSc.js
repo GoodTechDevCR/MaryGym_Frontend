@@ -15,7 +15,7 @@ const InformacionUserSc = ({ nombre, fecha1, fecha2, saldo }) => {
 
     useEffect(() => {
         if (user && user.id) {
-            fetch(`http://localhost:4000/cobro/fechaLimite/${user.id}`)
+            fetch(`https://marygymbackend-production.up.railway.app/cobro/fechaLimite/${user.id}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');

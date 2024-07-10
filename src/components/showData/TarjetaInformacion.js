@@ -32,8 +32,7 @@ const TarjetaInformacion = () => {
                     <p><strong>Nombre:</strong> {userData.nombre}</p>
                     <p><strong>Apellido:</strong> {userData.apellido}</p>
                     <p><strong>Teléfono:</strong> {userData.telefono}</p>
-                    <p><strong>Saldo:</strong> ₡{userData.saldo}</p>
-                    <p><strong>Estado:</strong> {userData.estado}</p>
+                    <p><strong>Estado:</strong> {userData.estado === 1 ? 'Está activo' : 'No está activo'}</p>
                     <p><strong>Fecha Nacimiento:</strong> {userData.fechanacimiento}</p>
                     <p><strong>Comentario:</strong> {userData.Comentario}</p>
                     <p><strong>AceptacionTC:</strong> {userData.AceptacionTC}</p>

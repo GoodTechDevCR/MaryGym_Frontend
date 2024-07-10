@@ -8,7 +8,7 @@ const useConsultaAbonos = () => {
     const consultaAbonos = async (userId) => {
         setLoading(true); // Asegúrate de que loading sea verdadero cuando se inicie la consulta
         try {
-            const response = await fetch(`http://localhost:4000/abono/${userId}`);
+            const response = await fetch(`https://marygymbackend-production.up.railway.app/abono/${userId}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

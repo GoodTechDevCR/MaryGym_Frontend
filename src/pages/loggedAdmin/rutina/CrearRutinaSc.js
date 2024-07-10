@@ -180,7 +180,7 @@ const CrearRutinaSc = () => {
         console.log("Dataaaaa: ", jsonData);
 
         // Envía los datos al backend para generar el PDF
-        const response = await fetch('http://25.7.30.30:4000/servicioAPI/generarPDF', {
+        const response = await fetch('https://marygymbackend-production.up.railway.app/servicioAPI/generarPDF', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

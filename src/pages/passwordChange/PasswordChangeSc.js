@@ -4,7 +4,7 @@ import useConsultaUsuarioByCorreo from "../../hooks/usuarioHooks/useConsultaUsua
 import useUpdateAnything from "../../hooks/useUpdateAnything";
 
 function PasswordChangeSc() {
-    const {updateAnything} = useUpdateAnything('http://25.7.30.30:4000/usuario/update');
+    const {updateAnything} = useUpdateAnything('https://marygymbackend-production.up.railway.app/usuario/update');
     const { correo } = useParams();
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');

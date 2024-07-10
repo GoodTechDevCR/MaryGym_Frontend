@@ -11,7 +11,7 @@ const UseConsultaEjercicio = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://25.7.30.30:4000/ejercicio`);
+                const response = await fetch(`https://marygymbackend-production.up.railway.app/ejercicio`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

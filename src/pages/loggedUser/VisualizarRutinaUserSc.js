@@ -10,6 +10,8 @@ const VisualizarRutinaUserSc = () => {
         return <p>No user data available</p>;
     }
 
+    
+
     return (
         <div>
             <UserMenu />

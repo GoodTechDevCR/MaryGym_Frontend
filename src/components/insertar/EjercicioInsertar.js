@@ -8,7 +8,7 @@ const handleReload = () => {
 };
 
 function EjercicioInsertar() {
-    const { createAnything } = useCreateAnything('http://25.7.30.30:4000/ejercicio');
+    const { createAnything } = useCreateAnything('https://marygymbackend-production.up.railway.app/ejercicio');
     const [formData, setFormData] = useState({
         nombreEjercicio: '',
         categoriaId: 0
