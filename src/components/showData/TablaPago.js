@@ -9,6 +9,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import SelectSingleUsuario from "../ui/selectSingle/SelectSingleUsuario";
 import UseConsultaPago from "../../hooks/pagoHooks/useConsultaPago";
+import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -32,6 +34,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function TablaPago() {
     const [selectedUser, setSelectedUser] = useState(null);
     const { data, loading, error } = UseConsultaPago(selectedUser);
+    const navigate = useNavigate();
+
+    const handleModify = (id) => {
+        // Redirigir a la página de modificación con el id del pago
+        navigate(`/admin/pago/modificar/${id}`);
+    };
 
     const handleUsuarioChange = (id) => {
         setSelectedUser(id);
@@ -57,6 +65,7 @@ function TablaPago() {
                                 <StyledTableCell align="right">Fecha Pago</StyledTableCell>
                                 <StyledTableCell align="right">Tipo Transaccion</StyledTableCell>
                                 <StyledTableCell align="right">Monto</StyledTableCell>
+                                <StyledTableCell align="center">Acciones</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -67,7 +76,13 @@ function TablaPago() {
                                     <StyledTableCell align="right">{row.FechaPago}</StyledTableCell>
                                     <StyledTableCell align="right">{row.TipoTran}</StyledTableCell>
                                     <StyledTableCell align="right">{row.Monto}</StyledTableCell>
+                                    <StyledTableCell align="right">
+                                    <Button variant="contained" color="primary" onClick={() => handleModify(row.IdPago)}>
+                                        Modificar
+                                    </Button>
+                                    </StyledTableCell>
                                 </StyledTableRow>
+                                
                             ))}
                         </TableBody>
                     </Table>
