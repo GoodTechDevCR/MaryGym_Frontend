@@ -13,7 +13,7 @@ function ComboBox({ datos, onSelect }) {
             onChange={(event, newValue) => {
                 onSelect(newValue); // Pasar el objeto completo de la opción seleccionada
             }}
-            renderInput={(params) => <TextField {...params} label="Datos Usuario" />}
+            renderInput={(params) => <TextField {...params} label="Datos" />}
         />
     );
 }

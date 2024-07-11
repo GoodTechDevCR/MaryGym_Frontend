@@ -4,6 +4,7 @@ import SelectSingleTipoTran from "../ui/selectSingle/SelectSingleTipoTran";
 import DatePickerPrueba from "../datePicker/DatePickerPrueba";
 import useCreateAnything from "../../hooks/useCreateAnything";
 import useConsultaAbonos from "../../hooks/AbonoHooks/UseConsultaAbonos";
+import { useNavigate } from 'react-router-dom';
 
 function PagoInsertar() {
     const { createAnything: createCobroYPago } = useCreateAnything('https://marygymbackend-production.up.railway.app/cobro/cobroypago');
@@ -11,6 +12,7 @@ function PagoInsertar() {
     const { data: abonos, loading, error, consultaAbonos } = useConsultaAbonos(); // Usa el hook correctamente
     const [selectedAbonos, setSelectedAbonos] = useState([]);
     const [notificacion, setNotificacion] = useState("");
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         IdUsuario: null,
@@ -120,7 +122,7 @@ function PagoInsertar() {
             if (success) {
                 alert("Abono registrado exitosamente");
             } else {
-                alert(`Error al registrar el abono: ${error.message}`);
+                alert(`Error al registrar el abono: `);
             }
         } else {
             // Registro de cobro y pago
@@ -140,6 +142,7 @@ function PagoInsertar() {
             };
     
             const { success, error } = await createCobroYPago(jsonData);
+        
     
             if (success) {
                 alert("Cobro y pago creados/actualizados exitosamente");
@@ -169,8 +172,10 @@ function PagoInsertar() {
                         }
                     }
                 }
+
+                navigate(`/admin/pago/visualizar`);
             } else {
-                alert(`Error al crear el cobro y el pago: ${error.message}`);
+                alert(`Error al crear el cobro y el pago:`);
             }
         }
     };       

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import { useParams } from 'react-router-dom';
 import dataPagobyId from '../../utils/dataPagobyId';
 import "../../pages/Home/Home.css";
 
-const TarjetaInformacionPago = () => {
-    const { idPago } = useParams();
+const TarjetaInformacionPago = ({ idPago }) => { // Asegúrate de recibir idPago como prop
     const [pagoData, setPagoData] = useState(null);
+
+    console.log("idpago idpago: ", idPago);
 
     useEffect(() => {
         const fetchPagoData = async () => {
@@ -21,13 +21,12 @@ const TarjetaInformacionPago = () => {
     }, [idPago]);
 
     useEffect(() => {
-        console.log('User Data:', pagoData);
+        console.log('Pago Data:', pagoData);
     }, [pagoData]);
 
     return (
-        <>
         <Box sx={{ border: '2px solid grey', borderRadius: '8px', backgroundColor: '#f9f9f9' , maxWidth: 700, margin:'auto' }}>
-        {pagoData ? (
+            {pagoData ? (
                 <div>
                     <p><strong>Nombre Usuario:</strong> {pagoData.NombreUsuario}</p>
                     <p><strong>Fecha Pago:</strong> {pagoData.FechaPago}</p>
@@ -38,7 +37,6 @@ const TarjetaInformacionPago = () => {
                 <p>Cargando datos del pago...</p>
             )}
         </Box>
-        </>
     );
 };
 

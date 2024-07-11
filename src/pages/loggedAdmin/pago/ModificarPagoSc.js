@@ -4,19 +4,17 @@ import ComboBox from '../../../components/ui/ComboBox';
 import TextInputs from '../../../components/ui/TextInput';
 import BotonPrincipalFuncional from '../../../components/ui/BotonPrincipalFuncional';
 import useUpdateAnything from '../../../hooks/useUpdateAnything';
-import TarjetaInformacionPago from '../../../components/showData/TarjetaInformacion';
+import TarjetaInformacionPago from '../../../components/showData/TarjetaInformacionPago.js';
 import HeadAdmin from "../../../components/Header/HeadAdmin";
 import Foot from "../../../components/Footer/Foot";
 import "../../Home/Home.css";
 
 const datos = [
-    { label: 'Fecha Pago', type: 'date' },
-    { label: 'Tipo Transacción', type: 'tipoTran' },
-    { label: 'Monto', type: 'number' },
+    { label: 'Fecha Pago', type: 'date' }
 ];
 
 function ModificarPagoSc() {
-    const { updateAnything } = useUpdateAnything('https://marygymbackend-production.up.railway.app/pago/update');
+    const { updateAnything } = useUpdateAnything('https://marygymbackend-production.up.railway.app/pago/');
     const { id: pagoId } = useParams();
     const navigate = useNavigate();
     const [selectedOption, setSelectedOption] = useState(null);
@@ -26,18 +24,13 @@ function ModificarPagoSc() {
         event.preventDefault();
 
         let nombreColumna;
-        if (selectedOption.label === 'Fecha Pago') {
+        if (selectedOption.type === 'date') {
             nombreColumna = 'FechaPago';
-        } else if (selectedOption.label === 'Tipo Transacción') {
-            nombreColumna = 'IdTipoTran';
-        } else if (selectedOption.label === 'Monto') {
-            nombreColumna = 'Monto';
-        } else {
-            nombreColumna = selectedOption.label.toLowerCase(); // Ajusta según corresponda
         }
+        console.log("nombreColumna: ", nombreColumna);
 
         let formattedData = newData;
-        if (selectedOption.label === 'Fecha Pago') {
+        if (selectedOption.type === 'date') {
             formattedData = newData.toISOString().split('T')[0]; // Formatea la fecha a "YYYY-MM-DD"
             console.log("FECHA:  ",formattedData);
         }
@@ -48,10 +41,10 @@ function ModificarPagoSc() {
             nuevoValor: formattedData
         };
 
-        console.log(jsonData);
+        console.log("jsoooon: ", jsonData);
 
         const success = await updateAnything(jsonData);
-        console.log("Respuesta del servidor:", success);
+        console.log("Respuesta del servidor:", success.success);
         if (success) {
             alert('Pago modificado exitosamente');
             navigate('/admin/pago/visualizar');
@@ -66,7 +59,7 @@ function ModificarPagoSc() {
             <HeadAdmin/>
             <div className='centered-title2'> 
                 <h1 className='black'>Modificar Pago</h1>
-                <TarjetaInformacionPago/>
+                <TarjetaInformacionPago idPago={pagoId}/>
                 <div className = 'elemento2'>
                     <ComboBox datos={datos} onSelect={setSelectedOption} sx={{margin:'auto'}}/>
                 </div>

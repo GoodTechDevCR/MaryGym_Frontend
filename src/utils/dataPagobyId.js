@@ -1,6 +1,6 @@
-const dataPagobyId = async (pagoId) => {
+const dataPagobyId = async (idPago) => {
     try {
-        const response = await fetch(`https://marygymbackend-production.up.railway.app/pago/idPago/${pagoId}`);
+        const response = await fetch(`https://marygymbackend-production.up.railway.app/pago/pagoprueba/${idPago}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
