@@ -1,19 +1,14 @@
 import React from 'react';
-import PrincipalMenu from '../menu/PrincipalMenu';
 import GymImagen from '../../assets/logoMaryGym.jpg'
 
 function HeadAdmin () {
     return (
-
-
         <>
         <header style={styles.header} >
-
             <div >
                 <img src={GymImagen} alt="Gym Image" style={styles.logo}/>
             </div>
         </header>
-        <PrincipalMenu/>
         </>
         
     );
