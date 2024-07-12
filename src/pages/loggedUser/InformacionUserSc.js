@@ -2,7 +2,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import UserContext from '../../UserContext';
 import "../../pages/Home/Home.css";
-import Head from "../../components/Header/Head";
+import HeadUser from "../../components/Header/HeadUser";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Box from '@mui/material/Box';
@@ -39,7 +39,7 @@ const InformacionUserSc = ({ nombre, fecha1, fecha2, saldo }) => {
 
     return (
         <div>
-            <Head />
+            <HeadUser />
             <UserMenu />
 
             <div className='fila'>

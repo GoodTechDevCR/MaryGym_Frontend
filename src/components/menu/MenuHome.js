@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -8,6 +8,8 @@ import LogInSc from '../../pages/Home/LogInSc';
 import HomeScreen from '../../pages/Home/HomeScreen';
 import PrecioSc from '../../pages/Home/PrecioSc';
 import ContactoSc from '../../pages/Home/ContactoSc';
+import GymImagen from '../../assets/logoMaryGym.jpg';
+import { ForkLeft } from '@mui/icons-material';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -19,7 +21,11 @@ function CustomTabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value <= index && <Box sx={{ p: 0}}>{children}</Box>}
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          {children}
+        </Box>
+      )}
     </div>
   );
 }
@@ -31,38 +37,65 @@ CustomTabPanel.propTypes = {
 };
 
 function MenuHome() {
-  const [value, setValue] = React.useState(3);
+  const [value, setValue] = useState(0);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   return (
     <>
-      <div sx={{ borderBottom: 1, borderColor: 'divider'}}>
-      
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" dir="rtl">
-            <Tab icon = {<LoginIcon />}  iconPosition="end"  label="Ingresar"/>
-            <Tab label="Contacto" />
-            <Tab label="Precios"  />
-            <Tab label="Inicio"  />
+      <header style={styles.header}>
+        <div>
+          <img src={GymImagen} alt="Gym Image" style={styles.logo} />
+        </div>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+          textColor="inherit"
+          indicatorColor="primary"
+          sx={{ minHeight: '100px' }} // Ajuste de altura mínima para los Tabs
+        >
+          <Tab label="Inicio" sx={{ minHeight: '100px', minWidth: '140px' }} />
+          <Tab label="Precios" sx={{ minHeight: '100px', minWidth: '140px' }} />
+          <Tab label="Contacto" sx={{ minHeight: '100px', minWidth: '140px' }} />
+          <Tab icon={<LoginIcon />} label="Ingresar" sx={{ minHeight: '100px', minWidth: '140px' }} />
         </Tabs>
-      </div>
-     
+      </header>
+
       <CustomTabPanel value={value} index={0}>
-          <LogInSc/>
+        <HomeScreen />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-          <ContactoSc/>
+        <PrecioSc />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-          <PrecioSc/>
+        <ContactoSc />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
-          <HomeScreen/>
+        <LogInSc />
       </CustomTabPanel>
-      </>
-    
+    </>
   );
 }
 
+const styles = {
+  header: {
+    backgroundColor: '#000000',
+    color: '#FFFFFF',
+    padding: '0px',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.2)',
+  },
+  logo: {
+    width: 'auto',
+    height: '50px',
+    marginLeft: '10px',
+  },
+};
 
 export default MenuHome;

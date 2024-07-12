@@ -74,9 +74,7 @@ const PrecioSc = () => {
 
   return (
     <div id="Precios" className='centered-title'>
-      <Typography variant="h2" component="h1" className='black' align="center" gutterBottom>
-        Precios
-      </Typography>
+      <h2 style={{ fontSize: '2rem' }}>Planes disponibles</h2>
       <Grid container justifyContent="center" alignItems="stretch">
         {plans.map((plan) => (
           <CardWrapper key={plan.tipo}>

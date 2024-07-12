@@ -29,7 +29,7 @@ function EjercicioDisponible(){
                 </div>
                 <CatEjeInsertar/>
                 <EjercicioInsertar/>
-                <br/><br/><br/>
+                
             </div>
             <Foot/>
         </div>
