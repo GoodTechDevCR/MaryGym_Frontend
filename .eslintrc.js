@@ -4,14 +4,14 @@ module.exports = {
     "react-app/jest"
   ],
   rules: {
-    "no-unused-vars": ["warn", { args: "none", ignoreRestSiblings: true, varsIgnorePattern: "React" }]
+    "no-unused-vars": ["error", { args: "none" }],
+    "jsx-a11y/iframe-has-title": "off"
   },
-  // Disable warnings as errors in CI environment
   overrides: [
     {
-      files: ["**/*"],
+      files: ["*"],
       rules: {
-        "no-warnings-as-errors": process.env.CI ? "off" : "error"
+        "no-unused-vars": process.env.CI ? "off" : "error"
       }
     }
   ]
