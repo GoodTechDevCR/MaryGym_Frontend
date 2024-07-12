@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import UserContext from '../../UserContext';
 import UserMenu from '../../components/menu/UserMenu';
+import HeadUser from "../../components/Header/HeadUser";
+import Foot from "../../components/Footer/Foot";
 
 const VisualizarRutinaUserSc = () => {
     const { user } = useContext(UserContext);
@@ -40,6 +42,7 @@ const VisualizarRutinaUserSc = () => {
 
         return (
             <div>
+                
                 <p>ID del usuario: {IdUsuario}</p>
                 <p>Usuario: {usuario}</p>
                 <p>Fecha de inicio: {fechaInicio}</p>
@@ -81,9 +84,11 @@ const VisualizarRutinaUserSc = () => {
 
     return (
         <div>
+            <HeadUser />
             <UserMenu />
             <h2>Visualizar Rutina</h2>
             {renderRutinaDetails()}
+            <Foot/>
         </div>
     );
 };
