@@ -16,8 +16,8 @@ import Checkbox from '@mui/material/Checkbox';
 const CrearRutinaSc = () => {
     const [step, setStep] = useState(1);
     const [routineData, setRoutineData] = useState({
-        idUsuario: null,
-        json: null
+        IdUsuario: null,
+        Json: null
     });
     const [formData, setFormData] = useState({
         usuario: "", // Almacena el ID del usuario
@@ -55,7 +55,7 @@ const CrearRutinaSc = () => {
 
     const handleUsuarioChange = (id, correo) => {
         setFormData({ ...formData, usuario: correo });
-        setRoutineData({ idUsuario: id});
+        setRoutineData({ IdUsuario: id});
         console.log("ID: ", routineData);
         console.log("correo: ", correo);
     };
@@ -205,18 +205,18 @@ const CrearRutinaSc = () => {
             saveAs(blob, `rutina_${formData.usuario}.pdf`);
 
             console.log("JSON: ", jsonData);
-            setRoutineData({
+            const jsonRoutine = {
                 ...routineData,
-                json: jsonData
-            });
-            console.log("Datos rutina x usuario: ", routineData);
+                Json: jsonData
+            };
+            console.log("Datos rutina x usuario: ", jsonRoutine);
 
             const rutinaXusuario = await fetch('https://marygymbackend-production.up.railway.app/rutinaXusuario/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(routineData),
+                body: JSON.stringify(jsonRoutine),
             });
     
             if (!rutinaXusuario.ok) {
