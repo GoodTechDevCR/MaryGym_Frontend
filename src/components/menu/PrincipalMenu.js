@@ -7,24 +7,31 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import GroupIcon from '@mui/icons-material/Group';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import HomeIcon from '@mui/icons-material/Home';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import LogoutIcon from '@mui/icons-material/Logout';
+import UserContext from '../../UserContext';
 
 
 function PrincipalMenu() {
     const [open, setOpen] = React.useState(false);
+    const navigate = useNavigate();
+    const { logout } = React.useContext(UserContext);
 
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
+    };
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
     };
 
     const DrawerList = (
@@ -97,6 +104,17 @@ function PrincipalMenu() {
                             <ShoppingCartIcon />
                         </ListItemIcon>
                         <ListItemText primary="Visualizar Pago" />
+                    </ListItemButton>
+                </ListItem>
+            </List>
+            <Divider />
+            <List>
+                <ListItem key="Log Out" disablePadding>
+                    <ListItemButton onClick={handleLogout}>
+                        <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Log Out" />
                     </ListItemButton>
                 </ListItem>
             </List>
