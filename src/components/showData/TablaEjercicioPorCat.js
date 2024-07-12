@@ -41,17 +41,15 @@ function TablaEjercicioPorCat({ categoria }) {
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell>IdEjercicio</StyledTableCell>
-                            <StyledTableCell>Nombre</StyledTableCell>
-                            <StyledTableCell>CategoriaId</StyledTableCell>
+                            <StyledTableCell align='center'>Nombre</StyledTableCell>
+                            <StyledTableCell align='center'>Categoria</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {data.map((row) => (
                             <StyledTableRow key={row.IdEjercicio}>
-                                <StyledTableCell>{row.IdEjercicio}</StyledTableCell>
-                                <StyledTableCell>{row.Nombre}</StyledTableCell>
-                                <StyledTableCell>{row.CategoriaId}</StyledTableCell>
+                                <StyledTableCell align='center'>{row.Nombre}</StyledTableCell>
+                                <StyledTableCell align='center'>{row.CategoriaId}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>

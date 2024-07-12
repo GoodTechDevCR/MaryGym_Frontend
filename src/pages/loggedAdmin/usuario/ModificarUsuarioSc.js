@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import ComboBox from '../../../components/ui/ComboBox';
 import TextInputs from '../../../components/ui/TextInput';
 import BotonPrincipalFuncional from '../../../components/ui/BotonPrincipalFuncional';
@@ -71,21 +73,23 @@ function ModificarUsuarioSc() {
 
     return (
         <div>
-            <HeadAdmin/>
-            <div className='centered-title2'> 
-                <h1 className='black'>Modificar Usuario</h1>
-                <TarjetaInformacion/>
-                <div className='elemento2'>
-                    <ComboBox datos={datos} onSelect={setSelectedOption} sx={{margin:'auto'}}/>
+            <HeadAdmin />
+            <Box sx={{ maxWidth: '800px', margin: 'auto', padding: '20px', boxShadow: 3, borderRadius: 2 }}>
+                <Typography variant="h4" align="center" sx={{ fontSize: '3rem', marginBottom: '20px' }}>Modificar Usuario</Typography>
+                <TarjetaInformacion />
+                <div className='centered-title'>
+                    <Box sx={{ mt: 3 }}>
+                        <ComboBox datos={datos} onSelect={setSelectedOption} />
+                    </Box>
+                    <Box sx={{ mt: 2 }}>
+                        <TextInputs selectedOption={selectedOption} newData={newData} setNewData={setNewData} />
+                    </Box>
+                    <Box sx={{ mt: 2 }}>
+                        <BotonPrincipalFuncional texto="Modificar" onClick={handleModificar} />
+                    </Box>
                 </div>
-                <div className='elemento2'>
-                    <TextInputs selectedOption={selectedOption} newData={newData} setNewData={setNewData}/>
-                </div>
-                <div className='elemento2'>
-                    <BotonPrincipalFuncional texto="Modificar" onClick={handleModificar}/>
-                </div>
-            </div>
-            <Foot/>
+            </Box>
+            <Foot />
         </div>
     );
 }
