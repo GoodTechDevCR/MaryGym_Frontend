@@ -16,7 +16,7 @@ const styles = {
         backgroundColor: '#333',
         color: '#fff',
         padding: '20px 0',
-        position: 'bottom',
+        //position: 'bottom',
         bottom: 0,
         width: '100%',
         textAlign: 'center',
