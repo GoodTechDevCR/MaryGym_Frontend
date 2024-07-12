@@ -12,9 +12,11 @@ const ContactoSc = () => {
         <div id="Contacto" className='centered-title'>
             <h1 className='black'> Contáctanos</h1>
             <Box sx={{ p: 10}}>
-                <Box component="section" className = 'elemento' >
-                    <InstagramIcon sx={{ color: 'black'  , fontSize: 40}}/>
-                    <body> mariajbarquero </body>
+            <Box component="section" className='elemento'>
+                    <a href="https://www.instagram.com/mariajbarquero" target="_blank" rel="noopener noreferrer">
+                        <InstagramIcon sx={{ color: 'black', fontSize: 40 }} />
+                    </a>
+                    <p>mariajbarquero</p>
                 </Box>
                 <Box component="section" className = 'elemento' >
                     <CallIcon sx={{ color: 'black' , fontSize: 40}}/>
