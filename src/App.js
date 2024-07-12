@@ -1,13 +1,19 @@
+import { ThemeProvider } from '@mui/material';
 import React from 'react';
 import AppRoutes from './routes/AppRoutes';
+import { theme } from './theme/theme';
+import { UserProvider } from './UserContext';
 
 
 const App = () => {
     return (
-        <div className="App">
-            <AppRoutes />
-
-        </div>
+        <ThemeProvider theme={theme}>
+            <div className="App">
+                <UserProvider>
+                    <AppRoutes />
+                </UserProvider>
+            </div>
+        </ThemeProvider>
     );
 };
 

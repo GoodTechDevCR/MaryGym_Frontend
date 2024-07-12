@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { saveAs } from 'file-saver';
 import Box from '@mui/material/Box';
 import SelectSingleUsuarioByName from '../../../components/ui/selectSingle/selectSingleUsuarioByName';
@@ -6,11 +6,16 @@ import DatePickerPrueba from '../../../components/datePicker/DatePickerPrueba';
 import SelectSingleEjercicioByName from '../../../components/ui/selectSingle/SelectSingleEjercicioByName';
 import HeadAdmin from '../../../components/Header/HeadAdmin';
 import Foot from '../../../components/Footer/Foot';
+import UseConsultaUsuarioByCorreo from '../../../hooks/usuarioHooks/useConsultaUsuarioByCorreo';
 
 const CrearRutinaSc = () => {
     const [step, setStep] = useState(1);
+    const [routineData, setRoutineData] = useState({
+        idUsuario: null,
+        json: null
+    });
     const [formData, setFormData] = useState({
-        usuario: "",
+        usuario: "", // Almacena el ID del usuario
         fechaInicio: null,
         fechaFin: null,
         cantSemana: 0,
@@ -18,18 +23,6 @@ const CrearRutinaSc = () => {
         initialComment: "",
         finalComment: ""
     });
-
-    /*const [formData, setFormData] = useState({
-        usuario: "12345",
-        fechaInicio: new Date(),
-        fechaFin: new Date(new Date().setDate(new Date().getDate() + 7 * 4)), // 4 weeks from now
-        cantSemana: 4,
-        fechaPago: new Date(),
-        initialComment: "",
-        finalComment: ""
-
-    });*/
-
     const [funcionalidades, setFuncionalidades] = useState([]);
 
     
@@ -37,6 +30,7 @@ const CrearRutinaSc = () => {
     const [initialComment, setInitialComment] = useState('');
     const [addFinalComment, setAddFinalComment] = useState(false);
     const [finalComment, setFinalComment] = useState('');
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -54,9 +48,13 @@ const CrearRutinaSc = () => {
         setFormData({...formData,fechaPago: dateFix })
     }
 
-    const handleUsuarioChange = (id) => {
-        setFormData({ ...formData, usuario: id });
+    const handleUsuarioChange = (id, correo) => {
+        setFormData({ ...formData, usuario: correo });
+        setRoutineData({ idUsuario: id});
+        console.log("ID: ", routineData);
+        console.log("correo: ", correo);
     };
+
 
     const handleDateChange = (name, date) => {
         setFormData((prevData) => {
@@ -192,11 +190,32 @@ const CrearRutinaSc = () => {
             throw new Error('Error generando el PDF');
         }
 
-        // Convierte la respuesta en un blob
-        const blob = await response.blob();
+            // Convierte la respuesta en un blob
+            const blob = await response.blob();
 
-        // Guarda el PDF en el navegador
-        saveAs(blob, `rutina_${formData.usuario}.pdf`);
+            // Guarda el PDF en el navegador
+            saveAs(blob, `rutina_${formData.usuario}.pdf`);
+
+            setRoutineData({
+                ...routineData,
+                json: jsonData
+            });
+            console.log("Datos rutina x usuario: ", routineData);
+
+            const rutinaXusuario = await fetch('https://marygymbackend-production.up.railway.app/rutina/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(routineData),
+            });
+    
+            if (!rutinaXusuario.ok) {
+                throw new Error('Error almacenando la rutina al usuario');
+            }
+
+
+        
     };
 
     const handleCheckboxChangeInitial = (e) => {
