@@ -67,7 +67,7 @@ function CustomizedTables() {
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                     <TableRow>
-                        <StyledTableCell>IdUsuario</StyledTableCell>
+                        
                         <StyledTableCell>Nombre Completo</StyledTableCell>
                         <StyledTableCell align="center">Telefono</StyledTableCell>
                         <StyledTableCell align="center">Correo</StyledTableCell>
@@ -84,7 +84,7 @@ function CustomizedTables() {
                     {data.map((row) => {
                         return (
                             <StyledTableRow key={row.idusuario}>
-                                <StyledTableCell>{row.idusuario}</StyledTableCell>
+                                
                                 <StyledTableCell>{`${row.nombre} ${row.apellido}`}</StyledTableCell>
                                 <StyledTableCell align="center">{row.telefono}</StyledTableCell>
                                 <StyledTableCell align="center">{row.correo}</StyledTableCell>
