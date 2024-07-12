@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import useValidateLogin from '../../hooks/loginHooks/useValidateLogin';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../UserContext';
+import './InsertarLogin.css';  // Importa el archivo de estilos
 
 function InsertarLogin() {
     const navigate = useNavigate();
@@ -44,7 +45,7 @@ function InsertarLogin() {
                     setUserContext({ id: idUsuarioLog, username: formData.usuario });
 
                     // Redirect based on idUsuarioLog
-                    if (idUsuarioLog === 64) {
+                    if (idUsuarioLog === 124) {
                         navigate('/admin');
                     } else {
                         navigate(`/usuario/${idUsuarioLog}`);
@@ -62,24 +63,40 @@ function InsertarLogin() {
     };
 
     return (
-        <div className='centered-title'>
-            <h2>Iniciar Sesion</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
+        <div className='login-container'>
+            <h2 className='login-title'>Iniciar Sesión</h2>
+            <form className='login-form' onSubmit={handleSubmit}>
+                <label className='login-label'>
                     Usuario:
-                    <input type="text" name="usuario" value={formData.usuario} onChange={handleInputChange} />
+                    <input
+                        className='login-input'
+                        type="text"
+                        name="usuario"
+                        value={formData.usuario}
+                        onChange={handleInputChange}
+                        placeholder='Ingresa tu usuario'
+                    />
                 </label>
-                <br />
-                <label>
+                <label className='login-label'>
                     Contraseña:
-                    <input type="password" name="contrasena" value={formData.contrasena} onChange={handleInputChange} />
+                    <input
+                        className='login-input'
+                        type="password"
+                        name="contrasena"
+                        value={formData.contrasena}
+                        onChange={handleInputChange}
+                        placeholder='Ingresa tu contraseña'
+                    />
                 </label>
-                <br />
-                <button type="submit" disabled={loading}>
+                <button
+                    className='login-button'
+                    type="submit"
+                    disabled={loading}
+                >
                     {loading ? 'Ingresando...' : 'Ingresar'}
                 </button>
+                {error && <p className='login-error'>{error}</p>}
             </form>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
     );
 }

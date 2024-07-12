@@ -1,0 +1,67 @@
+/* InsertarLogin.css */
+
+.login-container {
+    background-color: #f5f5f5; /* Color de fondo claro */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.login-title {
+    font-size: 2rem;
+    color: #000000; /* Color de texto primario */
+    margin-bottom: 20px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.login-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.login-input:focus {
+    border-color: #000000; /* Color del borde en foco */
+}
+
+.login-button {
+    background-color: #2196f3; /* Color del botón */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-button:disabled {
+    background-color: #b0bec5; /* Color de botón deshabilitado */
+}
+
+.login-button:hover:not(:disabled) {
+    background-color: #000000; /* Color del botón en hover */
+}
+
+.login-error {
+    color: red;
+    margin-top: 10px;
+    font-size: 0.875rem;
+}
