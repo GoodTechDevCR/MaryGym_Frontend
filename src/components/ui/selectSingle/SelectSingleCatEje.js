@@ -14,6 +14,7 @@ function SelectSingleCatEje({ onCatEjeChange }) {
     }));
 
     return (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -29,6 +30,7 @@ function SelectSingleCatEje({ onCatEjeChange }) {
             isOptionEqualToValue={(option, value) => option.value === value.value}
             renderInput={(params) => <TextField {...params} label="Categoria Ejercicio" />}
         />
+        </div>
     );
 }
 

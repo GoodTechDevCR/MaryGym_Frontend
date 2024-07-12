@@ -1,17 +1,23 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TablaContactoEmergencia from '../../../components/showData/TableContactoEmergencia';
 import SelectSingleRelacion from '../../../components/ui/selectSingle/SelectSingleRelacion';
 import useCreateAnything from '../../../hooks/useCreateAnything';
 import HeadAdmin from "../../../components/Header/HeadAdmin";
 import Foot from "../../../components/Footer/Foot";
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import "../../Home/Home.css";
 
 function VisualizarContactoEmergencia() {
     const { createAnything } = useCreateAnything('https://marygymbackend-production.up.railway.app/contactoEme/unico');
     const { id } = useParams();
+    
     // Estado inicial con los campos necesarios
     const [formData, setFormData] = useState({
-        IdUsuario: id, 
+        IdUsuario: id,
         Nombre: '',
         NumeroTelefono: '',
         Relacion: '',
@@ -37,7 +43,7 @@ function VisualizarContactoEmergencia() {
     const handleRelacionChange = (relacion) => {
         setFormData({
             ...formData,
-            Relacion: relacion 
+            Relacion: relacion,
         });
     };
 
@@ -45,58 +51,62 @@ function VisualizarContactoEmergencia() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        console.log("form data form data: ",formData);
-
         try {
             const success = await createAnything(formData);
             if (success) {
-                alert("Contacto emergencia Creado Exitosamente");
+                alert("Contacto de emergencia creado exitosamente");
                 window.location.reload();
             } else {
-                alert("Error al crear el contacto emergencia");
+                alert("Error al crear el contacto de emergencia");
             }
         } catch (error) {
-            console.error("Error al crear el contacto emergenciao:", error);
-            alert("Error al crear el contacto emergencia");
+            console.error("Error al crear el contacto de emergencia:", error);
+            alert("Error al crear el contacto de emergencia");
         }
     };
 
     return (
         <div>
-            <HeadAdmin/>
-            <div className='centered-title'>
-                <h2>Contacto Emergencia</h2>
-                <p>ID: {id}</p>
-                <TablaContactoEmergencia id = {id}/>
+            <HeadAdmin />
+            <Box sx={{ maxWidth: 800, margin: 'auto', padding: '20px', boxShadow: 3, borderRadius: 2 }}>
+                <Typography variant="h4" align="center" gutterBottom>Contactos de Emergencia</Typography>
+                <TablaContactoEmergencia id={id} />
 
-                <div className='centered-title'>
-                    <h3> Nuevo contacto de emergencia</h3>
-                    <form onSubmit={handleSubmit}>
-                        <label className='elemento2'>
-                            <input 
-                                type="text" 
-                                value={formData.Nombre} 
-                                onChange={handleNombreChange} 
-                                placeholder="Ingrese el nombre" 
+                <Box mt={4} p={2} bgcolor="#f9f9f9" borderRadius={2} boxShadow={3}>
+                    <Typography variant="h5" align="center" gutterBottom>Nuevo Contacto de Emergencia</Typography>
+                    <form onSubmit={handleSubmit} className='centered-title'>
+                        <Box mb={2}>
+                            <TextField
+                                type="text"
+                                value={formData.Nombre}
+                                onChange={handleNombreChange}
+                                label="Nombre"
+                                fullWidth
+                                variant="outlined"
                             />
-                        </label>
-                        <label className='elemento2'>
-                            <input 
-                                type="text" 
-                                value={formData.NumeroTelefono} 
-                                onChange={handleTelefonoChange} 
-                                placeholder="Ingrese el teléfono" 
+                        </Box>
+                        <Box mb={2}>
+                            <TextField
+                                type="text"
+                                value={formData.NumeroTelefono}
+                                onChange={handleTelefonoChange}
+                                label="Teléfono"
+                                fullWidth
+                                variant="outlined"
                             />
-                        </label>
-                        <label className='elemento2'>
+                        </Box>
+                        <Box mb={2}>
                             <SelectSingleRelacion onRelacionChange={handleRelacionChange} />
-                        </label>
-                        <div className='elemento2'> <button type="submit" className='black-button'>Guardar contacto emergencia</button> </div>
+                        </Box>
+                        <Box mb={2}>
+                            <Button type="submit" variant="contained" color="secondary" fullWidth>
+                                Guardar Contacto de Emergencia
+                            </Button>
+                        </Box>
                     </form>
-                </div>
-            </div>
+                </Box>
+            </Box>
             <Foot />
-            <br/> <br/> <br/> <br/> <br/>
         </div>
     );
 }
