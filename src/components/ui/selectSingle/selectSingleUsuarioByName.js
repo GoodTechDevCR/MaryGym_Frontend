@@ -7,12 +7,13 @@ function SelectSingleUsuario({ onUsuarioChange }) {
     const dataUsuario = UseConsultaUsuario();
 
     if (!dataUsuario) return <div>Loading...</div>;
-
+    console.log(dataUsuario);
     const opcionUsuario = dataUsuario.map(usuario => ({
-        label: `${usuario.nombre} ${usuario.apellido}`,
-        value: `${usuario.nombre} ${usuario.apellido}`
+        label: `${usuario.nombre} ${usuario.apellido} - ${usuario.correo} `,
+        value: usuario.idusuario, // Aquí solo guardamos el ID del usuario
+        correo: usuario.correo // Guardamos también el correo del usuario
     }));
-
+    
     return (
         <Autocomplete
             disablePortal
@@ -21,7 +22,7 @@ function SelectSingleUsuario({ onUsuarioChange }) {
             sx={{ width: 300 }}
             onChange={(event, newValue) => {
                 if (newValue) {
-                    onUsuarioChange(newValue.value);
+                    onUsuarioChange(newValue.value, newValue.correo);;
                 } else {
                     onUsuarioChange(null);
                 }
