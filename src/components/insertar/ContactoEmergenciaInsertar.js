@@ -91,8 +91,8 @@ function ContactoEmergenciaInsertar({ correo }) {
         <Box sx={{ maxWidth: '600px', margin: 'auto', padding: '20px', boxShadow: 3, borderRadius: 2 }}>
             <Typography className='black' variant="h4" gutterBottom textAlign="center">Insertar contacto de emergencia</Typography>
             <Typography variant="body1" textAlign="center" mb={2}>
-                Para agregar los contactos de emergencia se debe de ir llenar los datos y oprimir el boton "agregar", 
-                una vez digitados todos los contactos se debe digitar el boton "enviar", en caso de NO querer agregar contactos 
+                Para agregar los contactos de emergencia se debe de ir llenando los datos y oprimir el boton "Agregar", 
+                una vez digitados todos los contactos se debe digitar el boton "Enviar", en caso de NO querer agregar contactos 
                 digitar el boton "Salir".
             </Typography>
             <form onSubmit={handleSubmit}>
