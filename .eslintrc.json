@@ -4,8 +4,7 @@
       "react-app/jest"
     ],
     "rules": {
-      "no-unused-vars": "warn",  // Change this to "warn" instead of "error"
-      // Add any other rules you want to adjust here
+      "no-unused-vars": "warn"
     }
   }
   
