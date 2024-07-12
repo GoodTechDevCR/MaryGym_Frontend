@@ -23,6 +23,11 @@ function ModificarPagoSc() {
     const handleModificar = async (event) => {
         event.preventDefault();
 
+        if (!newData) {
+            alert('Debes ingresar un valor para modificar.');
+            return;
+        }
+
         let nombreColumna;
         if (selectedOption.type === 'date') {
             nombreColumna = 'FechaPago';

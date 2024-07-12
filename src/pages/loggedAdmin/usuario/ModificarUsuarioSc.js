@@ -29,6 +29,11 @@ function ModificarUsuarioSc() {
     const handleModificar = async (event) => {
         event.preventDefault();
 
+        if (!newData) {
+            alert('Debes ingresar un valor para modificar.');
+            return;
+        }
+
         let nombreColumna;
         if (selectedOption.label === 'Fecha Nacimiento') {
             nombreColumna = 'fechanacimiento';
@@ -43,7 +48,6 @@ function ModificarUsuarioSc() {
         let formattedData = newData;
         if (selectedOption.label === 'Fecha Nacimiento') {
             formattedData = newData.toISOString().split('T')[0]; // Formatea la fecha a "YYYY-MM-DD"
-            console.log("FECHA:  ",formattedData);
         }
 
         const jsonData = {
@@ -71,13 +75,13 @@ function ModificarUsuarioSc() {
             <div className='centered-title2'> 
                 <h1 className='black'>Modificar Usuario</h1>
                 <TarjetaInformacion/>
-                <div className = 'elemento2'>
+                <div className='elemento2'>
                     <ComboBox datos={datos} onSelect={setSelectedOption} sx={{margin:'auto'}}/>
                 </div>
-                <div className = 'elemento2'>
+                <div className='elemento2'>
                     <TextInputs selectedOption={selectedOption} newData={newData} setNewData={setNewData}/>
                 </div>
-                <div className = 'elemento2'>
+                <div className='elemento2'>
                     <BotonPrincipalFuncional texto="Modificar" onClick={handleModificar}/>
                 </div>
             </div>
