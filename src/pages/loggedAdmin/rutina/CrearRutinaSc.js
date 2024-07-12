@@ -211,7 +211,7 @@ const CrearRutinaSc = () => {
             });
             console.log("Datos rutina x usuario: ", routineData);
 
-            const rutinaXusuario = await fetch('https://marygymbackend-production.up.railway.app/rutina/', {
+            const rutinaXusuario = await fetch('https://marygymbackend-production.up.railway.app/rutinaXusuario/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
