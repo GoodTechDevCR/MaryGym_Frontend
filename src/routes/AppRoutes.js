@@ -59,7 +59,7 @@ const AppRoutes = () => {
                 <Route path="/admin/usuario/contactoEmergencia/:id" element={<VisualizarContactoEmergencia />} />
 
                 <Route path="/admin/pago/registrar" element={<RegistrarPagoSc/>} />
-                <Route path="/admin/pago/modificar" element={<ModificarPagoSc />} />
+                <Route path="/admin/pago/modificar/:id" element={<ModificarPagoSc />} />
                 <Route path="/admin/pago/visualizar" element={<VisualizarPagoSc />} />
             </Routes>
         </Router>
