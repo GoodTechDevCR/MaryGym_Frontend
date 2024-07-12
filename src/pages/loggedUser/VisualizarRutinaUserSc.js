@@ -27,7 +27,16 @@ const VisualizarRutinaUserSc = () => {
         }
 
         const { IdUsuario, Json } = rutinaData[0];
-        const { usuario, fechaFin, fechaPago, cantSemana, fechaInicio } = Json;
+        const {
+            usuario,
+            fechaFin,
+            fechaPago,
+            cantSemana,
+            fechaInicio,
+            finalComment,
+            initialComment,
+            funcionalidades
+        } = Json;
 
         return (
             <div>
@@ -37,6 +46,35 @@ const VisualizarRutinaUserSc = () => {
                 <p>Fecha de fin: {fechaFin}</p>
                 <p>Fecha de pago: {fechaPago}</p>
                 <p>Cantidad de semanas: {cantSemana}</p>
+                {initialComment && <p>Comentario inicial: {initialComment}</p>}
+                {finalComment && <p>Comentario final: {finalComment}</p>}
+                {funcionalidades && funcionalidades.length > 0 && (
+                    <div>
+                        <h3>Funcionalidades</h3>
+                        {funcionalidades.map((funcionalidad, index) => (
+                            <div key={index}>
+                                <h4>{funcionalidad.nombreFuncionalidad}</h4>
+                                {funcionalidad.ejercicios && funcionalidad.ejercicios.length > 0 && (
+                                    <ul>
+                                        {funcionalidad.ejercicios.map((ejercicio, idx) => (
+                                            <li key={idx}>
+                                                <p>Nombre del ejercicio: {ejercicio.nombreEjercicio}</p>
+                                                {[...Array(5)].map((_, semanaIdx) => (
+                                                    ejercicio[`semana${semanaIdx + 1}`] && (
+                                                        <p key={semanaIdx}>
+                                                            Semana {semanaIdx + 1}: {ejercicio[`semana${semanaIdx + 1}`]}
+                                                        </p>
+                                                    )
+                                                ))}
+                                                {ejercicio.comentario && <p>Comentario: {ejercicio.comentario}</p>}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         );
     };
