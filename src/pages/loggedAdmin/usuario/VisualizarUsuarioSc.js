@@ -2,14 +2,15 @@ import React from 'react';
 import TablaUsuario from "../../../components/showData/TablaUsuario";
 import HeadAdmin from "../../../components/Header/HeadAdmin";
 import Foot from "../../../components/Footer/Foot";
+import Box from '@mui/material/Box';
 
 const VisualizarUsuarioSc = () => {
     return (
         <div >
             <HeadAdmin/>
-            <div className='centered-title2'> 
-                <h1 className='black'>Usuarios</h1>
-            </div>
+            <Box sx={{ textAlign: 'center', mb: 4 }}>
+                <h1 className='black' style={{ fontSize: '3rem' }}>Usuarios</h1>
+            </Box>
             <TablaUsuario/>
             <Foot />
             <br/> <br/> <br/> <br/> <br/>

@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import useCreateAnything from '../../hooks/useCreateAnything';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
-function CatEjeInsertar(){
+function CatEjeInsertar() {
     const { createAnything } = useCreateAnything('https://marygymbackend-production.up.railway.app/catEje');
 
     const [formData, setFormData] = useState({
@@ -11,7 +15,7 @@ function CatEjeInsertar(){
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-    }
+    };
 
     const handleReload = () => {
         window.location.reload();
@@ -22,34 +26,42 @@ function CatEjeInsertar(){
 
         const jsonData = {
             ...formData
-        }
-
-        console.log(jsonData);
+        };
 
         try {
             const success = await createAnything(jsonData);
             if (success) {
-                alert("Categoria Ejercicio Creado Exitosamente");
+                alert("Categoría Ejercicio Creada Exitosamente");
                 handleReload();
             } else {
-                alert("Error al crear la Categoria Ejercicio");
+                alert("Error al crear la Categoría Ejercicio");
             }
         } catch (error) {
-            console.error("Error al crear la Categoria Ejercicio:", error);
-            alert("Error al crear la Categoria Ejercicio");
+            console.error("Error al crear la Categoría Ejercicio:", error);
+            alert("Error al crear la Categoría Ejercicio");
         }
-    }
+    };
 
     return (
         <div className='centered-title'>
-            <h2 className='black'> Insertar categoría ejercicio </h2>
+            <Typography variant="h4" align="center" gutterBottom className='black'>Insertar Categoría de Ejercicio</Typography>
             <form onSubmit={handleSubmit}>
-                <label className='elemento2'> Ingrese el nombre de la categoría ejercicio </label>
-                <label className='elemento2'> <input type="text" name="NombreCatEje" value={formData.NombreCatEje} onChange={handleInputChange} /> </label>
-                <button type="submit" className='black-button'>Guardar Categoría Ejercicio</button>
+                <Box mb={2}>
+                    <TextField
+                        type="text"
+                        name="NombreCatEje"
+                        value={formData.NombreCatEje}
+                        onChange={handleInputChange}
+                        label="Nombre de la Categoría de Ejercicio"
+                        fullWidth
+                    />
+                </Box>
+                <Button type="submit" variant="contained" size="large" color="primary" fullWidth>
+                    Guardar Categoría de Ejercicio
+                </Button>
             </form>
         </div>
-    )
+    );
 }
 
 export default CatEjeInsertar;

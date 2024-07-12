@@ -22,7 +22,7 @@ const TextInputs = ({ selectedOption, newData, setNewData }) => {
     }
 
     return (
-        <div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
             {selectedOption.type === 'date' && (
                 <DatePickerPrueba onDateChange={handleDateChange} />
             )}

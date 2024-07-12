@@ -40,19 +40,17 @@ function TablaContactoEmergencia(id) {
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell>IdContatoEmergencia</StyledTableCell>
-                                <StyledTableCell align="right">Nombre</StyledTableCell>
-                                <StyledTableCell align="right">Numero Telefono</StyledTableCell>
-                                <StyledTableCell align="right">Relacion</StyledTableCell>
+                                <StyledTableCell align="center">Nombre</StyledTableCell>
+                                <StyledTableCell align="center">Numero Telefono</StyledTableCell>
+                                <StyledTableCell align="center">Relacion</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {data.map((row) => (
                                 <StyledTableRow key={row.IdContEmer}>
-                                    <StyledTableCell>{row.IdContEmer}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.Nombre}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.NumeroTelefono}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.Relacion}</StyledTableCell>
+                                    <StyledTableCell align="center">{row.Nombre}</StyledTableCell>
+                                    <StyledTableCell align="center">{row.NumeroTelefono}</StyledTableCell>
+                                    <StyledTableCell align="center">{row.Relacion}</StyledTableCell>
                                 </StyledTableRow>
                             ))}
                         </TableBody>
