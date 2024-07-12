@@ -1,13 +1,14 @@
 /* Home.css */
 .background-image {
     background: url('../../assets/MaryGymPicture.jpg') no-repeat center center/cover;
-    height: 100vh;
+    height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: white;
+    position: relative; /* Añade posición relativa para alinear el gradiente */
 }
 
 .background-blank {
@@ -46,6 +47,7 @@
     max-width: 200px;
     border-radius: 10px;
     margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 .cta-button {
