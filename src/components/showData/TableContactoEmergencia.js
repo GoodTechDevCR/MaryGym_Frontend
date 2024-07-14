@@ -29,7 +29,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function TablaContactoEmergencia(id) {
-    console.log("prueba prueba prueba: ",id.id)
     const data = UseConsultaContEme(id.id);
     if (!data) return <div>Loading...</div>;
 

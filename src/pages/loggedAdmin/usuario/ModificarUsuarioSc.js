@@ -58,10 +58,8 @@ function ModificarUsuarioSc() {
             nuevoValor: formattedData
         };
 
-        console.log(jsonData);
 
         const success = await updateAnything(jsonData);
-        console.log("Respuesta del servidor:", success);
         if (success) {
             alert('Usuario modificado exitosamente');
             navigate('/admin/usuario/visualizar');

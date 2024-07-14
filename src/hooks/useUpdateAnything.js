@@ -7,7 +7,6 @@ const useUpdateAnything = (url) => {
 
     const updateAnything = async (body) => {
         setLoading(true);
-        console.log("BODYYY: ",body);
         try {
             const response = await fetch(url, {
                 method: 'PUT',
@@ -16,7 +15,6 @@ const useUpdateAnything = (url) => {
                 },
                 body: JSON.stringify(body),
             });
-            console.log("RESPONSE: ",response);
 
             let responseData;
             const contentType = response.headers.get('Content-Type');
