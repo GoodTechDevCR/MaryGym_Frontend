@@ -23,7 +23,7 @@ function CustomTabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 0 }}>
           {children}
         </Box>
       )}
@@ -38,7 +38,7 @@ CustomTabPanel.propTypes = {
 };
 
 function MenuHome() {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(3);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -51,6 +51,7 @@ function MenuHome() {
       <header style={isSmallScreen ? styles.headerSmall : styles.header}>
         <img src={GymImagen} alt="Gym Image" style={styles.logo} />
         <Tabs
+          dir="rtl"
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
@@ -63,23 +64,23 @@ function MenuHome() {
             justifyContent: 'flex-end',
           }}
         >
-          <Tab label="Inicio" sx={{ minHeight: isSmallScreen ? '50px' : '100px', minWidth: '100px' }} />
-          <Tab label="Precios" sx={{ minHeight: isSmallScreen ? '50px' : '100px', minWidth: '100px' }} />
-          <Tab label="Contacto" sx={{ minHeight: isSmallScreen ? '50px' : '100px', minWidth: '100px' }} />
           <Tab icon={<LoginIcon />} label="Ingresar" sx={{ minHeight: isSmallScreen ? '50px' : '100px', minWidth: '100px' }} />
+          <Tab label="Contacto" sx={{ minHeight: isSmallScreen ? '50px' : '100px', minWidth: '100px' }} />
+          <Tab label="Precios" sx={{ minHeight: isSmallScreen ? '50px' : '100px', minWidth: '100px' }} />
+          <Tab label="Inicio" sx={{ minHeight: isSmallScreen ? '50px' : '100px', minWidth: '100px' }} />
         </Tabs>
       </header>
 
-      <CustomTabPanel value={value} index={0}>
+      <CustomTabPanel value={value} index={3}>
         <HomeScreen />
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
+      <CustomTabPanel value={value} index={2}>
         <PrecioSc />
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
+      <CustomTabPanel value={value} index={1}>
         <ContactoSc />
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={3}>
+      <CustomTabPanel value={value} index={0}>
         <LogInSc />
       </CustomTabPanel>
     </>
