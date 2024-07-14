@@ -13,7 +13,7 @@ import TextField from '@mui/material/TextField';
 function PagoInsertar() {
     const { createAnything: createCobroYPago } = useCreateAnything('https://marygymbackend-production.up.railway.app/cobro/cobroypago');
     const { createAnything: createAbono } = useCreateAnything('https://marygymbackend-production.up.railway.app/abono');
-    const { data: abonos, loading, error, consultaAbonos } = useConsultaAbonos();
+    const { data: abonos, consultaAbonos } = useConsultaAbonos();
     const [selectedAbonos, setSelectedAbonos] = useState([]);
     const [notificacion, setNotificacion] = useState("");
     const navigate = useNavigate();
@@ -120,7 +120,7 @@ function PagoInsertar() {
                 MontoAbono: montoAbonoFinal
             };
 
-            const { success, error } = await createAbono(abonoData);
+            const { success } = await createAbono(abonoData);
 
             if (success.success) {
                 alert("Abono registrado exitosamente");
@@ -143,7 +143,7 @@ function PagoInsertar() {
                 FechaFinalEspecial: formData.FechaFinalEspecial ? formData.FechaFinalEspecial.toISOString().split('T')[0] : null
             };
 
-            const { success, error } = await createCobroYPago(jsonData);
+            const { success} = await createCobroYPago(jsonData);
 
             if (success) {
                 alert("Cobro y pago creados/actualizados exitosamente");

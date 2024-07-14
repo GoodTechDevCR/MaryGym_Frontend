@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import SelectSingleCatEje from '../../../components/ui/selectSingle/SelectSingleCatEje';
 import TablaEjercicioPorCat from '../../../components/showData/TablaEjercicioPorCat';
 import CatEjeInsertar from '../../../components/insertar/CatEjeInsertar';

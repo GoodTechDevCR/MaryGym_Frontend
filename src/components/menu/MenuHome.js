@@ -9,7 +9,6 @@ import HomeScreen from '../../pages/Home/HomeScreen';
 import PrecioSc from '../../pages/Home/PrecioSc';
 import ContactoSc from '../../pages/Home/ContactoSc';
 import GymImagen from '../../assets/logoMaryGym.jpg';
-import { ForkLeft } from '@mui/icons-material';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;

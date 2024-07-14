@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import ContactoEmergenciaInsertar from './ContactoEmergenciaInsertar';
 
 function UsuarioInsertar() {
-    const { createAnything, error } = useCreateAnything('https://marygymbackend-production.up.railway.app/usuario');
+    const { createAnything} = useCreateAnything('https://marygymbackend-production.up.railway.app/usuario');
     const [step, setStep] = useState(1);
 
     const [formData, setFormData] = useState({

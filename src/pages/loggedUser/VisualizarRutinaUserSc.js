@@ -33,9 +33,8 @@ const VisualizarRutinaUserSc = () => {
             return <Typography variant="body1" color="textSecondary">No se encontraron datos de la rutina</Typography>;
         }
 
-        const { IdUsuario, Json } = rutinaData[0];
+        const { Json } = rutinaData[0];
         const {
-            usuario,
             fechaFin,
             fechaPago,
             cantSemana,

@@ -7,7 +7,7 @@ import './InsertarLogin.css';  // Importa el archivo de estilos
 
 function InsertarLogin() {
     const navigate = useNavigate();
-    const { loading, error, loggedIn, login } = useValidateLogin();
+    const { loading, error, login } = useValidateLogin();
     const { setUserContext } = useContext(UserContext);
     const [formData, setFormData] = useState({
         usuario: '',

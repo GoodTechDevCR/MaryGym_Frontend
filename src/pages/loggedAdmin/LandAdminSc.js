@@ -4,7 +4,6 @@ import HeadAdmin from "../../components/Header/HeadAdmin";
 
 import Card from "../../components/ui/Card";
 
-import PrincipalMenu from '../../components/menu/PrincipalMenu';
 
 
 const LandAdminSc = () => {

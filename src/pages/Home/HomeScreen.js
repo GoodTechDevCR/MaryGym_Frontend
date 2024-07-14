@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Home.css";
-import { Grid, Box, Typography } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 
 import Gym1 from '@mui/icons-material/SportsGymnastics';
 import Gym2 from '@mui/icons-material/FitnessCenter';
@@ -9,9 +9,7 @@ import GymImagen from '../../assets/MaryGymPicture1.jpg';
 import MariaJose from '../../assets/MariaJose.jpg';
 import MamaMary from '../../assets/MariaJose.jpg';
 
-function scroll(name) {
-    document.getElementById(name).scrollIntoView({ behavior: 'smooth' });
-}
+
 
 function HomeScreen() {
     return (

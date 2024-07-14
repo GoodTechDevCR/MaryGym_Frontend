@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { saveAs } from 'file-saver';
 import Box from '@mui/material/Box';
 import SelectSingleUsuarioByName from '../../../components/ui/selectSingle/selectSingleUsuarioByName';
@@ -6,8 +6,6 @@ import DatePickerPrueba from '../../../components/datePicker/DatePickerPrueba';
 import SelectSingleEjercicioByName from '../../../components/ui/selectSingle/SelectSingleEjercicioByName';
 import HeadAdmin from '../../../components/Header/HeadAdmin';
 import Foot from '../../../components/Footer/Foot';
-import UseConsultaUsuarioByCorreo from '../../../hooks/usuarioHooks/useConsultaUsuarioByCorreo';
-
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
