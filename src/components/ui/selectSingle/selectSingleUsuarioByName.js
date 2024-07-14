@@ -7,7 +7,6 @@ function SelectSingleUsuario({ onUsuarioChange }) {
     const dataUsuario = UseConsultaUsuario();
 
     if (!dataUsuario) return <div>Loading...</div>;
-    console.log(dataUsuario);
     const opcionUsuario = dataUsuario.map(usuario => ({
         label: `${usuario.nombre} ${usuario.apellido} - ${usuario.correo} `,
         value: usuario.idusuario, // Aquí solo guardamos el ID del usuario

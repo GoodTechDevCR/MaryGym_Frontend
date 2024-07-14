@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 const UseConsultaContEme = (id) => {
-    console.log("id id id: ",id)
     const [data, setData] = useState(null);
     // eslint-disable-next-line
     const [loading, setLoading] = useState(true);

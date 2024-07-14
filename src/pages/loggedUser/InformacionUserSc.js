@@ -25,7 +25,6 @@ const InformacionUserSc = ({ nombre, fecha1, fecha2, saldo }) => {
                     return response.json();
                 })
                 .then(data => {
-                    console.log("Fecha de pago:", data);
                     if (data.length > 0 && data[0].FechaFinal) {
                         setUltimaFecha(data[0].FechaFinal);
                     } else {

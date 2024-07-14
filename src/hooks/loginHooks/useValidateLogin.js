@@ -10,8 +10,6 @@ const useValidateLogin = () => {
         setError(null);
 
         try {
-            console.log("Enviando datos al servidor:", { usuario, contrasena });
-
             const response = await fetch('https://marygymbackend-production.up.railway.app/login/validate', {
                 method: 'POST',
                 headers: {
@@ -20,16 +18,13 @@ const useValidateLogin = () => {
                 body: JSON.stringify({ usuario, contrasena }),
             });
 
-            console.log("Respuesta del servidor:", response);
 
             if (!response.ok) {
                 const errorData = await response.json();
-                console.log("Error del servidor:", errorData);
                 throw new Error(errorData.message || 'Login failed');
             }
 
             const data = await response.json();
-            console.log("Datos recibidos del servidor:", data); // Logging response data for verification
 
             // Handle successful login
             setLoggedIn(true);

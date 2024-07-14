@@ -7,7 +7,6 @@ import DatePickerPrueba from "../datePicker/DatePickerPrueba";
 const TextInputs = ({ selectedOption, newData, setNewData }) => {
 
     const handleDateChange = (date) => {
-        console.log("Fecha seleccionada:", date);
         setNewData(date); // Asegúrate que date tenga el formato correcto que esperas
     };
     const handleChange = (e) => {

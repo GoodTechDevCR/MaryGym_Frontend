@@ -47,7 +47,6 @@ function Label({ componentName, valueType, isProOnly }) {
 
 function DatePickerPrueba({ onDateChange }) {
     const handleDateChange = (date) => {
-        console.log("Fecha seleccionada:", date);
         onDateChange(date);
     };
 

@@ -54,8 +54,6 @@ const CrearRutinaSc = () => {
     const handleUsuarioChange = (id, correo) => {
         setFormData({ ...formData, usuario: correo });
         setRoutineData({ IdUsuario: id});
-        console.log("ID: ", routineData);
-        console.log("correo: ", correo);
     };
 
 
@@ -178,7 +176,6 @@ const CrearRutinaSc = () => {
             finalComment: addFinalComment ? finalComment : ''
         };
 
-        console.log("Dataaaaa: ", jsonData);
 
         // Envía los datos al backend para generar el PDF
         const response = await fetch('https://marygymbackend-production.up.railway.app/servicioAPI/generarPDF', {
@@ -190,7 +187,6 @@ const CrearRutinaSc = () => {
             body: JSON.stringify(jsonData),
         });
         
-        console.log("JSON 111: ", jsonData);
 
         if (!response.ok) {
             throw new Error('Error generando el PDF');
@@ -202,12 +198,10 @@ const CrearRutinaSc = () => {
             // Guarda el PDF en el navegador
             saveAs(blob, `rutina_${formData.usuario}.pdf`);
 
-            console.log("JSON: ", jsonData);
             const jsonRoutine = {
                 ...routineData,
                 Json: jsonData
             };
-            console.log("Datos rutina x usuario: ", jsonRoutine);
 
             const rutinaXusuario = await fetch('https://marygymbackend-production.up.railway.app/rutinaXusuario/', {
                 method: 'POST',
