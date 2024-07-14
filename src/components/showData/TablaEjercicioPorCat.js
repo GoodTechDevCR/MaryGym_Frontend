@@ -49,7 +49,7 @@ function TablaEjercicioPorCat({ categoria }) {
                         {data.map((row) => (
                             <StyledTableRow key={row.IdEjercicio}>
                                 <StyledTableCell align='center'>{row.Nombre}</StyledTableCell>
-                                <StyledTableCell align='center'>{row.CategoriaId}</StyledTableCell>
+                                <StyledTableCell align='center'>{row.nombreCat}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
