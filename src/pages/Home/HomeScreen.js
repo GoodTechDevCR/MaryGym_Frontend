@@ -17,11 +17,10 @@ function HomeScreen() {
     return (
         <>
             <div id="Inicio" className="background-image">
-            <div className='centered-title' style={{ textShadow: '2px 2px 15px rgba(0, 0, 0, 100)' }}>
-                <h1 className="white" style={{ fontSize: '3rem' }}>Entrena con nosotros</h1>
-                <p className='white-body' style={{ fontSize: '1.5rem' }}>Transforma tu esfuerzo en fuerza en nuestro gimnasio.</p>
-            </div>
-
+                <div className='centered-title' style={{ textShadow: '2px 2px 15px rgba(0, 0, 0, 100)' }}>
+                    <h1 className="white" style={{ fontSize: '3rem' }}>Entrena con nosotros</h1>
+                    <p className='white-body' style={{ fontSize: '1.5rem' }}>Transforma tu esfuerzo en fuerza en nuestro gimnasio.</p>
+                </div>
             </div>
 
             <div className="background-blank">

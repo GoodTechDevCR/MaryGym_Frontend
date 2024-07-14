@@ -10,7 +10,6 @@ import HeadHome from "../../components/Header/HeadHome";
 const HomeSc = () => {
     return (
         <div>
-            
             <MenuHome/>
             <Foot />
         </div>
