@@ -7,6 +7,8 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import HeadUser from "../../components/Header/HeadUser";
 import Foot from "../../components/Footer/Foot";
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 
 const VisualizarRutinaUserSc = () => {
@@ -128,9 +130,11 @@ const VisualizarRutinaUserSc = () => {
     };
 
     return (
-        
         <div>
             <HeadUser />
+
+        <Box sx={{ padding: 2 }}>
+
             <UserMenu />
             <Box sx={{ padding: 2, maxWidth: 800, margin: 'auto', marginTop: 3 }}>
                 <Typography variant="h4" component="h2" gutterBottom align="center" sx={{ fontWeight: 'bold', color: '#333' }}>
@@ -140,6 +144,9 @@ const VisualizarRutinaUserSc = () => {
             </Box>
             <Foot />
         </div>
+
+        </Box>
+
     );
 };
 
