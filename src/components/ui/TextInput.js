@@ -22,7 +22,7 @@ const TextInputs = ({ selectedOption, newData, setNewData }) => {
     }
 
     return (
-        <div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
             {selectedOption.type === 'date' && (
                 <DatePickerPrueba onDateChange={handleDateChange} />
             )}
@@ -46,6 +46,20 @@ const TextInputs = ({ selectedOption, newData, setNewData }) => {
                 >
                     <MenuItem value={0}>TC NO Aceptados</MenuItem>
                     <MenuItem value={1}>TC Aceptados</MenuItem>
+                </Select>
+            )}
+
+            {selectedOption.type === 'tipoTran' && (
+                <Select
+                    value={newData}
+                    onChange={handleChange}
+                    sx={{ width: 300 }}
+                >
+                    <MenuItem value={11}>Abono</MenuItem>
+                    <MenuItem value={12}>Membresía Mensual</MenuItem>
+                    <MenuItem value={13}>Membresía Semanal</MenuItem>
+                    <MenuItem value={14}>Membresía un día</MenuItem>
+                    <MenuItem value={15}>Precio Especial</MenuItem>
                 </Select>
             )}
 

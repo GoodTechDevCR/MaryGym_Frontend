@@ -4,13 +4,19 @@ import SelectSingleTipoTran from "../ui/selectSingle/SelectSingleTipoTran";
 import DatePickerPrueba from "../datePicker/DatePickerPrueba";
 import useCreateAnything from "../../hooks/useCreateAnything";
 import useConsultaAbonos from "../../hooks/AbonoHooks/UseConsultaAbonos";
+import { useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 function PagoInsertar() {
     const { createAnything: createCobroYPago } = useCreateAnything('https://marygymbackend-production.up.railway.app/cobro/cobroypago');
     const { createAnything: createAbono } = useCreateAnything('https://marygymbackend-production.up.railway.app/abono');
-    const { data: abonos, loading, error, consultaAbonos } = useConsultaAbonos(); // Usa el hook correctamente
+    const { data: abonos, loading, error, consultaAbonos } = useConsultaAbonos();
     const [selectedAbonos, setSelectedAbonos] = useState([]);
     const [notificacion, setNotificacion] = useState("");
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         IdUsuario: null,
@@ -29,7 +35,7 @@ function PagoInsertar() {
         if (formData.IdUsuario) {
             consultaAbonos(formData.IdUsuario);
         } else {
-            setSelectedAbonos([]); // Reset abonos when no user is selected
+            setSelectedAbonos([]);
         }
     }, [formData.IdUsuario]);
 
@@ -40,7 +46,7 @@ function PagoInsertar() {
 
     const handleUsuarioChange = (id) => {
         setFormData({ ...formData, IdUsuario: id });
-        setSelectedAbonos([]); // Reset selected abonos when user changes
+        setSelectedAbonos([]);
     };
 
     const handleTipoTranChange = (id) => {
@@ -102,33 +108,31 @@ function PagoInsertar() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setNotificacion(""); // Reset notification
-    
-        if (formData.IdTipoTran ===11) {
-            // Registro de abono
+        setNotificacion("");
+
+        if (formData.IdTipoTran === 11) {
             const fechaAbonoFinal = formData.FechaAbono.toISOString().split('T')[0];
             const montoAbonoFinal = parseFloat(formData.MontoAbono);
-    
+
             const abonoData = {
                 IdUsuario: formData.IdUsuario,
                 FechaAbono: fechaAbonoFinal,
                 MontoAbono: montoAbonoFinal
             };
-    
+
             const { success, error } = await createAbono(abonoData);
-    
-            if (success) {
+
+            if (success.success) {
                 alert("Abono registrado exitosamente");
             } else {
-                alert(`Error al registrar el abono: ${error.message}`);
+                alert(`Error al registrar el abono: `);
             }
         } else {
-            // Registro de cobro y pago
             const fechaInicioFinal = formData.FechaInicio.toISOString().split('T')[0];
             const fechaPagoFinal = formData.FechaPago.toISOString().split('T')[0];
             const montoFinal = parseFloat(formData.Monto);
             const abonoTotal = calculateAbonoTotal();
-    
+
             const jsonData = {
                 IdUsuario: formData.IdUsuario,
                 Monto: montoFinal,
@@ -138,19 +142,18 @@ function PagoInsertar() {
                 DiasAdicionales: formData.DiasAdicionales ? parseInt(formData.DiasAdicionales) : null,
                 FechaFinalEspecial: formData.FechaFinalEspecial ? formData.FechaFinalEspecial.toISOString().split('T')[0] : null
             };
-    
+
             const { success, error } = await createCobroYPago(jsonData);
-    
+
             if (success) {
                 alert("Cobro y pago creados/actualizados exitosamente");
-    
+
                 if (abonoTotal > 0) {
                     if (abonoTotal >= montoFinal) {
-                        // Eliminar abonos usados y registrar nuevo abono si hay exceso
                         for (const id of selectedAbonos) {
                             await fetch(`https://marygymbackend-production.up.railway.app/abono/${id}`, { method: 'DELETE' });
                         }
-    
+
                         if (abonoTotal > montoFinal) {
                             const exceso = abonoTotal - montoFinal;
                             const abonoExcesoData = {
@@ -158,93 +161,97 @@ function PagoInsertar() {
                                 FechaAbono: fechaPagoFinal,
                                 MontoAbono: exceso
                             };
-    
+
                             await createAbono(abonoExcesoData);
                             setNotificacion(`Se creo un nuevo abono con el sobrante de este pago, el monto es ${exceso}`);
                         }
                     } else {
-                        // Eliminar abonos usados
                         for (const id of selectedAbonos) {
                             await fetch(`https://marygymbackend-production.up.railway.app/abono/${id}`, { method: 'DELETE' });
                         }
                     }
                 }
+
+                navigate(`/admin/pago/visualizar`);
             } else {
-                alert(`Error al crear el cobro y el pago: ${error.message}`);
+                alert(`Error al crear el cobro y el pago:`);
             }
         }
-    };       
+    };
 
     const abonoTotal = calculateAbonoTotal();
     const montoTotal = parseFloat(formData.Monto) - abonoTotal;
 
     return (
-        <div className='centered-title2'>
-            <h1 className="black">Formulario de Pago </h1>
-            {notificacion && <p style={{ color: 'green' }}>{notificacion}</p>}
+        <Box sx={{ maxWidth: '600px', margin: 'auto', padding: '20px', boxShadow: 3, borderRadius: 2 }}>
+            <Typography variant="h4" gutterBottom textAlign="center">Formulario de Pago</Typography>
+            {notificacion && <Typography variant="body1" textAlign="center" style={{ color: 'green', marginBottom: '20px' }}>{notificacion}</Typography>}
             <form onSubmit={handleSubmit}>
-                <div className='elemento2'> <SelectSingleUsuario onUsuarioChange={handleUsuarioChange} /> </div>
-                <div className='elemento2'> <SelectSingleTipoTran onTipoTranChange={handleTipoTranChange} /> </div>
+                <Box sx={{ mb: 2 }}>
+                    <SelectSingleUsuario onUsuarioChange={handleUsuarioChange} />
+                </Box>
+                <Box sx={{ mb: 2 }}>
+                    <SelectSingleTipoTran onTipoTranChange={handleTipoTranChange} />
+                </Box>
                 {formData.IdTipoTran !== 11 && (
                     <>
-                        <div className='elemento2'>
-                            <label>
-                            <div className='body3'> Monto: </div> 
-                                <input
-                                    id="monto-input"
-                                    placeholder='Monto'
-                                    type="text"
-                                    name="Monto"
-                                    value={formData.Monto}
-                                    onChange={handleInputChange}
-                                />
-                            </label>
-                        </div>
-                        <div className='elemento2'>
-                            <div className='body3'> Fecha de inicio de Membresia: </div> 
-                            <DatePickerPrueba onDateChange={(date) => handleDateChange(date, 'FechaInicio')} /> 
-                        </div>
-                        <div className='elemento2'> 
-                            <div className='body3'> Fecha de pago: </div> 
-                            <DatePickerPrueba onDateChange={(date) => handleDateChange(date, 'FechaPago')} /> 
-                        </div>
-                        
+                        <Box sx={{ mb: 2 }}>
+                            <TextField
+                                id="monto-input"
+                                placeholder='Monto'
+                                type="text"
+                                name="Monto"
+                                value={formData.Monto}
+                                onChange={handleInputChange}
+                                fullWidth
+                            />
+                        </Box>
+                        <Box sx={{ mb: 2 }}>
+                            <Typography variant="body2" gutterBottom className='body3'> Fecha de inicio de Membresia: </Typography>
+                            <DatePickerPrueba onDateChange={(date) => handleDateChange(date, 'FechaInicio')} />
+                        </Box>
+                        <Box sx={{ mb: 2 }}>
+                            <Typography variant="body2" gutterBottom className='body3'> Fecha de pago: </Typography>
+                            <DatePickerPrueba onDateChange={(date) => handleDateChange(date, 'FechaPago')} />
+                        </Box>
+
                         {formData.IdTipoTran === 15 && (
-                            <div>
-                                <label className='elemento2'>
-                                    <div className='body3'> Seleccione una opción: </div>
+                            <Box>
+                                <Box sx={{ mb: 2 }}>
+                                    <Typography variant="body2" gutterBottom className='body3'> Seleccione una opción: </Typography>
                                     <select name="OpcionSeleccionada" value={formData.OpcionSeleccionada} onChange={handleOpcionSeleccionadaChange}>
                                         <option value="">Seleccione</option>
                                         <option value="DiasAdicionales">Días adicionales</option>
                                         <option value="FechaFinalEspecial">Fecha final especial</option>
                                     </select>
-                                </label>
+                                </Box>
                                 {formData.OpcionSeleccionada === 'DiasAdicionales' && (
-                                    <label className='elemento2'>
-                                        <div className='body3'> Digite la cantidad de dias adicionales</div>
-                                        <input
-                                            placeholder='Dias adicionales'
+                                    <Box sx={{ mb: 2 }}>
+                                        <Typography variant="body2" gutterBottom className='body3'> Digite la cantidad de días adicionales: </Typography>
+                                        <TextField
+                                            placeholder='Días adicionales'
                                             type="number"
                                             name="DiasAdicionales"
                                             value={formData.DiasAdicionales}
                                             onChange={handleDiasAdicionalesChange}
+                                            fullWidth
                                         />
-                                    </label>
+                                    </Box>
                                 )}
                                 {formData.OpcionSeleccionada === 'FechaFinalEspecial' && (
-                                    <label className='elemento2'>
-                                        <div className='body3'> Fecha final especial:</div>
+                                    <Box sx={{ mb: 2 }}>
+                                        <Typography variant="body2" gutterBottom className='body3'> Fecha final especial: </Typography>
                                         <DatePickerPrueba onDateChange={handleFechaFinalEspecialChange} />
-                                    </label>
+                                    </Box>
                                 )}
-                            </div>
+                            </Box>
                         )}
-                       
+
                         {abonos && abonos.length > 0 && (
-                            <div className='centered-title'>
-                                <h3>Seleccionar Abonos</h3>
+                            <Box sx={{ mb: 2 }}>
+                                <Typography variant="h6" gutterBottom textAlign="center">Seleccionar Abonos</Typography>
                                 {abonos.map((abono) => (
-                                    <div key={abono.IdAbono}>
+                                    <Box key={abono.IdAbono} sx={{ mb: 1 }}>
                                         <input
                                             type="checkbox"
                                             value={abono.IdAbono}
@@ -254,35 +261,36 @@ function PagoInsertar() {
                                         <label>
                                             {`Monto: ${abono.MontoAbono}, Fecha: ${new Date(abono.FechaAbono).toLocaleDateString()}`}
                                         </label>
-                                    </div>
+                                    </Box>
                                 ))}
-                                <p>Total de abonos seleccionados: {abonoTotal}</p>
-                                <p>Monto total a cobrar después de abonos: {montoTotal < 0 ? 0 : montoTotal}</p>
-                            </div>
+                                <Typography variant="body1" gutterBottom textAlign="center">Total de abonos seleccionados: {abonoTotal}</Typography>
+                                <Typography variant="body1" gutterBottom textAlign="center">Monto total a cobrar después de abonos: {montoTotal < 0 ? 0 : montoTotal}</Typography>
+                            </Box>
                         )}
                     </>
                 )}
                 {formData.IdTipoTran === 11 && (
-                    <div>
-                        <label className='elemento2'>
-                            <input
+                    <Box>
+                        <Box sx={{ mb: 2 }}>
+                            <TextField
                                 placeholder='Monto del abono'
                                 type="text"
                                 name="MontoAbono"
                                 value={formData.MontoAbono}
                                 onChange={handleInputChange}
+                                fullWidth
                             />
-                        </label>
-                        <label className='elemento2'>
-                            <div className='body3'> Fecha del Abono: </div>
+                        </Box>
+                        <Box sx={{ mb: 2 }}>
+                            <Typography variant="body2" gutterBottom className='body3'> Fecha del Abono: </Typography>
                             <DatePickerPrueba onDateChange={handleFechaAbonoChange} />
-                        </label>
-                    </div>
+                        </Box>
+                    </Box>
                 )}
-                
-                <button type="submit" className='black-button'>Guardar</button>
+
+                <Button type="submit" variant="contained" className='black-button' fullWidth>Guardar</Button>
             </form>
-        </div>
+        </Box>
     );
 }
 

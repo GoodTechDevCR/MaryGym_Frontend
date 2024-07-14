@@ -7,24 +7,32 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import LogoutIcon from '@mui/icons-material/Logout';
+import UserContext from '../../UserContext';
 
 function UserMenu() {
     const [open, setOpen] = React.useState(false);
+    const { logout } = React.useContext(UserContext);
+    const navigate = useNavigate();
 
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
 
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
+
     const DrawerList = (
         <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-            <Divider/>
+            <Divider />
             <List>
                 <ListItem key="Usuario Home" disablePadding>
                     <ListItemButton component={Link} to="/usuario/:id">
@@ -35,7 +43,7 @@ function UserMenu() {
                     </ListItemButton>
                 </ListItem>
             </List>
-            <Divider/>
+            <Divider />
             <List>
                 <ListItem key="Visualizar Ejercicios" disablePadding>
                     <ListItemButton component={Link} to="/usuario/rutina/">
@@ -48,12 +56,12 @@ function UserMenu() {
             </List>
             <Divider />
             <List>
-                <ListItem key="Visualizar Pago" disablePadding>
-                    <ListItemButton component={Link} to="/usuario/pagoHistorial/">
+                <ListItem key="Log Out" disablePadding>
+                    <ListItemButton onClick={handleLogout}>
                         <ListItemIcon>
-                            <ShoppingCartIcon />
+                            <LogoutIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Visualizar Pago" />
+                        <ListItemText primary="Log Out" />
                     </ListItemButton>
                 </ListItem>
             </List>
@@ -62,7 +70,7 @@ function UserMenu() {
 
     return (
         <div>
-            <IconButton aria-label="Menu" onClick={toggleDrawer(true)} >
+            <IconButton aria-label="Menu" onClick={toggleDrawer(true)}>
                 <MenuIcon />
             </IconButton>
             <Drawer open={open} onClose={toggleDrawer(false)}>

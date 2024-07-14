@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useCreateAnything from '../../hooks/useCreateAnything';
 import SelectSingleRelacion from '../ui/selectSingle/SelectSingleRelacion';
 import UseConsultaByCorreo from '../../hooks/usuarioHooks/useConsultaUsuarioByCorreo';
 import { useNavigate } from 'react-router-dom';
-
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
 
 function ContactoEmergenciaInsertar({ correo }) {
     const { createAnything } = useCreateAnything('https://marygymbackend-production.up.railway.app/contactoEme');
     const IdUsuarioGuardar = UseConsultaByCorreo(correo);
     const navigate = useNavigate();
 
-    // Estado inicial con los campos necesarios
     const [formData, setFormData] = useState({
         IdUsuario: '', 
         Nombre: '',
@@ -18,10 +25,8 @@ function ContactoEmergenciaInsertar({ correo }) {
         Relacion: '',
     });
 
-    // Estado para almacenar todos los contactos de emergencia
     const [contactos, setContactos] = useState([]);
 
-    // Manejar el cambio de nombre
     const handleNombreChange = (event) => {
         setFormData({
             ...formData,
@@ -29,7 +34,6 @@ function ContactoEmergenciaInsertar({ correo }) {
         });
     };
 
-    // Manejar el cambio de teléfono
     const handleTelefonoChange = (event) => {
         setFormData({
             ...formData,
@@ -37,7 +41,6 @@ function ContactoEmergenciaInsertar({ correo }) {
         });
     };
 
-    // Manejar el cambio de relación
     const handleRelacionChange = (relacion) => {
         setFormData({
             ...formData,
@@ -45,14 +48,12 @@ function ContactoEmergenciaInsertar({ correo }) {
         });
     };
 
-    // Agregar un nuevo contacto a la lista
     const handleAddContact = () => {
         if (formData.Nombre && formData.NumeroTelefono && formData.Relacion) {
             setContactos([
                 ...contactos,
                 { ...formData, IdUsuario: IdUsuarioGuardar[0].IdUsuario }
             ]);
-            // Limpiar los campos del formulario
             setFormData({
                 IdUsuario: IdUsuarioGuardar[0].IdUsuario,
                 Nombre: '',
@@ -64,7 +65,6 @@ function ContactoEmergenciaInsertar({ correo }) {
         }
     };
 
-    // Manejar el envío del formulario
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -84,60 +84,76 @@ function ContactoEmergenciaInsertar({ correo }) {
 
     const handleSalir = async(event) => {
         event.preventDefault();
-
         navigate(`/admin/usuario/visualizar`);
     }
 
     return (
-        <div className='centerd title'>
-            <h2>Insertar contacto de emergencia</h2>
-            <p>
-                Para agregar los contactos de emergencia se debe de ir llenar los datos y oprimir el boton "agregar",
-                una vez digitados todos los contactos se debe digitar el boton "enviar", en caso de NO querer agregar contactos
+        <Box sx={{ maxWidth: '600px', margin: 'auto', padding: '20px', boxShadow: 3, borderRadius: 2 }}>
+            <Typography className='black' variant="h4" gutterBottom textAlign="center">Insertar contacto de emergencia</Typography>
+            <Typography variant="body1" textAlign="center" mb={2}>
+                Para agregar los contactos de emergencia se debe de ir llenando los datos y oprimir el boton "Agregar", 
+                una vez digitados todos los contactos se debe digitar el boton "Enviar", en caso de NO querer agregar contactos 
                 digitar el boton "Salir"
-            </p>
+            </Typography>
             <form onSubmit={handleSubmit}>
-                <label className='elemento2'>
-                    <input 
-                        type="text" 
-                        value={formData.Nombre} 
-                        onChange={handleNombreChange} 
-                        placeholder="Nombre Contacto" 
+                <Box sx={{ mb: 2 }}>
+                    <TextField
+                        type="text"
+                        value={formData.Nombre}
+                        onChange={handleNombreChange}
+                        label="Nombre Contacto"
+                        fullWidth
                     />
-                </label>
-                <label className='elemento2'>
-                    <input 
-                        type="text" 
-                        value={formData.NumeroTelefono} 
-                        onChange={handleTelefonoChange} 
-                        placeholder="Teléfono" 
+                </Box>
+                <Box sx={{ mb: 2 }}>
+                    <TextField
+                        type="text"
+                        value={formData.NumeroTelefono}
+                        onChange={handleTelefonoChange}
+                        label="Teléfono"
+                        fullWidth
                     />
-                </label>
-                <label className='elemento2'>
+                </Box>
+                <Box sx={{ mb: 2 }}>
                     <SelectSingleRelacion onRelacionChange={handleRelacionChange} />
-                </label>
-                <div className='elemento2'>
-                    <button type="button" className='black-button' onClick={handleAddContact}>Agregar Contacto</button>
-                </div>
-                <div className='elemento2'>
-                    <button type="submit" className='black-button'>Enviar</button>
-                </div>
-                <div className='elemento2'>
-                    <button type="button" className='black-button' onClick={handleSalir}>Salir</button>
-                </div>
-                </form>
-
-            <div className='centered-title'>
-                <h3>Contactos de Emergencia</h3>
-                <ul>
-                    {contactos.map((contacto, index) => (
-                        <li key={index}>
-                            {contacto.Nombre} - {contacto.NumeroTelefono} - {contacto.Relacion}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </div>
+                </Box>
+                <Grid container spacing={2} justifyContent="center">
+                    <Grid item>
+                        <Button type="button" variant="contained" color="primary" onClick={handleAddContact} fullWidth>
+                            Agregar Contacto
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button type="submit" variant="contained" color="primary" fullWidth>
+                            Enviar
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button type="button" variant="contained" color="secondary" onClick={handleSalir} fullWidth>
+                            Salir
+                        </Button>
+                    </Grid>
+                </Grid>
+            </form>
+            
+            {/* Mostrar lista de contactos solo si hay contactos registrados */}
+            {contactos.length > 0 && (
+                <Box mt={4}>
+                    <Typography className='black' variant="h4" gutterBottom textAlign="center">Contactos de Emergencia</Typography>
+                                      
+                    <List>
+                        {contactos.map((contacto, index) => (
+                            <div key={index}>
+                                <ListItem>
+                                    <ListItemText primary={`${contacto.Nombre} - ${contacto.NumeroTelefono} - ${contacto.Relacion}`} />
+                                </ListItem>
+                                {index < contactos.length - 1 && <Divider />}
+                            </div>
+                        ))}
+                    </List>
+                </Box>
+            )}
+        </Box>
     );
 }
 

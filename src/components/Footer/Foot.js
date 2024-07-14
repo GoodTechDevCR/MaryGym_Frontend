@@ -20,10 +20,11 @@ const styles = {
         bottom: 0,
         width: '100%',
         textAlign: 'center',
+        marginTop: 'auto',
     },
     container: {
         maxWidth: '960px',
-        margin: '0 auto',
+        margin: 'auto',
     },
 };
 

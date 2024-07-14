@@ -1,7 +1,7 @@
 import React from 'react';
 import Foot from "../../components/Footer/Foot";
 import MenuHome from '../../components/menu/MenuHome';
-import HeadAdmin from "../../components/Header/HeadAdmin";
+import HeadHome from "../../components/Header/HeadHome";
 
 /* Cuando el login funcione, cambiar HeadAdmin por HeadUser 
 (No contiene las opciones de admin, solo la barrita negra con el logo)
@@ -10,7 +10,6 @@ import HeadAdmin from "../../components/Header/HeadAdmin";
 const HomeSc = () => {
     return (
         <div>
-            <HeadAdmin/> 
             <MenuHome/>
             <Foot />
         </div>

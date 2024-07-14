@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SelectSingleCatEje from '../ui/selectSingle/SelectSingleCatEje';
 import useCreateAnything from '../../hooks/useCreateAnything';
-import TablaEjercicioPorCat from '../showData/TablaEjercicioPorCat';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const handleReload = () => {
     window.location.reload();
@@ -21,7 +24,6 @@ function EjercicioInsertar() {
 
     const handleCatEjeChange = (id) => {
         setFormData({ ...formData, categoriaId: id });
-
     };
 
     const handleSubmit = async (e) => {
@@ -45,24 +47,26 @@ function EjercicioInsertar() {
     };
 
     return (
-        <div>
-            <h2>Insertar Ejercicio</h2>
+        <div className='centered-title'>
+            <Typography variant="h4" align="center" gutterBottom>Insertar Ejercicio</Typography>
             <form onSubmit={handleSubmit}>
-                <label className='elemento2'> Seleccione la categoría del ejercicio: </label>
-                <label className='elemento2'> <SelectSingleCatEje onCatEjeChange={handleCatEjeChange} /> </label>
-                <label className='elemento2'>
-                    Ingrese el nombre del ejercicio:
-                    <input
-                        id="nombre-input"
+                <Box mb={2}>
+                    <Typography variant="body1" className='elemento2'>Seleccione la categoría del ejercicio:</Typography>
+                    <SelectSingleCatEje onCatEjeChange={handleCatEjeChange} />
+                </Box>
+                <Box mb={2}>
+                    <TextField
                         type="text"
                         name="nombreEjercicio"
                         value={formData.nombreEjercicio}
                         onChange={handleInputChange}
+                        label="Nombre del Ejercicio"
+                        fullWidth
                     />
-                </label>
-                <label className='elemento2'> 
-                    <button type="submit" className='black-button'>Guardar Ejercicio</button>
-                </label>
+                </Box>
+                <Button type="submit" size="large" variant="contained" color="primary" fullWidth>
+                    Guardar Ejercicio
+                </Button>
             </form>
         </div>
     );

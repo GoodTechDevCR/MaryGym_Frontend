@@ -7,6 +7,7 @@ const useUpdateAnything = (url) => {
 
     const updateAnything = async (body) => {
         setLoading(true);
+        console.log("BODYYY: ",body);
         try {
             const response = await fetch(url, {
                 method: 'PUT',

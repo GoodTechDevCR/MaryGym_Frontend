@@ -3,6 +3,9 @@ import PaisesTelefono from '../ui/PaisesTelefono';
 import useCreateAnything from '../../hooks/useCreateAnything';
 import DatePickerPrueba from "../datePicker/DatePickerPrueba";
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import ContactoEmergenciaInsertar from './ContactoEmergenciaInsertar';
 
 function UsuarioInsertar() {
@@ -39,14 +42,9 @@ function UsuarioInsertar() {
         setFormData({ ...formData, FechaNacimiento: date });
     };
 
-    const handleReload = () => {
-        window.location.reload();
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Verificación de campos vacíos
         for (let key in formData) {
             if (formData[key] === '' && key !== 'Comentario') {
                 alert('Error: Todos los campos deben de estar llenos');
@@ -66,10 +64,9 @@ function UsuarioInsertar() {
         };
         delete jsonData.CodigoPais;
         delete jsonData.Pais;
-        console.log("JSON: ", jsonData);
+
         try {
             const success = await createAnything(jsonData);
-            console.log("imprimir success success: ",success.success)
             if (success.success) {
                 alert("Usuario Creado Exitosamente");
                 setStep(2);
@@ -83,49 +80,96 @@ function UsuarioInsertar() {
     };
 
     return (
-        <div className='centered-title'>
-            <h1 className='black'>Registro de usuarios</h1>  
+        <div>
+            <Box sx={{ textAlign: 'center', mb: 4 }}>
+                <h1 className='black' style={{ fontSize: '3rem' }}>Registro de usuarios</h1>
+            </Box>
             {step === 1 && (
-                <form onSubmit={handleSubmit} className='centered-title2'>
-                    <label className='elemento2'>
-                        <input type="text" placeholder="Nombre" name="Nombre" value={formData.Nombre} onChange={handleInputChange}/>
-                    </label>
-                    <label className='elemento2'>
-                        <input type="text" placeholder="Apellido" name="Apellido" value={formData.Apellido} onChange={handleInputChange} />
-                    </label>
-                    <label className='elemento2'>
-                        <input type="email" placeholder="Correo" name="Correo" value={formData.Correo} onChange={handleInputChange} />
-                    </label>
-                    <Box className="elemento2">
-                        <PaisesTelefono onCountryChange={handleCountryChange}/>
+                <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: '600px', margin: 'auto', padding: '20px', boxShadow: 3, borderRadius: 2 }}>
+                    <Typography className='black' variant="h4" gutterBottom textAlign="center">Información del Usuario</Typography>
+                    <Box sx={{ mb: 2 }}>
+                        <TextField
+                            type="text"
+                            name="Nombre"
+                            label="Nombre"
+                            value={formData.Nombre}
+                            onChange={handleInputChange}
+                            fullWidth
+                        />
                     </Box>
-                    <label className='elemento2'>
-                        <input type="text" placeholder="Teléfono" name="Telefono" value={formData.Telefono} onChange={handleInputChange} />
-                    </label>
-                    <label className='elemento2'>
-                        <div className='body2'> Estado: </div>
-                        <select name="Estado" value={formData.Estado} onChange={handleInputChange}>
+                    <Box sx={{ mb: 2 }}>
+                        <TextField
+                            type="text"
+                            name="Apellido"
+                            label="Apellido"
+                            value={formData.Apellido}
+                            onChange={handleInputChange}
+                            fullWidth
+                        />
+                    </Box>
+                    <Box sx={{ mb: 2 }}>
+                        <TextField
+                            type="email"
+                            name="Correo"
+                            label="Correo"
+                            value={formData.Correo}
+                            onChange={handleInputChange}
+                            fullWidth
+                        />
+                    </Box>
+                    <Box sx={{ mb: 2 }}>
+                        <PaisesTelefono onCountryChange={handleCountryChange} />
+                    </Box>
+                    <Box sx={{ mb: 2 }}>
+                        <TextField
+                            type="text"
+                            name="Telefono"
+                            label="Teléfono"
+                            value={formData.Telefono}
+                            onChange={handleInputChange}
+                            fullWidth
+                        />
+                    </Box>
+                    <Box sx={{ mb: 2 }}>
+                        <Typography variant="body1">Estado:</Typography>
+                        <TextField
+                            select
+                            name="Estado"
+                            value={formData.Estado}
+                            onChange={handleInputChange}
+                            SelectProps={{ native: true }}
+                            fullWidth
+                        >
                             <option value="activo">Activo</option>
                             <option value="noActivo">No Activo</option>
-                        </select>
-                    </label>
-                    <Box className='elemento2'>
-                        <div className='body2'> Fecha de nacimiento: </div>
+                        </TextField>
+                    </Box>
+                    <Box sx={{ mb: 2 }}>
+                        <Typography variant="body1">Fecha de nacimiento:</Typography>
                         <DatePickerPrueba onDateChange={handleDateChange} />
                     </Box>
-                    <label className='elemento2'>
-                        <input type="text" placeholder="Comentario" name="Comentario" value={formData.Comentario} onChange={handleInputChange} />
-                    </label>
-                    <div className='elemento2'>
-                        <button type="submit" className='black-button'>Enviar</button>
-                    </div>
-                </form>
+                    <Box sx={{ mb: 2 }}>
+                        <TextField
+                            type="text"
+                            name="Comentario"
+                            label="Comentario"
+                            value={formData.Comentario}
+                            onChange={handleInputChange}
+                            fullWidth
+                        />
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+                        <Button type="submit" variant="contained" color="primary">
+                            Enviar
+                        </Button>
+                    </Box>
+                </Box>
             )}
 
             {step === 2 && (
-                <div className='centered-title2'>
+                <Box sx={{ maxWidth: '600px', margin: 'auto', padding: '20px', boxShadow: 3, borderRadius: 2 }}>
                     <ContactoEmergenciaInsertar correo={formData.Correo} />
-                </div>
+                </Box>
             )}
         </div>
     );
