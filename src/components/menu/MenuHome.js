@@ -4,6 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import LoginIcon from '@mui/icons-material/Login';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import LogInSc from '../../pages/Home/LogInSc';
 import HomeScreen from '../../pages/Home/HomeScreen';
 import PrecioSc from '../../pages/Home/PrecioSc';
@@ -37,6 +39,8 @@ CustomTabPanel.propTypes = {
 
 function MenuHome() {
   const [value, setValue] = useState(0);
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -44,22 +48,25 @@ function MenuHome() {
 
   return (
     <>
-      <header style={styles.header}>
-        <div>
-          <img src={GymImagen} alt="Gym Image" style={styles.logo} />
-        </div>
+      <header style={isSmallScreen ? styles.headerSmall : styles.header}>
+        <img src={GymImagen} alt="Gym Image" style={styles.logo} />
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
           textColor="inherit"
           indicatorColor="primary"
-          sx={{ minHeight: '100px' }} // Ajuste de altura mínima para los Tabs
+          sx={{
+            minHeight: isSmallScreen ? '50px' : '100px',
+            flexGrow: 1,
+            display: 'flex',
+            justifyContent: 'flex-end',
+          }}
         >
-          <Tab label="Inicio" sx={{ minHeight: '100px', minWidth: '140px' }} />
-          <Tab label="Precios" sx={{ minHeight: '100px', minWidth: '140px' }} />
-          <Tab label="Contacto" sx={{ minHeight: '100px', minWidth: '140px' }} />
-          <Tab icon={<LoginIcon />} label="Ingresar" sx={{ minHeight: '100px', minWidth: '140px' }} />
+          <Tab label="Inicio" sx={{ minHeight: isSmallScreen ? '50px' : '100px', minWidth: '100px' }} />
+          <Tab label="Precios" sx={{ minHeight: isSmallScreen ? '50px' : '100px', minWidth: '100px' }} />
+          <Tab label="Contacto" sx={{ minHeight: isSmallScreen ? '50px' : '100px', minWidth: '100px' }} />
+          <Tab icon={<LoginIcon />} label="Ingresar" sx={{ minHeight: isSmallScreen ? '50px' : '100px', minWidth: '100px' }} />
         </Tabs>
       </header>
 
@@ -87,6 +94,16 @@ const styles = {
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.2)',
+  },
+  headerSmall: {
+    backgroundColor: '#000000',
+    color: '#FFFFFF',
+    padding: '0px',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.2)',
   },
