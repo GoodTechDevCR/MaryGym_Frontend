@@ -62,6 +62,9 @@ const InformacionUserSc = ({ nombre, fecha1, fecha2, saldo }) => {
                     Pagos realizados
                 </Typography>
                 <TablaPagoForUser idUsuario={user.id} />
+                <Typography variant="h2" className='black' sx={{ fontSize: '2rem', marginBottom: '30px' }}>
+                    
+                </Typography>
             </div>
             <Foot />
         </div>
