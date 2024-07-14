@@ -183,6 +183,7 @@ function PagoInsertar() {
     const montoTotal = parseFloat(formData.Monto) - abonoTotal;
 
     return (
+        <Box sx={{paddingBottom: 9 }}>
         <Box sx={{ maxWidth: '600px', margin: 'auto', padding: '20px', boxShadow: 3, borderRadius: 2 }}>
             <Typography variant="h4" gutterBottom textAlign="center">Formulario de Pago</Typography>
             {notificacion && <Typography variant="body1" textAlign="center" style={{ color: 'green', marginBottom: '20px' }}>{notificacion}</Typography>}
@@ -290,6 +291,7 @@ function PagoInsertar() {
 
                 <Button type="submit" variant="contained" className='black-button' fullWidth>Guardar</Button>
             </form>
+        </Box>
         </Box>
     );
 }
