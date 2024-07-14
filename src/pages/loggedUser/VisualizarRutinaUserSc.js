@@ -7,8 +7,6 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import HeadUser from "../../components/Header/HeadUser";
 import Foot from "../../components/Footer/Foot";
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 
 
 const VisualizarRutinaUserSc = () => {
@@ -142,10 +140,9 @@ const VisualizarRutinaUserSc = () => {
                 </Typography>
                 {renderRutinaDetails()}
             </Box>
+            </Box>
             <Foot />
         </div>
-
-        </Box>
 
     );
 };
