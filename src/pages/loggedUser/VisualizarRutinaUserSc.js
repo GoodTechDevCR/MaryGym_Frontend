@@ -3,6 +3,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import UserContext from '../../UserContext';
 import UserMenu from '../../components/menu/UserMenu';
+import HeadUser from "../../components/Header/HeadUser";
+import Foot from "../../components/Footer/Foot";
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
@@ -121,17 +123,28 @@ const VisualizarRutinaUserSc = () => {
                     )}
                 </Grid>
             </Paper>
+
         );
     };
 
     return (
+
+        <div>
+            <HeadUser />
+
         <Box sx={{ padding: 2 }}>
+
             <UserMenu />
             <Typography variant="h4" component="h2" gutterBottom align="center" sx={{ fontWeight: 'bold', color: '#333' }}>
                 Visualizar Rutina
             </Typography>
             {renderRutinaDetails()}
+
+            <Foot/>
+        </div>
+
         </Box>
+
     );
 };
 

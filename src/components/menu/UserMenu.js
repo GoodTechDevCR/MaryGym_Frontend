@@ -56,17 +56,6 @@ function UserMenu() {
             </List>
             <Divider />
             <List>
-                <ListItem key="Visualizar Pago" disablePadding>
-                    <ListItemButton component={Link} to="/usuario/pagoHistorial/">
-                        <ListItemIcon>
-                            <ShoppingCartIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Visualizar Pago" />
-                    </ListItemButton>
-                </ListItem>
-            </List>
-            <Divider />
-            <List>
                 <ListItem key="Log Out" disablePadding>
                     <ListItemButton onClick={handleLogout}>
                         <ListItemIcon>
