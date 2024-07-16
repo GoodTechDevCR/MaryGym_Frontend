@@ -28,18 +28,24 @@ function CatEjeInsertar() {
             ...formData
         };
 
-        try {
-            const success = await createAnything(jsonData);
-            if (success) {
-                alert("Categoría Ejercicio Creada Exitosamente");
-                handleReload();
-            } else {
+        if(formData.NombreCatEje === ''){
+            alert("Error, la categoria debe de tener nombre")
+        }
+        else{
+            try {
+                const success = await createAnything(jsonData);
+                if (success) {
+                    alert("Categoría Ejercicio Creada Exitosamente");
+                    handleReload();
+                } else {
+                    alert("Error al crear la Categoría Ejercicio");
+                }
+            } catch (error) {
+                console.error("Error al crear la Categoría Ejercicio:", error);
                 alert("Error al crear la Categoría Ejercicio");
             }
-        } catch (error) {
-            console.error("Error al crear la Categoría Ejercicio:", error);
-            alert("Error al crear la Categoría Ejercicio");
         }
+
     };
 
     return (

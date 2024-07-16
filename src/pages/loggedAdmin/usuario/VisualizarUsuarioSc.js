@@ -13,7 +13,6 @@ const VisualizarUsuarioSc = () => {
             </Box>
             <TablaUsuario/>
             <Foot />
-            <br/> <br/> <br/> <br/> <br/>
         </div>
     );
 };

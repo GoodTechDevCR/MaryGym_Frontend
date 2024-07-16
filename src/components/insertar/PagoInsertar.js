@@ -110,72 +110,94 @@ function PagoInsertar() {
         e.preventDefault();
         setNotificacion("");
 
-        if (formData.IdTipoTran === 11) {
-            const fechaAbonoFinal = formData.FechaAbono.toISOString().split('T')[0];
-            const montoAbonoFinal = parseFloat(formData.MontoAbono);
 
-            const abonoData = {
-                IdUsuario: formData.IdUsuario,
-                FechaAbono: fechaAbonoFinal,
-                MontoAbono: montoAbonoFinal
-            };
+        //catch de no mandar nada vacio 
+        if(formData.IdUsuario === null){
+            alert("Error, debe de seleccionar un usuario");
+        }
+        else if(formData.IdTipoTran === null){
+            alert("Error, debe de seleccionar un tipo de transaccion");
+        }
+        else if(formData.IdTipoTran !== 11 && formData.Monto === '' && formData.Monto === '-'){
+            alert("Error, debe de seleccionar un monto");
+        }
+        else if(formData.IdTipoTran !== 11 && formData.FechaInicio === null){
+            alert("Error, debe de haber una fecha de inicio");
+        }
+        else if(formData.IdTipoTran !== 11 && formData.FechaPago === null){
+            alert("Error, debe de haber una fecha de pago");
+        }
+        else{
+            if (formData.IdTipoTran === 11) {
+                const fechaAbonoFinal = formData.FechaAbono.toISOString().split('T')[0];
+                const montoAbonoFinal = parseFloat(formData.MontoAbono);
+    
+                const abonoData = {
+                    IdUsuario: formData.IdUsuario,
+                    FechaAbono: fechaAbonoFinal,
+                    MontoAbono: montoAbonoFinal
+                };
+    
 
-            const { success } = await createAbono(abonoData);
-
-            if (success.success) {
-                alert("Abono registrado exitosamente");
+                //revisar aca porque siempre es falso xd
+                const { success } = await createAbono(abonoData);
+                console.log("success success success: ",success);
+                if (success.success) {
+                    alert("Abono registrado exitosamente");
+                } else {
+                    alert(`Error al registrar el abono: `);
+                }
             } else {
-                alert(`Error al registrar el abono: `);
-            }
-        } else {
-            const fechaInicioFinal = formData.FechaInicio.toISOString().split('T')[0];
-            const fechaPagoFinal = formData.FechaPago.toISOString().split('T')[0];
-            const montoFinal = parseFloat(formData.Monto);
-            const abonoTotal = calculateAbonoTotal();
-
-            const jsonData = {
-                IdUsuario: formData.IdUsuario,
-                Monto: montoFinal,
-                FechaInicio: fechaInicioFinal,
-                FechaPago: fechaPagoFinal,
-                IdTipoTran: formData.IdTipoTran,
-                DiasAdicionales: formData.DiasAdicionales ? parseInt(formData.DiasAdicionales) : null,
-                FechaFinalEspecial: formData.FechaFinalEspecial ? formData.FechaFinalEspecial.toISOString().split('T')[0] : null
-            };
-
-            const { success} = await createCobroYPago(jsonData);
-
-            if (success) {
-                alert("Cobro y pago creados/actualizados exitosamente");
-
-                if (abonoTotal > 0) {
-                    if (abonoTotal >= montoFinal) {
-                        for (const id of selectedAbonos) {
-                            await fetch(`https://marygymbackend-production.up.railway.app/abono/${id}`, { method: 'DELETE' });
-                        }
-
-                        if (abonoTotal > montoFinal) {
-                            const exceso = abonoTotal - montoFinal;
-                            const abonoExcesoData = {
-                                IdUsuario: formData.IdUsuario,
-                                FechaAbono: fechaPagoFinal,
-                                MontoAbono: exceso
-                            };
-
-                            await createAbono(abonoExcesoData);
-                            setNotificacion(`Se creo un nuevo abono con el sobrante de este pago, el monto es ${exceso}`);
-                        }
-                    } else {
-                        for (const id of selectedAbonos) {
-                            await fetch(`https://marygymbackend-production.up.railway.app/abono/${id}`, { method: 'DELETE' });
+                const fechaInicioFinal = formData.FechaInicio.toISOString().split('T')[0];
+                const fechaPagoFinal = formData.FechaPago.toISOString().split('T')[0];
+                const montoFinal = parseFloat(formData.Monto);
+                const abonoTotal = calculateAbonoTotal();
+    
+                const jsonData = {
+                    IdUsuario: formData.IdUsuario,
+                    Monto: montoFinal,
+                    FechaInicio: fechaInicioFinal,
+                    FechaPago: fechaPagoFinal,
+                    IdTipoTran: formData.IdTipoTran,
+                    DiasAdicionales: formData.DiasAdicionales ? parseInt(formData.DiasAdicionales) : null,
+                    FechaFinalEspecial: formData.FechaFinalEspecial ? formData.FechaFinalEspecial.toISOString().split('T')[0] : null
+                };
+                
+                const { success} = await createCobroYPago(jsonData);
+                
+                if (success) {
+                    alert("Cobro y pago creados/actualizados exitosamente");
+    
+                    if (abonoTotal > 0) {
+                        if (abonoTotal >= montoFinal) {
+                            for (const id of selectedAbonos) {
+                                await fetch(`https://marygymbackend-production.up.railway.app/abono/${id}`, { method: 'DELETE' });
+                            }
+    
+                            if (abonoTotal > montoFinal) {
+                                const exceso = abonoTotal - montoFinal;
+                                const abonoExcesoData = {
+                                    IdUsuario: formData.IdUsuario,
+                                    FechaAbono: fechaPagoFinal,
+                                    MontoAbono: exceso
+                                };
+    
+                                await createAbono(abonoExcesoData);
+                                setNotificacion(`Se creo un nuevo abono con el sobrante de este pago, el monto es ${exceso}`);
+                            }
+                        } else {
+                            for (const id of selectedAbonos) {
+                                await fetch(`https://marygymbackend-production.up.railway.app/abono/${id}`, { method: 'DELETE' });
+                            }
                         }
                     }
+    
+                    navigate(`/admin/pago/visualizar`);
+                } else {
+                    alert(`Error al crear el cobro y el pago:`);
                 }
+        }
 
-                navigate(`/admin/pago/visualizar`);
-            } else {
-                alert(`Error al crear el cobro y el pago:`);
-            }
         }
     };
 
@@ -183,6 +205,7 @@ function PagoInsertar() {
     const montoTotal = parseFloat(formData.Monto) - abonoTotal;
 
     return (
+        <Box sx={{paddingBottom: 9 }}>
         <Box sx={{ maxWidth: '600px', margin: 'auto', padding: '20px', boxShadow: 3, borderRadius: 2 }}>
             <Typography variant="h4" gutterBottom textAlign="center">Formulario de Pago</Typography>
             {notificacion && <Typography variant="body1" textAlign="center" style={{ color: 'green', marginBottom: '20px' }}>{notificacion}</Typography>}
@@ -290,6 +313,7 @@ function PagoInsertar() {
 
                 <Button type="submit" variant="contained" className='black-button' fullWidth>Guardar</Button>
             </form>
+        </Box>
         </Box>
     );
 }

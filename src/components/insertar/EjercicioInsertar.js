@@ -32,18 +32,25 @@ function EjercicioInsertar() {
             ...formData
         };
 
-        try {
-            const success = await createAnything(jsonData);
-            if (success) {
-                alert("Ejercicio Creado Exitosamente");
-                handleReload();
-            } else {
-                alert("Error al crear el ejercicio");
+        if (formData.categoriaId === 0) {
+            alert("Error, debe de seleccionar una categoria");
+        } else if (formData.nombreEjercicio === '') {
+            alert("Error, el ejercicio debe de tener nombre");
+        } else {
+            try {
+                const success = await createAnything(jsonData);
+                if (success) {
+                    alert("Ejercicio Creado Exitosamente");
+                    handleReload();
+                } else {
+                    alert("Error al crear el ejercicio");
+                }
+            } catch (error) {
+                console.error("Error al crear el Ejercicio:", error);
+                alert("Error al crear el Ejercicio");
             }
-        } catch (error) {
-            console.error("Error al crear el Ejercicio:", error);
-            alert("Error al crear el Ejercicio");
         }
+        
     };
 
     return (
