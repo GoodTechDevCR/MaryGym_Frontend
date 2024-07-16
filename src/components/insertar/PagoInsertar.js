@@ -109,26 +109,66 @@ function PagoInsertar() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setNotificacion("");
-
-
-        //catch de no mandar nada vacio 
-        if(formData.IdUsuario === null){
+    
+        // Catch para no mandar nada vacío 
+        if (formData.IdUsuario === null) {
             alert("Error, debe de seleccionar un usuario");
+            return;
         }
-        else if(formData.IdTipoTran === null){
+        if (formData.IdTipoTran === null) {
             alert("Error, debe de seleccionar un tipo de transaccion");
+            return;
         }
-        else if(formData.IdTipoTran !== 11 && formData.Monto === '' && formData.Monto === '-'){
+        if (formData.IdTipoTran !== 11 && formData.Monto === '' && formData.Monto === '-') {
             alert("Error, debe de seleccionar un monto");
+            return;
         }
-        else if(formData.IdTipoTran !== 11 && formData.FechaInicio === null){
+        if (formData.IdTipoTran !== 11 && formData.FechaInicio === null) {
             alert("Error, debe de haber una fecha de inicio");
+            return;
         }
-        else if(formData.IdTipoTran !== 11 && formData.FechaPago === null){
+        if (formData.IdTipoTran !== 11 && formData.FechaPago === null) {
             alert("Error, debe de haber una fecha de pago");
+            return;
         }
-        else{
+
+        if(formData.IdTipoTran === 15 && formData.Monto === "-"){
+            alert("Error, debe de digitar un monto para el precio especial")
+            return;
+        }
+
+        if(formData.IdTipoTran === 15 && formData.Monto === ''){
+            alert("Error, debe de digitar un monto para el precio especial")
+            return;
+        }
+        //comprobaciones de precio especial
+        if (formData.IdTipoTran === 15) {
+            if (formData.OpcionSeleccionada === '') {
+                alert("Error, debe de digitar una opción");
+                return;
+            }
+            if (formData.OpcionSeleccionada === "DiasAdicionales" && formData.DiasAdicionales === '') {
+                alert("Error, debe de digitar la cantidad de días adicionales");
+                return;
+            }
+            if (formData.OpcionSeleccionada === "FechaFinalEspecial" && formData.FechaFinalEspecial === null) {
+                alert("Error, debe de digitar la fecha final especial");
+                return;
+            }
+        }
+        
+    
+        try {
             if (formData.IdTipoTran === 11) {
+                if (formData.MontoAbono === '') {
+                    alert("Error, debe digitar una cantidad para el abono");
+                    return;
+                }
+                if (formData.FechaAbono === null) {
+                    alert("Error, debe digitar una fecha para el abono");
+                    return;
+                }
+    
                 const fechaAbonoFinal = formData.FechaAbono.toISOString().split('T')[0];
                 const montoAbonoFinal = parseFloat(formData.MontoAbono);
     
@@ -138,15 +178,37 @@ function PagoInsertar() {
                     MontoAbono: montoAbonoFinal
                 };
     
-
-                //revisar aca porque siempre es falso xd
-                const { success } = await createAbono(abonoData);
-                console.log("success success success: ",success);
-                if (success.success) {
-                    alert("Abono registrado exitosamente");
-                } else {
-                    alert(`Error al registrar el abono: `);
+    
+                try {
+                    const response = await fetch('https://marygymbackend-production.up.railway.app/abono', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(abonoData)
+                    });
+                
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || 'Error al crear abono');
+                    }
+                
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        alert("Abono registrado exitosamente");
+                        navigate(`/admin/pago/visualizar`);
+                    } else {
+                        alert("Algo salió mal al registrar el abono");
+                    }
+                } catch (err) {
+                    if (err.message.includes("Unexpected token 'A'")) {
+                        alert("Abono registrado exitosamente");
+                    } else {
+                        alert(`Error: ${err.message}`);
+                    }
                 }
+                    
             } else {
                 const fechaInicioFinal = formData.FechaInicio.toISOString().split('T')[0];
                 const fechaPagoFinal = formData.FechaPago.toISOString().split('T')[0];
@@ -162,9 +224,9 @@ function PagoInsertar() {
                     DiasAdicionales: formData.DiasAdicionales ? parseInt(formData.DiasAdicionales) : null,
                     FechaFinalEspecial: formData.FechaFinalEspecial ? formData.FechaFinalEspecial.toISOString().split('T')[0] : null
                 };
-                
-                const { success} = await createCobroYPago(jsonData);
-                
+    
+                const { success } = await createCobroYPago(jsonData);
+    
                 if (success) {
                     alert("Cobro y pago creados/actualizados exitosamente");
     
@@ -192,14 +254,17 @@ function PagoInsertar() {
                         }
                     }
     
-                    navigate(`/admin/pago/visualizar`);
+                    //navigate(`/admin/pago/visualizar`);
                 } else {
-                    alert(`Error al crear el cobro y el pago:`);
+                    throw new Error('Error al crear el cobro y el pago');
                 }
-        }
-
+            }
+        } catch (error) {
+            console.error("Error en handleSubmit:", error);
+            alert(`Error: ${error.message}`);
         }
     };
+    
 
     const abonoTotal = calculateAbonoTotal();
     const montoTotal = parseFloat(formData.Monto) - abonoTotal;

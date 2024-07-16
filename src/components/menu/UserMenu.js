@@ -34,7 +34,7 @@ function UserMenu() {
             <Divider />
             <List>
                 <ListItem key="Usuario Home" disablePadding>
-                    <ListItemButton component={Link} to="/usuario/:id">
+                    <ListItemButton component={Link} to="/usuario/">
                         <ListItemIcon>
                             <HomeIcon />
                         </ListItemIcon>

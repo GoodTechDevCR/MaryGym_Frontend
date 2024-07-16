@@ -3,16 +3,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import useValidateLogin from '../../hooks/loginHooks/useValidateLogin';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../UserContext';
-import './InsertarLogin.css';  // Importa el archivo de estilos
+import './InsertarLogin.css';
 
 function InsertarLogin() {
     const navigate = useNavigate();
     const { loading, error, login } = useValidateLogin();
     const { setUserContext } = useContext(UserContext);
-    const [formData, setFormData] = useState({
-        usuario: '',
-        contrasena: ''
-    });
+    const [formData, setFormData] = useState({ usuario: '', contrasena: '' });
     const [usuarioLog, setUsuarioLog] = useState([]);
 
     const handleInputChange = (e) => {
@@ -44,11 +41,11 @@ function InsertarLogin() {
                     const idUsuarioLog = usuarioLog[0].IdUsuario;
                     setUserContext({ id: idUsuarioLog, username: formData.usuario });
 
-                    // Redirect based on idUsuarioLog
+                    // Redirect based on user type
                     if (idUsuarioLog === 124) {
                         navigate('/admin');
                     } else {
-                        navigate(`/usuario/${idUsuarioLog}`);
+                        navigate(`/usuario`);
                     }
                 } else {
                     alert('No se encontró el usuario.');
