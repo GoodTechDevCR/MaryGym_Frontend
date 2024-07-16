@@ -68,17 +68,23 @@ function ContactoEmergenciaInsertar({ correo }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        try {
-            const success = await createAnything(contactos);
-            if (success) {
-                alert("Contactos Creados Exitosamente");
-                navigate(`/admin/usuario/visualizar`);
-            } else {
+        //solucion a error de envio contactos vacios
+        if(contactos.length === 0){
+            alert("Error, debe de haber minimo un contacto");
+        }
+        else{
+            try {
+                const success = await createAnything(contactos);
+                if (success) {
+                    alert("Contactos Creados Exitosamente");
+                    navigate(`/admin/usuario/visualizar`);
+                } else {
+                    alert("Error al crear el Usuario");
+                }
+            } catch (error) {
+                console.error("Error al crear el Usuario:", error);
                 alert("Error al crear el Usuario");
             }
-        } catch (error) {
-            console.error("Error al crear el Usuario:", error);
-            alert("Error al crear el Usuario");
         }
     };
 

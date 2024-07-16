@@ -136,15 +136,11 @@ const CrearRutinaSc = () => {
 
     const handleSubmitInitial = (e) => {
         e.preventDefault();
-        const { fechaInicio, fechaFin, cantSemana } = formData;
+        const { fechaInicio, cantSemana, fechaPago } = formData;
 
-        if (!fechaInicio || !fechaFin) {
+        //correcciones en el manejo de ingreso de datos al formulario
+        if (!fechaInicio || !fechaPago) {
             alert("Por favor, seleccione ambas fechas.");
-            return;
-        }
-
-        if (new Date(fechaInicio) >= new Date(fechaFin)) {
-            alert("La fecha de inicio debe ser menor que la fecha de fin.");
             return;
         }
 
