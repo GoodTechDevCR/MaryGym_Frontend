@@ -36,7 +36,7 @@ const AppRoutes = () => {
                 <Route path="/login" element={<LogInSc />} />
                 <Route path="/precio" element={<PrecioSc />} />
 
-                <Route path="/usuario/:id" element={<ProtectedRoute element={InformacionUserSc} />} />
+                <Route path="/usuario" element={<ProtectedRoute element={InformacionUserSc} />} />
                 <Route path="/usuario/rutina" element={<ProtectedRoute element={VisualizarRutinaUserSc} />} />
                 <Route path="/usuario/passwordChange/:correo" element={<PasswordChangeSc />} />
 

@@ -45,7 +45,7 @@ function InsertarLogin() {
                     if (idUsuarioLog === 124) {
                         navigate('/admin');
                     } else {
-                        navigate(`/usuario/${idUsuarioLog}`);
+                        navigate(`/usuario`);
                     }
                 } else {
                     alert('No se encontró el usuario.');
