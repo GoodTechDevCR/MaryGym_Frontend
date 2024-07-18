@@ -4,9 +4,11 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 
-function CatEjeInsertar() {
+function CatEjeInsertar({ onSuccess }) {
     const { createAnything } = useCreateAnything('https://marygymbackend-production.up.railway.app/catEje');
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         NombreCatEje: ''
@@ -17,10 +19,6 @@ function CatEjeInsertar() {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleReload = () => {
-        window.location.reload();
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -28,15 +26,16 @@ function CatEjeInsertar() {
             ...formData
         };
 
-        if(formData.NombreCatEje === ''){
-            alert("Error, la categoria debe de tener nombre")
-        }
-        else{
+        if (formData.NombreCatEje === '') {
+            alert("Error, la categoría debe tener nombre");
+        } else {
             try {
                 const success = await createAnything(jsonData);
                 if (success) {
                     alert("Categoría Ejercicio Creada Exitosamente");
-                    handleReload();
+                    setFormData({ NombreCatEje: '' });
+                    onSuccess();  
+                    navigate('/admin/crearRutina');
                 } else {
                     alert("Error al crear la Categoría Ejercicio");
                 }
@@ -45,7 +44,6 @@ function CatEjeInsertar() {
                 alert("Error al crear la Categoría Ejercicio");
             }
         }
-
     };
 
     return (

@@ -14,8 +14,14 @@ function EjercicioDisponible() {
         categoriaId: 0
     });
 
+    const [refreshKey, setRefreshKey] = useState(0);
+
     const handleCatEjeChange = (id) => {
         setFormData({ ...formData, categoriaId: id });
+    };
+
+    const handleCatEjeInsertSuccess = () => {
+        setRefreshKey(prevKey => prevKey + 1);
     };
 
     return (
@@ -32,7 +38,7 @@ function EjercicioDisponible() {
                         <TablaEjercicioPorCat key={formData.categoriaId} categoria={formData.categoriaId} />
                     </Box>
                     <Box sx={{ mb: 2 }}>
-                        <CatEjeInsertar />
+                        <CatEjeInsertar onSuccess={handleCatEjeInsertSuccess} key={refreshKey} />
                     </Box>
                     <Box sx={{ mb: 2 }}>
                         <EjercicioInsertar />

@@ -8,6 +8,9 @@ import Gym3 from '@mui/icons-material/Diversity3';
 import GymImagen from '../../assets/MaryGymPicture1.jpg';
 import MariaJose from '../../assets/MariaJose.jpg';
 import MamaMary from '../../assets/MaritzaMena.jpeg';
+import instalacion1 from '../../assets/instalacion1.png';
+import instalacion2 from '../../assets/instalacion2.png';
+import instalacion3 from '../../assets/instalacion3.png';
 
 
 
@@ -66,8 +69,10 @@ function HomeScreen() {
                                     personales de forma efectiva y satisfactoria.
                                 </p>
                             </Box>
-
-                            <div className="background-blank">
+                        </Grid>
+                        <img src={GymImagen} alt="Gym" className="imagen" />
+                    </Grid>
+                    <div className="background-blank">
                                 <div className='centered-title'>
                                     <h1 className="black">Horario</h1>
                                     <Box component="section" className='columna'>
@@ -75,11 +80,7 @@ function HomeScreen() {
                                         <p>4:30 pm - 9:00 pm</p>
                                     </Box>
                                 </div>
-                            </div>
-                        </Grid>
-                        <img src={GymImagen} alt="Gym" className="imagen" />
-                        
-                    </Grid>
+                    </div>
                 </div>
             </div>
 
@@ -90,7 +91,9 @@ function HomeScreen() {
                 </div>
                 <div className="centered-content">
                     <Grid container spacing={2} className='fila'>
-                    <img src={GymImagen} alt="Instalaciones" className="imagen" />
+                    <img src={instalacion1} alt="instalacion1" className="imagen" />
+                    <img src={instalacion2} alt="instalacion2" className="imagen" />
+                    <img src={instalacion3} alt="instalacion3" className="imagen" />
                         <Grid item xs={12} md={6}>
                             <Box component="section" className='box-grande' sx={{ paddingRight: { xs: 0, md: 2 }, paddingLeft: { xs: 0, md: 2 } }}>
                                 <p>
@@ -125,7 +128,7 @@ function HomeScreen() {
                             "El equipo es de alta calidad y el ambiente es muy acogedor. Me encanta entrenar en MaryGym."
                             </p>
                             <p style={{ fontSize: '1.2rem' }}>
-                             - Aaron
+                             - Aaron Ramirez
                             </p>
                     </Box>
                 </Grid>

@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute';
 
-
 // Importaciones de pantallas
 import HomeSc from "../pages/Home/HomeSc";
 import ContactoSc from "../pages/Home/ContactoSc";
@@ -25,7 +24,6 @@ import VisualizarContactoEmergencia from '../pages/loggedAdmin/usuario/Visualiza
 import ModificarPagoSc from "../pages/loggedAdmin/pago/ModificarPagoSc";
 import RegistrarPagoSc from "../pages/loggedAdmin/pago/RegistrarPagoSc";
 import VisualizarPagoSc from "../pages/loggedAdmin/pago/VisualizarPagoSc";
-
 
 const AppRoutes = () => {
     return (
