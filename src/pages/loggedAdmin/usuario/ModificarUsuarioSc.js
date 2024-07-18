@@ -14,6 +14,7 @@ import "../../Home/Home.css";
 const datos = [
     { label: 'Nombre', type: 'text' },
     { label: 'Apellido', type: 'text' },
+    { label: 'Contraseña', type: 'text' },
     { label: 'Teléfono', type: 'number' },
     { label: 'Estado', type: 'bit' },
     { label: 'Fecha Nacimiento', type: 'date' },
@@ -43,6 +44,8 @@ function ModificarUsuarioSc() {
             nombreColumna = 'telefono';
         } else if (selectedOption.label === 'Aceptacion de terminos y condiciones') {
             nombreColumna = 'AceptacionTC';
+        } else if (selectedOption.label === 'Contraseña') {
+            nombreColumna = 'password';
         } else {
             nombreColumna = selectedOption.label.toLowerCase(); // Ajusta según corresponda
         }

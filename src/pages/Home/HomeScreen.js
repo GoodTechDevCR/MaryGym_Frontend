@@ -7,7 +7,7 @@ import Gym2 from '@mui/icons-material/FitnessCenter';
 import Gym3 from '@mui/icons-material/Diversity3';
 import GymImagen from '../../assets/MaryGymPicture1.jpg';
 import MariaJose from '../../assets/MariaJose.jpg';
-import MamaMary from '../../assets/MariaJose.jpg';
+import MamaMary from '../../assets/MaritzaMena.jpeg';
 
 
 
@@ -171,11 +171,11 @@ function HomeScreen() {
 
                 <div  className="centered-content">
                     <Grid container spacing={2} className='fila'>
-                        <img src={MamaMary}  alt="Mamá Mary" className="imagen-entrenadora" />
+                        <img src={MamaMary}  alt="Maritza Mena" className="imagen-entrenadoraMaritza" />
                         <Grid item xs={12} md={6}>
                             <Box component="section" className='box-grande' sx={{ paddingRight: { xs: 0, md: 2 }, paddingLeft: { xs: 0, md: 2 } }}>
                         
-                            <h3>Mamá Mary</h3>
+                            <h3>Maritza Mena</h3>
                             <p><strong>Instructora de Zumba, Spinning y Cardio</strong> con muchos años de experiencia en clases grupales. Mamá Mary ofrece clases de Zumba, Spinning y Cardio, proporcionando una experiencia divertida y energizante. Sus clases están diseñadas para todos los niveles, promoviendo un estilo de vida activo y saludable en un ambiente inclusivo.</p>
                             <p><strong>Certificaciones:</strong></p>
                         

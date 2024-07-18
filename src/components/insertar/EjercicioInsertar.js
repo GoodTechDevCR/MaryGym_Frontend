@@ -27,6 +27,11 @@ function EjercicioInsertar() {
     };
 
     const handleSubmit = async (e) => {
+        if (!formData) {
+            alert('Error: Todos los campos deben estar llenos.');
+            return;
+        }
+
         e.preventDefault();
         const jsonData = {
             ...formData
