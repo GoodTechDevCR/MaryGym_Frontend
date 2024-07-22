@@ -138,6 +138,8 @@ const CrearRutinaSc = () => {
         e.preventDefault();
         const { fechaInicio, cantSemana, fechaPago } = formData;
 
+
+
         //correcciones en el manejo de ingreso de datos al formulario
         if (!fechaInicio || !fechaPago) {
             alert("Por favor, seleccione ambas fechas.");
@@ -230,6 +232,27 @@ const CrearRutinaSc = () => {
     const handleFinalCommentChange = (e) => {
         setFinalComment(e.target.value);
     };
+
+    const validateData = () => {
+
+      const areAllFieldsFilled = funcionalidades.every((funcionalidad) =>
+        funcionalidad.ejercicios.every((ejercicio) =>
+            ejercicio.comentario !== "" &&
+            Array.from({ length: formData.cantSemana }).every((_, i) =>
+                ejercicio[`semana${i + 1}`] !== ""
+            )
+        ));
+      const funcionalidadValida = funcionalidades.every((funcionalidad) =>
+        funcionalidad.nombreFuncionalidad
+      );
+
+      //aca debe validarse lo del select single
+      const ejercicioSeleccionado = funcionalidades.every((funcionalidad) =>
+        funcionalidad.ejercicios.length > 0
+      );
+
+      return areAllFieldsFilled && funcionalidadValida && ejercicioSeleccionado;
+   };
     
     return (
         <div>
@@ -373,7 +396,7 @@ const CrearRutinaSc = () => {
             )}
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Button type="submit" variant="contained" color="primary">
+            <Button type="submit" variant="contained" color="primary" disabled={!validateData()}>
               Guardar Rutina
             </Button>
           </Box>

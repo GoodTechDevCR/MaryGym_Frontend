@@ -13,6 +13,7 @@ const TarjetaInformacion = () => {
             const data = await dataUserbyId(id);
             if (Array.isArray(data) && data.length > 0) {
                 setUserData(data[0]); // Acceder al primer elemento del array
+                console.log(userData)
             } else {
                 setUserData(null);
             }
@@ -42,6 +43,9 @@ const TarjetaInformacion = () => {
                     </Typography>
                     <Typography variant="body1" component="p">
                         <strong>Apellido:</strong> {userData.apellido}
+                    </Typography>
+                    <Typography variant="body1" component="p">
+                        <strong>Contraseña:</strong> {userData.password}
                     </Typography>
                     <Typography variant="body1" component="p">
                         <strong>Teléfono:</strong> {userData.telefono}

@@ -7,7 +7,10 @@ import Gym2 from '@mui/icons-material/FitnessCenter';
 import Gym3 from '@mui/icons-material/Diversity3';
 import GymImagen from '../../assets/MaryGymPicture1.jpg';
 import MariaJose from '../../assets/MariaJose.jpg';
-import MamaMary from '../../assets/MariaJose.jpg';
+import MamaMary from '../../assets/MaritzaMena.jpeg';
+import instalacion1 from '../../assets/instalacion1.png';
+import instalacion2 from '../../assets/instalacion2.png';
+import instalacion3 from '../../assets/instalacion3.png';
 
 
 
@@ -66,20 +69,18 @@ function HomeScreen() {
                                     personales de forma efectiva y satisfactoria.
                                 </p>
                             </Box>
-
-                            <div className="background-blank">
+                        </Grid>
+                        <img src={GymImagen} alt="Gym" className="imagen" />
+                    </Grid>
+                    <div className="background-blank">
                                 <div className='centered-title'>
-                                    <h1 className="black">Horario</h1>
+                                    <h1 className="black">Nuestro Horario</h1>
                                     <Box component="section" className='columna'>
                                         <p>5:30 am - 9:30 am</p>
                                         <p>4:30 pm - 9:00 pm</p>
                                     </Box>
                                 </div>
-                            </div>
-                        </Grid>
-                        <img src={GymImagen} alt="Gym" className="imagen" />
-                        
-                    </Grid>
+                    </div>
                 </div>
             </div>
 
@@ -90,7 +91,9 @@ function HomeScreen() {
                 </div>
                 <div className="centered-content">
                     <Grid container spacing={2} className='fila'>
-                    <img src={GymImagen} alt="Instalaciones" className="imagen" />
+                    <img src={instalacion1} alt="instalacion1" className="imagen" />
+                    <img src={instalacion2} alt="instalacion2" className="imagen" />
+                    <img src={instalacion3} alt="instalacion3" className="imagen" />
                         <Grid item xs={12} md={6}>
                             <Box component="section" className='box-grande' sx={{ paddingRight: { xs: 0, md: 2 }, paddingLeft: { xs: 0, md: 2 } }}>
                                 <p>
@@ -125,7 +128,7 @@ function HomeScreen() {
                             "El equipo es de alta calidad y el ambiente es muy acogedor. Me encanta entrenar en MaryGym."
                             </p>
                             <p style={{ fontSize: '1.2rem' }}>
-                             - Aaron
+                             - Aaron Ramirez
                             </p>
                     </Box>
                 </Grid>
@@ -171,11 +174,11 @@ function HomeScreen() {
 
                 <div  className="centered-content">
                     <Grid container spacing={2} className='fila'>
-                        <img src={MamaMary}  alt="Mamá Mary" className="imagen-entrenadora" />
+                        <img src={MamaMary}  alt="Maritza Mena" className="imagen-entrenadoraMaritza" />
                         <Grid item xs={12} md={6}>
                             <Box component="section" className='box-grande' sx={{ paddingRight: { xs: 0, md: 2 }, paddingLeft: { xs: 0, md: 2 } }}>
                         
-                            <h3>Mamá Mary</h3>
+                            <h3>Maritza Mena</h3>
                             <p><strong>Instructora de Zumba, Spinning y Cardio</strong> con muchos años de experiencia en clases grupales. Mamá Mary ofrece clases de Zumba, Spinning y Cardio, proporcionando una experiencia divertida y energizante. Sus clases están diseñadas para todos los niveles, promoviendo un estilo de vida activo y saludable en un ambiente inclusivo.</p>
                             <p><strong>Certificaciones:</strong></p>
                         

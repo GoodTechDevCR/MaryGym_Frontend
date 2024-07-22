@@ -64,7 +64,7 @@ function InsertarLogin() {
             <h2 className='login-title'>Iniciar Sesión</h2>
             <form className='login-form' onSubmit={handleSubmit}>
                 <label className='login-label'>
-                    Usuario:
+                    Correo:
                     <input
                         className='login-input'
                         type="text"
