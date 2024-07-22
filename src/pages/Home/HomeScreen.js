@@ -74,7 +74,7 @@ function HomeScreen() {
                     </Grid>
                     <div className="background-blank">
                                 <div className='centered-title'>
-                                    <h1 className="black">Horario</h1>
+                                    <h1 className="black">Nuestro Horario</h1>
                                     <Box component="section" className='columna'>
                                         <p>5:30 am - 9:30 am</p>
                                         <p>4:30 pm - 9:00 pm</p>
